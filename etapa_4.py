@@ -49,39 +49,40 @@ def pasapalabras():
     indice = 0
 
     """defino una funcion para la correspondiente palabra y su definicion"""
-    posicion=0
-    def palabra():
-        return palabras_seleccionadas[posicion]
-
-    def defincion():
-        return definiciones[palabra()]
-    
-    
     
     #Se llama a la funcion que se encarga de imprimir la interfaz al usuario
     
-    imprimir_resultados(abecedario_imprimir, resultados_imprimir, aciertos, errores, palabra(),defincion())
+    posicion=0
+    imprimir_resultados(abecedario_imprimir, resultados_imprimir, aciertos, errores, posicion)
     
     """
     Se pide al usuario que ingrese su respuesta y se realiza la validacion
     asi como tambien se actualizar las variables que dependen de la respuesta
     """
+    
     respuesta = input("Ingrese palabra: ")
-    if(len(palabra()) == len(respuesta) and respuesta.isalpha()):
-        if (palabra().lower() == respuesta.lower()):
+    if(len(palabra(posicion)) == len(respuesta) and respuesta.isalpha()):
+        if (palabra(posicion).lower() == respuesta.lower()):
             print("Palabra correcta")
             aciertos += 1
         else:
             errores += 1
             print(f"Palabra incorrecta - Respuesta: {palabra()}")
-        indice += 1
+        indice +=1
         posicion +=1
     else:
         print("Respuesta no valida")
 
+def palabra(posicion):
+    return palabras_seleccionadas(posicion)
 
-def imprimir_resultados(abecedario_imprimir, resultados_imprimir, aciertos, errores, palabra, definicion):
+def definicion(posicion):
+    return definiciones[palabra(posicion)]
 
+
+def imprimir_resultados(abecedario_imprimir, resultados_imprimir, aciertos, errores,posicion):
+        palabra1= palabra(posicion)
+        definicion1= definicion(posicion)
         #Funcion encargada de imprimir el rosco en pantalla
         print(abecedario_imprimir)
         print(resultados_imprimir + "\n\n")
@@ -89,15 +90,14 @@ def imprimir_resultados(abecedario_imprimir, resultados_imprimir, aciertos, erro
         print(f"Aciertos: {aciertos}")
         print(f"Errores: {errores}")
 
-        print(f"Turno letra {palabra[0]} - Palabra de {len(palabra)} letras")
+        print(f"Turno letra {palabra1} - Palabra de {len(palabra1)} letras")
 
-        print(f"Definición: {definicion}")
+        print(f"Definición: {definicion1}")
 
 def validar_formato_respuesta(palabra, respuesta):
     return True if (len(palabra) == len(respuesta) and respuesta.isalpha()) else False
 
 pasapalabras()
-
 
 
 
