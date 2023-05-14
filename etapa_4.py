@@ -52,7 +52,7 @@ def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, pala
     print(f"Turno letra {palabra[0]} - Palabra de {len(palabra)} letras")
 
     print(f"Definición: {definicion}")
-    print("la palabra es ", palabra)
+    print("la palabra correcta es:", palabra)
 
 def valida_respuesta (aciertos,errores,indice,palabra,resultados):
     """
@@ -71,6 +71,7 @@ def valida_respuesta (aciertos,errores,indice,palabra,resultados):
         print(f"Palabra incorrecta - Respuesta: {palabra}")
         resultados[indice]="e"
         errores += 1
+    
     return (aciertos,errores)
 
 def impresion_final(aciertos):
@@ -86,6 +87,9 @@ def funcion_definiciones (count):
     palabra= palabras_seleccionadas[count]
     definicion= definiciones[palabra]
     return definicion
+
+
+    
 
 
 def pasapalabras():
@@ -107,21 +111,18 @@ def pasapalabras():
     """
     aciertos = 0
     errores = 0
-    indice = 0
     count = 0
-    palabra = palabras(count)
-    definicion = funcion_definiciones(count)
-    
     
     """
     Se llama a la funcion que se encarga de imprimir la interfaz al usuario
     """
-    while indice < len(LETRAS): 
-        imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabra, definicion)
+    while count < len(LETRAS): 
+        imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabras(count), funcion_definiciones(count))
         #valida respuesta y actualiza aciertos y errores
-        (aciertos,errores)=valida_respuesta(aciertos,errores,indice,palabra,resultados)
-        indice+=1
+        (aciertos,errores)=valida_respuesta(aciertos,errores,count,palabras(count),funcion_definiciones(count))
+        count+=1
     impresion_final(aciertos)
+
 
 pasapalabras()
 
