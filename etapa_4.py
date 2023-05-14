@@ -18,10 +18,11 @@ def letras_participantes():
     letras_rosco= ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z']
     random.shuffle(letras_rosco)
     return sorted(letras_rosco[0:10])
+letras= letras_participantes()
 
 #3. El programa elegirá al azar la lista de palabras a adivinar por el jugador.
 from etapa_3 import palabras_del_rosco
-palabras_seleccionadas= palabras_del_rosco(definiciones, letras_participantes())
+palabras_seleccionadas= palabras_del_rosco(definiciones, letras)
 
 #4. Luego se armará el tablero que visualizará el usuario, y dará comienzo la partida,
 #implementando así, lo realizado en la etapa 1.
@@ -51,6 +52,7 @@ def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, pala
     print(f"Turno letra {palabra[0]} - Palabra de {len(palabra)} letras")
 
     print(f"Definición: {definicion}")
+    print("la palabra es ", palabra)
 
 def valida_respuesta (aciertos,errores,indice,palabra,resultados):
     """
@@ -92,13 +94,13 @@ def pasapalabras():
     Se crean las variables abecedario donde se encuentran todas las letras
     y se le da un formato a las mismas para despues poder imprimirlas.
     """
-    LETRAS = letras_participantes()
+    LETRAS = letras
     resultados = []
     abecedario_imprimir = ""
     for letra in LETRAS:
         abecedario_imprimir += f"[{letra}]"
         resultados.append(" ")
-        
+    
     
     """
     Se definen algunas variables para realizar pruebas de la interfaz grafica
@@ -119,7 +121,6 @@ def pasapalabras():
         #valida respuesta y actualiza aciertos y errores
         (aciertos,errores)=valida_respuesta(aciertos,errores,indice,palabra,resultados)
         indice+=1
-        count +=1
     impresion_final(aciertos)
 
 pasapalabras()
