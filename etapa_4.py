@@ -52,7 +52,6 @@ def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, pala
     print(f"Turno letra {palabra[0]} - Palabra de {len(palabra)} letras")
 
     print(f"Definición: {definicion}")
-    print("la palabra correcta es:", palabra)
 
 def valida_respuesta (aciertos,errores,indice,palabra,resultados):
     """
@@ -71,7 +70,6 @@ def valida_respuesta (aciertos,errores,indice,palabra,resultados):
         print(f"Palabra incorrecta - Respuesta: {palabra}")
         resultados[indice]="e"
         errores += 1
-    
     return (aciertos,errores)
 
 def impresion_final(aciertos):
@@ -79,10 +77,12 @@ def impresion_final(aciertos):
     print('Impresion de diccionario y respuestas')
     print(f"Puntaje final: {aciertos}")
 
+#esta funcion recorre la lista de palabras seleccionadas y me las va pasando una a una.
 def palabras(count):
     palabra= palabras_seleccionadas[count]
     return palabra
 
+#idem de la anterior pero con sus respectivas definiciones.
 def funcion_definiciones (count):
     palabra= palabras_seleccionadas[count]
     definicion= definiciones[palabra]
@@ -119,12 +119,13 @@ def pasapalabras():
     while count < len(LETRAS): 
         imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabras(count), funcion_definiciones(count))
         #valida respuesta y actualiza aciertos y errores
-        (aciertos,errores)=valida_respuesta(aciertos,errores,count,palabras(count),funcion_definiciones(count))
+        (aciertos,errores)=valida_respuesta(aciertos,errores,count,palabras(count),resultados)
         count+=1
     impresion_final(aciertos)
 
 
 pasapalabras()
+
 
 
 
