@@ -106,5 +106,7 @@ def pasapalabras():
 
 #def validar_formato_respuesta(palabra, respuesta):
     #return True if (len(palabra) == len(respuesta) and respuesta.isalpha()) else False
-           
-pasapalabras()
+
+
+
+

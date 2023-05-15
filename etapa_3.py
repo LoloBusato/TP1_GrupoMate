@@ -21,4 +21,4 @@ def palabras_del_rosco (diccionario,letras):
     
     return sorted(definiciones_rosco)
 
-print(palabras_del_rosco(definiciones,letras_rosco[0:10]))
+

@@ -43,9 +43,9 @@ def pasapalabras():
     palabra = "Almuerzo"
     definicion = "1. m. Comida que se toma por la mañana"
     
-    """
-    Se llama a la funcion que se encarga de imprimir la interfaz al usuario
-    """
+    
+    #Se llama a la funcion que se encarga de imprimir la interfaz al usuario
+    
     imprimir_resultados(abecedario_imprimir, resultados_imprimir, aciertos, errores, palabra, definicion)
     
     """
@@ -66,22 +66,21 @@ def pasapalabras():
 
 
 def imprimir_resultados(abecedario_imprimir, resultados_imprimir, aciertos, errores, palabra, definicion):
-    """
-    Funcion encargada de imprimir el rosco en pantalla
-    """
-    print(abecedario_imprimir)
-    print(resultados_imprimir + "\n\n")
-    
-    print(f"Aciertos: {aciertos}")
-    print(f"Errores: {errores}")
-    
-    print(f"Turno letra {palabra[0]} - Palabra de {len(palabra)} letras")
 
-    print(f"Definición: {definicion}")
+        #Funcion encargada de imprimir el rosco en pantalla
+        print(abecedario_imprimir)
+        print(resultados_imprimir + "\n\n")
 
-#def validar_formato_respuesta(palabra, respuesta):
-    #return True if (len(palabra) == len(respuesta) and respuesta.isalpha()) else False
-           
+        print(f"Aciertos: {aciertos}")
+        print(f"Errores: {errores}")
+
+        print(f"Turno letra {palabra[0]} - Palabra de {len(palabra)} letras")
+
+        print(f"Definición: {definicion}")
+
+def validar_formato_respuesta(palabra, respuesta):
+    return True if (len(palabra) == len(respuesta) and respuesta.isalpha()) else False
+
 pasapalabras()
 
 

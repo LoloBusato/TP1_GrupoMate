@@ -15,6 +15,9 @@ for definicion in obtener_lista_definiciones():
             letra= letras_tildadas[letra]
         cant_definiciones += 1
         cant_palabras_por_letra[letra] += 1
-        
-print (f'la cantidad de palabras por letra son:\n{cant_palabras_por_letra}')
-print (f'la cantidad total de definiciones son: {cant_definiciones}')
+
+
+
+
+#print (f'la cantidad de palabras por letra son:\n{cant_palabras_por_letra}')
+#print (f'la cantidad total de definiciones son: {cant_definiciones}')
