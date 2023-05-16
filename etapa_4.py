@@ -10,7 +10,9 @@ def partida_pasapalabra(puntaje = 0):
     PUNTAJE_ACIERTO = 10
     PUNTAJE_ERROR = 3
     #1. Se deberá comenzar con la generación del diccionario de palabras.
-    from etapa_2 import definiciones
+    from etapa_2 import obtener_definiciones
+    definiciones = obtener_definiciones()
+    print(definiciones)
 
     #2. Luego se deben seleccionar las 10 letras participantes.
     #defino una funcion que lo haga:
