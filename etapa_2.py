@@ -6,10 +6,12 @@ cant_definiciones= 0
 PALABRA = 0
 DEFINICION = 1
 INICIAL = 0
-
+LONG_MINIMA = 5
 for definicion in obtener_lista_definiciones():
-    if len(definicion[PALABRA]) >= 5:
+    if len(definicion[PALABRA]) >= LONG_MINIMA:
+        #Agrega al diccionario a utilizar con formato {palabra: Definicion}
         definiciones[definicion[PALABRA]] = definicion[DEFINICION]
+        #Busca y modifica el contador de cantidades
         letra= definicion[PALABRA][INICIAL]
         if letra in letras_tildadas.keys():
             letra= letras_tildadas[letra]
