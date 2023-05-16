@@ -92,7 +92,7 @@ def partida_pasapalabra(puntaje = 0):
     resultados = []
     abecedario_imprimir = ""
     for letra in LETRAS:
-        abecedario_imprimir += f"[{letra}]"
+        abecedario_imprimir += f"[{letra.upper()}]"
         resultados.append(" ")
     
     
