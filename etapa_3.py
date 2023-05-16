@@ -1,9 +1,12 @@
-letras_tildadas = {"á":"a","é":"e","í":"i","ó":"o","ú":"u"}
-definiciones_rosco= []
-MAX_LETRAS_ROSCO = 10
-INICIAL = 0
 
 def palabras_del_rosco (diccionario,letras):
+    letras_tildadas = {"á":"a","é":"e","í":"i","ó":"o","ú":"u"}
+    definiciones_rosco= []
+    INICIAL = 0
+    def chequeo_tilde(letra):
+        if letra in letras_tildadas.keys():
+            letra=letras_tildadas[letra]
+        return letra
     '''
     recibe diccionario con formato {palabra: definicion} y listado de 10 letras participantes
     '''    
@@ -18,8 +21,3 @@ def palabras_del_rosco (diccionario,letras):
             indice += 1
     
     return sorted(definiciones_rosco)
-
-def chequeo_tilde(letra):
-    if letra in letras_tildadas.keys():
-        letra=letras_tildadas[letra]
-    return letra
