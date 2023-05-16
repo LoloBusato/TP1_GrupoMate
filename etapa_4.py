@@ -52,25 +52,22 @@ def partida_pasapalabra(puntaje = 0):
         print(f"Aciertos: {aciertos}")
         print(f"Errores: {errores}")
         
-        print(f"Turno letra {palabra[0]} - Palabra de {len(palabra)} letras")
+        print(f"Turno letra {palabra[0].upper()} - Palabra de {len(palabra)} letras")
 
         print(f"Definición: {definicion}")
 
-    def valida_respuesta (palabra):
-        valida = False
+    def pedir_palabra():
         respuesta = input("Ingrese palabra: ")
         while not respuesta.isalpha():
             print("Respuesta inválida, intente nuevamente")
             respuesta = input("Ingrese palabra: ")
-        if (len(palabra) == len(respuesta) and palabra.lower() == respuesta.lower()):
-            valida = True            
-        return valida
+        return respuesta
 
 
-    def impresion_final(aciertos):
-        print("-------------------------------------")
-        print('Impresion de diccionario y respuestas')
-        print(f"Cantidad de aciertos: {aciertos}")
+    def impresion_final(puntaje, resumen_partida):
+        print(resumen_partida)
+        print(f"Puntaje final: {puntaje}")
+
 
     #esta funcion recorre la lista de palabras seleccionadas y me las va pasando una a una.
     def palabras(count):
@@ -105,22 +102,30 @@ def partida_pasapalabra(puntaje = 0):
     """
     Se llama a la funcion que se encarga de imprimir la interfaz al usuario
     """
+    INICIAL = 0
+    resumen_partida = ""
     while count < len(LETRAS):
+
         imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabras(count), funcion_definiciones(count))
-        respuesta = valida_respuesta(palabras(count))
+        palabra_usuario = pedir_palabra()
+
+        respuesta = palabra_usuario.lower() == palabras(count).lower()
         if respuesta:
+            resumen_partida += (f"\nTurno letra {palabras(count)[INICIAL].upper()} - Palabra de {len(palabras(count))} letras - {palabra_usuario} - acierto")
+            print("Palabra correcta")
             aciertos +=1
             resultados[count]="a"
             puntaje += PUNTAJE_ACIERTO
-            print("Palabra correcta")
             count +=1
         else:
+            resumen_partida += (f"\nTurno letra {palabras(count)[INICIAL].upper()} - Palabra de {len(palabras(count))} letras - {palabra_usuario} - error - Palabra Correcta: {palabras(count)}")
+            print (f"Palabra incorrecta - Respuesta: {palabras(count)}")
             errores +=1
             resultados[count]= "e"
             puntaje -= PUNTAJE_ERROR
-            print (f"Palabra incorrecta - Respuesta: {palabras(count)}")
             count+=1
-    impresion_final(aciertos)
+
+    impresion_final(puntaje, resumen_partida)
     return puntaje
 
 
