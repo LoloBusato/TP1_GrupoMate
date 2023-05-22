@@ -92,9 +92,9 @@ def partida_pasapalabra(puntaje = 0):
     #1. Se deberá comenzar con la generación del diccionario de palabras.
     definiciones = obtener_definiciones()
     #2. Luego se deben seleccionar las 10 letras participantes.
-    letras= letras_participantes()
+    LETRAS= letras_participantes()
     #3. El programa elegirá al azar la lista de palabras a adivinar por el jugador.
-    palabras_seleccionadas= palabras_del_rosco(definiciones, letras)
+    palabras_seleccionadas= palabras_del_rosco(definiciones, LETRAS)
     #4. Luego se armará el tablero que visualizará el usuario, y dará comienzo la partida
 
     def palabras(indice):
@@ -122,7 +122,6 @@ def partida_pasapalabra(puntaje = 0):
 
 
     # Se crean las variables abecedario y se les da formato a las mismas
-    LETRAS = letras
     resultados = []
     abecedario_imprimir = ""
     for letra in LETRAS:
@@ -134,7 +133,7 @@ def partida_pasapalabra(puntaje = 0):
     errores = 0
     indice = 0                
     resumen_partida = ""
-    
+
     #Se da inicio al ciclo que engloba el rosco. Finaliza al resolver todas las palabras
     while indice < len(LETRAS):
 
