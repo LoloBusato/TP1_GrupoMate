@@ -1,7 +1,7 @@
 import random
 from etapa_2 import obtener_definiciones
 from etapa_3 import palabras_del_rosco
-
+import doctest
 # Constantes =======================================================================================================================
 PUNTAJE_ACIERTO = 10
 PUNTAJE_ERROR = 3
@@ -67,6 +67,50 @@ def pedir_palabra():
     while not respuesta.isalpha():
         print("Respuesta inválida, intente nuevamente")
         respuesta = input("Ingrese palabra: ")
+    return respuesta
+def reemplaza_tildes(palabra):
+    '''
+    * Función que reemplaza los tildes de las palabras, de encontrar alguna
+    
+    * Pre: Recibe una cadena
+    
+    * Post: Devuelve la misma palabra sin tildes
+    *
+    >>> reemplaza_tildes('esdrújula')
+    'esdrujula'
+    >>> reemplaza_tildes('canción')
+    'cancion'
+    >>> reemplaza_tildes('magia')
+    'magia'
+    '''
+    palabra_en_lista = list(palabra)
+    indice = 0
+    tilde_encontrada = False
+    while (indice < len(palabra_en_lista) and not tilde_encontrada):
+        if palabra_en_lista[indice] in LETRAS_TILDADAS.keys():
+            palabra_en_lista[indice] = LETRAS_TILDADAS[palabra_en_lista[indice]]
+            tilde_encontrada = True
+        indice +=1
+    palabra_procesada = ''.join(palabra_en_lista)
+    return palabra_procesada
+def valida_respuesta(palabra_usuario,palabra):
+    '''
+    * Función que evalúa si la palabra otorgada es correcta o no
+    
+    * Pre: Recibe la palabra ingresada por input por el usuario y la palabra a adivinar 
+    
+    * Post: Retorna True o False segun la respuesta sea correcta o no
+    >>> valida_respuesta('cancion','canción')
+    True
+    >>> valida_respuesta('perrito','perito')
+    False
+    >>> valida_respuesta('teclado','teclado')
+    True
+    >>> valida_respuesta('pérro','perro')
+    False
+    '''
+    palabra = reemplaza_tildes(palabra)
+    respuesta = palabra_usuario.lower() == palabra.lower()
     return respuesta
 
 def impresion_final(puntaje, resumen_partida):
@@ -139,8 +183,7 @@ def partida_pasapalabra(puntaje = 0):
 
         imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabras(indice), funcion_definiciones(indice))
         palabra_usuario = pedir_palabra()
-
-        respuesta = palabra_usuario.lower() == palabras(indice).lower()
+        respuesta = valida_respuesta(palabra_usuario,palabras(indice))
         if respuesta:
             resumen_partida += (f"\nTurno letra {palabras(indice)[INICIAL].upper()} - Palabra de {len(palabras(indice))} letras - {palabra_usuario} - acierto")
             print("Palabra correcta")
@@ -158,7 +201,7 @@ def partida_pasapalabra(puntaje = 0):
 
     impresion_final(puntaje, resumen_partida)
     return puntaje
-
+print(doctest.testmod())
 
 
 
