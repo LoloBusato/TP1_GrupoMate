@@ -16,7 +16,13 @@ def obtener_definiciones():
     *       }
     """
     # Constantes
-    LETRAS_TILDADAS = {"á":"a","é":"e","í":"i","ó":"o","ú":"u"}
+    LETRAS_TILDADAS = {
+        "á":"a",
+        "é":"e",
+        "í":"i",
+        "ó":"o",
+        "ú":"u"
+        }
     PALABRA = 0
     DEFINICION = 1
     INICIAL = 0
