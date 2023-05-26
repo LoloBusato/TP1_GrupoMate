@@ -49,6 +49,22 @@ def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, pala
     * Pre: Recibe las letras participantes ordenadas, los resultados parciales, la cantidad de aciertos y errores, la palabra del turno y su definición
     *
     * Post: Imprime el tablero de letras, los resultados parciales, la palabra de turno y su definición
+    
+    >>> abecedario_imprimir = "[A][B][C][D]"
+    >>> resultados=["a","e"," "," "]
+    >>> aciertos = 1
+    >>> errores = 1
+    >>> palabra = "circuito"
+    >>> definicion = "1.  m. Terreno comprendido dentro de un perímetro cualquiera"
+    >>> imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabra, definicion)
+    [A][B][C][D]
+    [a][e][ ][ ]
+    <BLANKLINE>
+    <BLANKLINE>
+    Aciertos: 1
+    Errores: 1
+    Turno letra C - Palabra de 8 letras
+    Definición: 1.  m. Terreno comprendido dentro de un perímetro cualquiera
     """
     print(abecedario_imprimir)
     resultado_imprimir = formateo_resultados(resultados)
