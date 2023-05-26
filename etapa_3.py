@@ -1,23 +1,18 @@
+def palabras_del_rosco(diccionario,letras):
+    """
+        * funcion palabras_del_rosco - recibe diccionario y listado de 10 letras participantes
+        *           Selecciona una palabra de cada letra del diccionario
+        *
+        * pre: diccionario es un diccionario con formato valido, letras es una lista de letras ordenadas
+        *
+        * post: devuelve una lista ordenada con las palabras y definiciones seleccionadas
+    """
+    # Constantes
+    PRIMERA_PALABRA_DEFINICION = 0
 
-def palabras_del_rosco (diccionario,letras):
-    letras_tildadas = {"á":"a","é":"e","í":"i","ó":"o","ú":"u"}
-    definiciones_rosco= []
-    INICIAL = 0
-    def chequeo_tilde(letra):
-        if letra in letras_tildadas.keys():
-            letra=letras_tildadas[letra]
-        return letra
-    '''
-    recibe diccionario con formato {palabra: definicion} y listado de 10 letras participantes
-    '''    
-    palabras_lista = list(diccionario.keys())
-    for letra in letras:
-        indice = 0
-        encontrado = False
-        while indice < len(palabras_lista) and not encontrado:
-            if palabras_lista[indice][INICIAL] == chequeo_tilde(letra):
-                encontrado = True
-                definiciones_rosco.append(palabras_lista[indice])
-            indice += 1
+    definiciones_rosco = []
     
-    return sorted(definiciones_rosco)
+    for letra in letras:
+        definiciones_rosco.append(diccionario[letra][PRIMERA_PALABRA_DEFINICION])
+
+    return definiciones_rosco
