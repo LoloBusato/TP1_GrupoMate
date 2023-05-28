@@ -1,6 +1,7 @@
 from etapa_4 import partida_pasapalabra
 
 def pasapalabra ():
+    #Hecha por Orlando Martín
     """
     * Función encargada de mantener un puntaje global y definir la continuidad o fin del juego segun el usuario lo desee por comando
     """

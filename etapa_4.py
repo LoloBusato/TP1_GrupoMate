@@ -27,12 +27,19 @@ def letras_participantes():
     return sorted(LETRAS_ROSCO[:CANTIDAD_LETRAS_ROSCO])
 
 def formateo_resultados(resultados):
+    #Hecha por Orlando Martín
     '''
     * Función que da formato de impresión al listado de resultados
     *
     * Pre: resultados es una lista con valores posibles 'a' en caso de acierto, 'e' en caso de error y ' 'en caso de que no se haya evaluado aún esa respuesta
     *
     * Post: Devuelve un formato de impresión con los mismos valores recibidos
+    >>> formateo_resultados(['a','e'])
+    '[a][e]'
+    >>> formateo_resultados(['e','e','a','a',' ',' '])
+    '[e][e][a][a][ ][ ]'
+    >>> formateo_resultados(['a','e','a'])
+    '[a][e][a]'
     '''
     resultados_a_imprimir = ""
     for letra in resultados:
@@ -93,6 +100,7 @@ def pedir_palabra(longitud):
     return respuesta
 
 def reemplaza_tildes(palabra):
+    #Hecha por Orlando Martín
     '''
     * Función que reemplaza los tildes de las palabras, de encontrar alguna
     *
@@ -119,6 +127,7 @@ def reemplaza_tildes(palabra):
     return palabra_procesada
 
 def valida_respuesta(palabra_usuario, palabra_actual):
+    #Hecha por Orlando Martín
     '''
     * Función que evalúa si la palabra otorgada es correcta o no
     
@@ -149,8 +158,8 @@ def impresion_final(puntaje, resumen_partida):
     '''
     print(resumen_partida)
     print(f"Puntaje final: {puntaje}")
-
 def iniciar_resultados_abecedario(letras):
+    #Hecha por Orlando Martín
     '''
     * Función que se encarga de iniciar las variables resultados y abecedario_imprimir
     *
@@ -158,6 +167,12 @@ def iniciar_resultados_abecedario(letras):
     *
     * Post: devuelve resultados como una lista con cadenas de caracter vacias y
     *       devuelve abecedario_imprimir con las letras participantes para imprimir
+    >>> iniciar_resultados_abecedario(["a","b","c","d"])
+    ([' ', ' ', ' ', ' '], '[A][B][C][D]')
+    >>> iniciar_resultados_abecedario(["A","f","h","r"])
+    ([' ', ' ', ' ', ' '], '[A][F][H][R]')
+    >>> iniciar_resultados_abecedario(["R","t","w","z"])
+    ([' ', ' ', ' ', ' '], '[R][T][W][Z]')
     '''
     resultados = []
     abecedario_imprimir = ""
@@ -168,6 +183,7 @@ def iniciar_resultados_abecedario(letras):
 
 # Cuerpo =======================================================================================================================
 def partida_pasapalabra(puntaje = 0):
+    #Modificada por todos los integrantes del grupo
     '''
     * Función que ejecuta cada partida de pasapalabra
     *
