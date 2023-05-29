@@ -1,4 +1,5 @@
 def palabras_del_rosco(diccionario,letras):
+    # Hecha por Vicini Luciano
     """
         * funcion palabras_del_rosco - recibe diccionario y listado de 10 letras participantes
         *           Selecciona una palabra de cada letra del diccionario

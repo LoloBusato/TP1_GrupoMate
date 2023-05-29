@@ -17,6 +17,7 @@ LETRAS_TILDADAS = {
 }
 # Funciones =======================================================================================================================
 def letras_participantes():
+    # Hecho por Nuñez Juan Bautista
     '''
     * Mezcla las letras del abecedario y selecciona las primeras diez del listado como letras participantes del juego
     *
@@ -50,6 +51,7 @@ def formateo_resultados(resultados):
     return resultados_a_imprimir
 
 def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabra, definicion):
+    # Hecha por Busato Lorenzo
     """
     * Función que se encarga de la impresión de cada turno del juego y se acciona luego de cada intento 
     *
@@ -85,6 +87,7 @@ def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, pala
     print(f"Definición: {definicion}")
 
 def pedir_palabra(longitud):
+    # Hecha por Busato Lorenzo
     '''
     * Función que se encarga de pedir al jugador una respuesta para 
     *       la palabra de turno y revisa si tiene el formato y tamanio pedido
@@ -148,6 +151,7 @@ def valida_respuesta(palabra_usuario, palabra_actual):
     return respuesta
 
 def impresion_final(puntaje, resumen_partida):
+    # Hecha por Busato Lorenzo
     '''
     * Función que imprime el puntaje final de cada partida
     *
@@ -158,6 +162,7 @@ def impresion_final(puntaje, resumen_partida):
     '''
     print(resumen_partida)
     print(f"Puntaje final: {puntaje}")
+
 def iniciar_resultados_abecedario(letras):
     #Hecha por Orlando Martín
     '''
@@ -183,7 +188,8 @@ def iniciar_resultados_abecedario(letras):
 
 # Cuerpo =======================================================================================================================
 def partida_pasapalabra(puntaje = 0):
-    #Modificada por todos los integrantes del grupo
+    # Hecha por Nuñez Juan Bautista
+    # Modificada por todos los integrantes del grupo
     '''
     * Función que ejecuta cada partida de pasapalabra
     *
