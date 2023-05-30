@@ -1,6 +1,7 @@
 from datos import obtener_lista_definiciones
 
 def obtener_definiciones():
+    # Hecha por Vicini Luciano
     """
     * funcion obtener_definiciones - importa el diccionario en formato lista, lo filtra y lo procesa
     *
