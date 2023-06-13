@@ -2,11 +2,10 @@ import random
 from etapa_2 import obtener_definiciones
 from etapa_3 import palabras_del_rosco
 import doctest
+from etapa_10 import obtener_constantes
 
 # Constantes =======================================================================================================================
-PUNTAJE_ACIERTO = 10
-PUNTAJE_ERROR = 3
-CANTIDAD_LETRAS_ROSCO = 10
+CONFIGURACION = obtener_constantes()
 INICIAL = 0
 LETRAS_TILDADAS = {
     'á':'a',
@@ -194,7 +193,7 @@ def letras_participantes():
     '''
     LETRAS_ROSCO= ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z']
     random.shuffle(LETRAS_ROSCO)
-    return sorted(LETRAS_ROSCO[:CANTIDAD_LETRAS_ROSCO])
+    return sorted(LETRAS_ROSCO[:int(CONFIGURACION['CANTIDAD_LETRAS_ROSCO'])])
 
 def selecciona_jugador(indice,jugadores):
     if (indice == -1):
@@ -238,15 +237,15 @@ def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario):
     partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
     print("Palabra correcta")
     partida[jugador]['resultados'][indice] = "a"
-    partida[jugador]['puntaje_partida'] += PUNTAJE_ACIERTO
-    partida[jugador]['puntaje_global'] += PUNTAJE_ACIERTO
+    partida[jugador]['puntaje_partida'] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
+    partida[jugador]['puntaje_global'] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
     
 def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
     partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
     print(f"Palabra incorrecta - Respuesta: {palabra_actual}")
     partida[jugador]['resultados'][indice] = "e"
-    partida[jugador]['puntaje_partida'] += PUNTAJE_ERROR
-    partida[jugador]['puntaje_global'] += PUNTAJE_ERROR
+    partida[jugador]['puntaje_partida'] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
+    partida[jugador]['puntaje_global'] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
 def imprimir_resultados_parciales(partida,jugadores):
     numero = 1
     for jugador in jugadores:
@@ -299,14 +298,14 @@ def imprimir_resultados_parciales(partida,jugadores):
 #             print("Palabra correcta")
 #             aciertos += 1
 #             resultados[indice] = "a"
-#             puntaje += PUNTAJE_ACIERTO
+#             puntaje += int(CONFIGURACION['PUNTAJE_ACIERTO'])
 #             indice += 1
 #         else:
 #             resumen_partida += (f"\nTurno letra {palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} letras - {palabra_usuario} - error - Palabra Correcta: {palabra_actual}")
 #             print (f"Palabra incorrecta - Respuesta: {palabra_actual}")
 #             errores +=1
 #             resultados[indice] = "e"
-#             puntaje -= PUNTAJE_ERROR
+#             puntaje -= int(CONFIGURACION['PUNTAJE_DESACIERTO'])
 #             indice += 1
 
 #     impresion_final(puntaje, resumen_partida)
