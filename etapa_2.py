@@ -1,4 +1,4 @@
-from datos import obtener_lista_definiciones
+from Etapa_8 import obtener_lista_definiciones
 
 def obtener_definiciones():
     # Hecha por Vicini Luciano
