@@ -1,5 +1,4 @@
 from Etapa_8 import obtener_lista_definiciones
-from etapa_10 import obtener_constantes
 
 def obtener_definiciones():
     # Hecha por Vicini Luciano
@@ -18,7 +17,6 @@ def obtener_definiciones():
     *       }
     """
     # Constantes
-    CONFIGURACION = obtener_constantes()
     LETRAS_TILDADAS = {
         "á":"a",
         "é":"e",
