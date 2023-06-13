@@ -1,4 +1,5 @@
 from Etapa_8 import obtener_lista_definiciones
+from etapa_10 import obtener_constantes
 
 def obtener_definiciones():
     # Hecha por Vicini Luciano
@@ -17,6 +18,7 @@ def obtener_definiciones():
     *       }
     """
     # Constantes
+    CONFIGURACION = obtener_constantes()
     LETRAS_TILDADAS = {
         "á":"a",
         "é":"e",
@@ -45,3 +47,4 @@ def obtener_definiciones():
             cant_definiciones += 1
             cant_palabras_por_letra[letra] += 1        
     return definiciones
+print(obtener_definiciones())
