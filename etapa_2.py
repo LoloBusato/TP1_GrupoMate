@@ -34,17 +34,16 @@ def obtener_definiciones():
     cant_definiciones = 0
     definiciones = {}
 
-    for definicion in obtener_lista_definiciones():
+    for definicion in obtener_lista_definiciones():g
         letra = definicion[PALABRA][INICIAL]
         if definicion[PALABRA][INICIAL] in LETRAS_TILDADAS:
             letra = LETRAS_TILDADAS[letra]
         if letra in definiciones:
-            definiciones[letra].append([definicion[PALABRA], definicion[DEFINICION]])
+            definiciones[letra].append(definicion)
         else:
-            definiciones[letra] = [[definicion[PALABRA], definicion[DEFINICION]]]
+            definiciones[letra] = [definicion]
         cant_definiciones += 1
         cant_palabras_por_letra[letra] += 1      
     print(cant_palabras_por_letra)
     print(cant_definiciones)
     return definiciones
-obtener_definiciones()
