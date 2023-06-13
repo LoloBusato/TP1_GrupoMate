@@ -1,13 +1,15 @@
 import csv
 
+NOMBRE = 0
+VALOR = 1
 def obtener_constantes():
-    datos = {}
+    constantes = {}
     with open('configuracion.csv', 'r') as archivo:
-        reader = csv.reader(archivo)
+        configuracion = csv.reader(archivo)
+        for fila in configuracion:
+            variable = fila[NOMBRE]
+            valor = fila[VALOR]
+            constantes[variable] = valor
 
-        for fila in reader:
-            variable = fila[0]
-            valor = int(fila[1])
-            datos[variable] = valor
-    return datos
+    return constantes
     
