@@ -1,10 +1,11 @@
 import csv
 import random
+from etapa_10 import obtener_constantes
 
 #----------------------------------------------------------------------------------------------------------------
 #GENERO VARIABLES Y CONSTANTES QUE VOY A USAR
 PALABRA=0
-MINIMO=4
+CONFIGURACION = obtener_constantes()
 ENCODING='utf-8'
 
 #-------------------------------------------------------------------------------------------------------------------
@@ -21,7 +22,7 @@ def crear_diccionario(palabras,definiciones):
     palabra,definicion=leer_archivos(palabras,definiciones)
     while palabra:
             #valido que la palabra sea alum.
-            if palabra.isalnum() and len(palabra)>MINIMO:
+            if palabra.isalnum() and len(palabra) > int(CONFIGURACION['LONGITUD_PALABRA_MINIMA']):
                 dicc[palabra]="'"+str(definicion)+"'"
             palabra,definicion=leer_archivos(palabras,definiciones)
     dicc=sorted(dicc.items(),key=lambda x:x[PALABRA])
