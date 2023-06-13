@@ -29,14 +29,13 @@ def obtener_definiciones():
     PALABRA = 0
     DEFINICION = 1
     INICIAL = 0
-    LONG_MINIMA = 5
 
     cant_palabras_por_letra = {"a":0,"b":0,"c":0,"d":0,"e":0,"f":0,"g":0,"h":0,"i":0,"j":0,"k":0,"l":0,"m":0,"n":0,"ñ":0,"o":0,"p":0,"q":0,"r":0,"s":0,"t":0,"u":0,"v":0,"w":0,"x":0,"y":0,"z":0}
     cant_definiciones = 0
     definiciones = {}
 
     for definicion in obtener_lista_definiciones():
-        if len(definicion[PALABRA]) >= LONG_MINIMA:
+        if len(definicion[PALABRA]) >= int(CONFIGURACION['LONGITUD_PALABRA_MINIMA']):
             letra = definicion[PALABRA][INICIAL]
             if definicion[PALABRA][INICIAL] in LETRAS_TILDADAS:
                 letra = LETRAS_TILDADAS[letra]
