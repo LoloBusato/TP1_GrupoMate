@@ -1,4 +1,3 @@
-import csv
 import random
 
 #----------------------------------------------------------------------------------------------------------------
@@ -30,17 +29,16 @@ def crear_diccionario(palabras,definiciones):
 #------------------------------------------------------------------------------------------------------------------------
 
 #CREO EL ARCHIVO DICCIONARIO.CSV
-def crear_diccionario_csv(palabras,definiciones):
+def crear_diccionario_csv(palabras,definiciones,diccionario):
     palabras_definiciones=crear_diccionario(palabras,definiciones)
-    diccionario_csv = 'diccionario.csv'
-    #escribir los datos en el archivo CSV
-    with open(diccionario_csv, 'w', newline='',encoding=ENCODING) as dicc_csv:
-        escritor = csv.writer(dicc_csv)
-        escritor.writerows(palabras_definiciones)
+    for palabra_definicion in palabras_definiciones:
+        diccionario.write(palabra_definicion[0] + ','  + palabra_definicion[1] + "\n")
+    
 
 def leer_archivo_diccionario(diccionario_txt):
     linea=diccionario_txt.readline().rstrip()
     return linea.split(',') if linea else ('','')
+
 
 def leer_diccionario(diccionario_csv):
     diccionario_lista = []
@@ -57,7 +55,8 @@ def obtener_lista_definiciones():
     #ABRIMOS LOS ARCHIVOS.TXT--------------------------------------------------------------------------------------------
     palabras_txt = open('palabras.txt', 'r', encoding=ENCODING)
     definiciones_txt = open('definiciones.txt', 'r', encoding=ENCODING)
-    crear_diccionario_csv(palabras_txt,definiciones_txt)
+    diccionario_csv = open('diccionario.csv','w',encoding=ENCODING)
+    crear_diccionario_csv(palabras_txt,definiciones_txt,diccionario_csv)
     #CIERRO LOS ARCHIVOS TXT--------------------------------------------------------------------------------------------
     palabras_txt.close()
     definiciones_txt.close()
@@ -66,6 +65,3 @@ def obtener_lista_definiciones():
     diccionario_csv.close()
     random.shuffle(diccionario_lista)
     return diccionario_lista
-
-
-
