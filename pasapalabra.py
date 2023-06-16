@@ -75,4 +75,3 @@ partida = {
 
     }
 }
-pasapalabra(jugadores,partida)
