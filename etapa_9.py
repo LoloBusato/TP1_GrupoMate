@@ -70,11 +70,12 @@ def fin_de_partida(jugadores,partida,cant_partida):
 def pedir_continuacion():
     seguir_jugando = True
     continuar = input('¿Desea seguir jugando? Ingrese si o no:')
-    while continuar.lower() != 'si' and continuar.lower != "no":
+    while continuar.lower() != 'si' and continuar.lower() != "no":
         continuar = input('Error, ¿desea seguir jugando? Ingrese si o no:')
-    if continuar.lower == "no":
+    if continuar.lower() == "no":
         seguir_jugando=False
     return seguir_jugando
+
 #CUERPO FUNCION PRINCIPAL===============================================================================================================
 def main ():
     '''
@@ -93,9 +94,9 @@ def main ():
         
         #resultados parciales
         resultados_parciales(jugadores,partida)
-        #pide input del jugador
+        #pide continuacion del juego
         seguir_jugando = pedir_continuacion()
-            
+        
     return fin_de_partida(jugadores,partida,cant_partidas)
 
-main()
+print(pedir_continuacion())
