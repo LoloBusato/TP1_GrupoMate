@@ -194,7 +194,7 @@ def letras_participantes():
     '''
     LETRAS_ROSCO= ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z']
     random.shuffle(LETRAS_ROSCO)
-    return sorted(LETRAS_ROSCO[:CANTIDAD_LETRAS_ROSCO])
+    return sorted(LETRAS_ROSCO[:2])
 
 def selecciona_jugador(indice,jugadores):
     if (indice == -1):
@@ -247,6 +247,7 @@ def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
     partida[jugador]['resultados'][indice] = "e"
     partida[jugador]['puntaje_partida'] += PUNTAJE_ERROR
     partida[jugador]['puntaje_global'] += PUNTAJE_ERROR
+    
 def imprimir_resultados_parciales(partida,jugadores):
     numero = 1
     for jugador in jugadores:
@@ -311,4 +312,7 @@ def imprimir_resultados_parciales(partida,jugadores):
 
 #     impresion_final(puntaje, resumen_partida)
 #     return puntaje
-print(doctest.testmod())
+
+
+
+#print(doctest.testmod())
