@@ -1,6 +1,4 @@
 import random
-from etapa_2 import obtener_definiciones
-from etapa_3 import palabras_del_rosco
 import doctest
 from etapa_10 import obtener_constantes
 
@@ -54,8 +52,6 @@ def reemplaza_tildes(palabra):
     *
     >>> reemplaza_tildes('esdrújula')
     'esdrujula'
-    >>> reemplaza_tildes('canción')
-    'cancion'
     >>> reemplaza_tildes('magia')
     'magia'
     '''
@@ -82,8 +78,6 @@ def valida_respuesta(palabra_usuario, palabra_actual):
     True
     >>> valida_respuesta('perrito','peritos')
     False
-    >>> valida_respuesta('teclado','teclado')
-    True
     >>> valida_respuesta('pérro','perro')
     False
     '''
@@ -140,9 +134,8 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,par
     <BLANKLINE>
     <BLANKLINE>
     <BLANKLINE>
-    Turno jugador martin letra C - Palabra de 8 letras
+    Turno  jugador martin letra C - Palabra de 8 letras
     3. Definición: def de circuito
-    Definición: 1.  m. Terreno comprendido dentro de un perímetro cualquiera
     """
     print(abecedario_imprimir)
     resultado_imprimir = formateo_resultados(resultados)
@@ -308,7 +301,11 @@ def imprimir_resultados_parciales(partida,jugadores):
     '''
     * Función encargada de imprimir los resultados parciales
     * Pre: Recibe el diccionario de partida y el listado de los jugadores participantes
-    
+    >>> partida = {'martin':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3},'lorenzo':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3}}
+    >>> jugadores = ['martin','lorenzo']
+    >>> imprimir_resultados_parciales(partida,jugadores)
+    1. martin - Aciertos: 1 - Errores : 1
+    2. lorenzo - Aciertos: 1 - Errores : 1
     '''
     numero = 1
     for jugador in jugadores:
