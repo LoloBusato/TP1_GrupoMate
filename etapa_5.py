@@ -9,8 +9,7 @@ def pasapalabra ():
     seguir_jugando = True
 
     while seguir_jugando:
-        puntaje_partida = partida_pasapalabra(puntaje)
-        puntaje=puntaje_partida
+        puntaje = partida_pasapalabra(puntaje)
         continuar = input("Desea seguir jugando? si | no: ")
         while continuar.lower() != "si" and continuar.lower() != "no":
             continuar = input("Error, desea seguir jugando? si | no: ")

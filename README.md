@@ -8,3 +8,10 @@ Integrantes:
 
 Link del repositorio:
     https://github.com/LoloBusato/TP1_GrupoMate
+
+Modos de ejecución:
+    Para comenzar una partida del pasapalabra ejecutar el siguiente comando en la terminal:
+        py etapa_5.py
+
+    Para observar las pruebas y los resultados de las mismas utilizar el siguiente comando:
+        py -m doctest -v etapa_4.py
