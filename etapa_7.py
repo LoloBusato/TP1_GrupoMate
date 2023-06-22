@@ -23,14 +23,14 @@ def ventana_de_jugadores():
     """
     raiz= Tk()
     #esta funcion agrega a la lista de jugadores los nombres de los usuarios a participar
-    def usuarios_participantes(usuario,contraseña):
+    def usuarios_participantes(usuario,contrasenia):
         if usuario in jugadores:
             messagebox.showerror(message='Este jugador ya esta participando')
         else:
             jugadores.append(usuario)
             messagebox.showinfo(message=f'{usuario} participará del juego')
         nombre_usuario_entry.delete(0,len(usuario))
-        contraseña_entry.delete(0,len(contraseña))
+        contrasenia_entry.delete(0,len(contrasenia))
         if len(jugadores) == 4:
             raiz.destroy()
             
@@ -49,43 +49,43 @@ def ventana_de_jugadores():
                 validacion= False
         return validacion and int(CONFIGURACION['MIN_LONG_USUARIO']) <= len(usuario) and len(usuario) <= int(CONFIGURACION['MAX_LONG_USUARIO'])
 
-    #esta funcion comprueba si la contraseña del usuario es valido cuando se registra el jugador
-    def validar_contraseña(contraseña):
+    #esta funcion comprueba si la contrasenia del usuario es valido cuando se registra el jugador
+    def validar_contrasenia(contrasenia):
         cont_especiales= 0
         cont_num = 0
         cont_minus = 0
         cont_mayus = 0
         indice = 0
         validacion= True
-        while indice < len(contraseña) and validacion==True:
-            if contraseña[indice] in CARACTERES_ESPECIALES:
+        while indice < len(contrasenia) and validacion==True:
+            if contrasenia[indice] in CARACTERES_ESPECIALES:
                 cont_especiales += 1
-            elif contraseña[indice].isnumeric():
+            elif contrasenia[indice].isnumeric():
                 cont_num += 1
-            elif contraseña[indice].islower():
+            elif contrasenia[indice].islower():
                 cont_minus += 1
-            elif contraseña[indice].isupper():
+            elif contrasenia[indice].isupper():
                 cont_mayus += 1
             else:
                 validacion= False
             indice += 1
-        validacion= cont_mayus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_minus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_num >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_especiales >= int(CONFIGURACION['CONTEO_MINIMO']) and int(CONFIGURACION['MIN_LONG_CONTRASEÑA']) <= len(contraseña) and len(contraseña) <= int(CONFIGURACION['MAX_LONG_CONTRASEÑA']) 
+        validacion= cont_mayus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_minus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_num >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_especiales >= int(CONFIGURACION['CONTEO_MINIMO']) and int(CONFIGURACION['MIN_LONG_CONTRASEniA']) <= len(contrasenia) and len(contrasenia) <= int(CONFIGURACION['MAX_LONG_CONTRASEniA']) 
         return validacion
 
     #esta funcion inicia sesion
-    def iniciar_sesion(usuario, contraseña):
+    def iniciar_sesion(usuario, contrasenia):
         with open('usuarios.csv', 'r') as archivo:
             lector = csv.reader(archivo)
             cont = 0
             for fila in lector:
                 if fila[int(CONFIGURACION['USUARIO'])] == usuario:
-                    if fila[int(CONFIGURACION['CONTRASEÑA'])] == contraseña:
+                    if fila[int(CONFIGURACION['CONTRASENIA'])] == contrasenia:
                         cont = -1
                         resultado= usuarios_participantes(fila[0],fila[1])
                     else:
                         cont += 1
             if cont == 1:
-                resultado= messagebox.showerror(message='contraseña incorrecta')
+                resultado= messagebox.showerror(message='contrasenia incorrecta')
             elif cont == 0:
                 resultado= messagebox.showerror(message='este usuario no esta registrado')
         return resultado
@@ -94,7 +94,7 @@ def ventana_de_jugadores():
     def registrarse():
         Registro= Tk()
         
-        def registro(usuario,contraseña):
+        def registro(usuario,contrasenia):
             #este with open es para comprobar si ya esta registrado ese usuario
             with open('usuarios.csv', 'r') as archivo:
                 lector = csv.reader(archivo)
@@ -103,14 +103,14 @@ def ventana_de_jugadores():
                     if fila[int(CONFIGURACION['USUARIO'])] == usuario:
                         cont += 1
             if cont == 0:
-                if validar_usuario(usuario) and validar_contraseña(contraseña):
+                if validar_usuario(usuario) and validar_contrasenia(contrasenia):
                     with open('usuarios.csv','a',newline='\n') as archivo:
                         escritor = csv.writer(archivo)
-                        escritor.writerow([usuario,contraseña])
+                        escritor.writerow([usuario,contrasenia])
                         messagebox.showinfo(message= 'has sido registrado exitosamente')
                         Registro.destroy()
                 else:
-                    messagebox.showerror(message= '''Ingrese un nombre de usuario o contraseña validos    (NOMBRE DE USUARIO entre 4 y 20 caracteres con -, letras, numeros)   (CONTRASEÑA: longitud entre 6 y 12 caracteres, por lo menos 1 mayus,minus,numero y alguno de los siguientes elementos: #, !)''')
+                    messagebox.showerror(message= '''Ingrese un nombre de usuario o contrasenia validos    (NOMBRE DE USUARIO entre 4 y 20 caracteres con -, letras, numeros)   (CONTRASEniA: longitud entre 6 y 12 caracteres, por lo menos 1 mayus,minus,numero y alguno de los siguientes elementos: #, !)''')
                     
             else:
                 messagebox.showerror(message= 'este usuario ya esta registrado') 
@@ -120,16 +120,16 @@ def ventana_de_jugadores():
         
         R_nombre_usuario_entry= Entry(Registro)
         R_nombre_usuario_entry.place(x= 200, y=40)
-        R_contraseña_entry= Entry(Registro)
-        R_contraseña_entry.place(x=200, y= 80)
-        R_contraseña_entry.config(show= '*')
+        R_contrasenia_entry= Entry(Registro)
+        R_contrasenia_entry.place(x=200, y= 80)
+        R_contrasenia_entry.config(show= '*')
 
         R_nombre_usuario_label= Label(Registro, text= 'Nombre de Usuario:', bg='lightyellow')
         R_nombre_usuario_label.place(x=70, y=40)
-        R_contraseña_label= Label(Registro, text= 'contraseña:', bg='lightyellow')
-        R_contraseña_label.place(x=115, y= 80)
+        R_contrasenia_label= Label(Registro, text= 'contrasenia:', bg='lightyellow')
+        R_contrasenia_label.place(x=115, y= 80)
         
-        R_registrarse_boton= Button(Registro,text= 'Registrarse',command= lambda:registro(R_nombre_usuario_entry.get(),R_contraseña_entry.get()))
+        R_registrarse_boton= Button(Registro,text= 'Registrarse',command= lambda:registro(R_nombre_usuario_entry.get(),R_contrasenia_entry.get()))
         R_registrarse_boton.place(x=150, y= 120)
         
         Registro.mainloop()
@@ -140,18 +140,18 @@ def ventana_de_jugadores():
 
     nombre_usuario_entry= Entry(raiz)
     nombre_usuario_entry.place(x= 200, y=40)
-    contraseña_entry= Entry(raiz)
-    contraseña_entry.place(x=200, y= 80)
-    contraseña_entry.config(show= '*')
+    contrasenia_entry= Entry(raiz)
+    contrasenia_entry.place(x=200, y= 80)
+    contrasenia_entry.config(show= '*')
 
     nombre_usuario_label= Label(raiz, text= 'Nombre de Usuario:', bg='lightblue')
     nombre_usuario_label.place(x=70, y=40)
-    contraseña_label= Label(raiz, text= 'contraseña:', bg='lightblue')
-    contraseña_label.place(x=115, y= 80)
+    contrasenia_label= Label(raiz, text= 'contrasenia:', bg='lightblue')
+    contrasenia_label.place(x=115, y= 80)
 
     iniciar_partida_boton= Button(raiz,text='     Iniciar Partida     ',command= lambda: iniciar_partida())
     iniciar_partida_boton.place(x=133, y= 220)
-    iniciar_sesion_boton= Button(raiz,text='Iniciar Sesion',command= lambda: iniciar_sesion(nombre_usuario_entry.get(), contraseña_entry.get()))
+    iniciar_sesion_boton= Button(raiz,text='Iniciar Sesion',command= lambda: iniciar_sesion(nombre_usuario_entry.get(), contrasenia_entry.get()))
     iniciar_sesion_boton.place(x=150, y= 120)
     registrarse_txt= Label(raiz, text= 'si no tenes cuenta presiona en el boton de abajo', bg='lightblue', fg= 'blue')
     registrarse_txt.place(x=60, y= 150)
