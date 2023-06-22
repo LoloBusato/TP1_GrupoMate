@@ -246,6 +246,7 @@ def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
     partida[jugador]['resultados'][indice] = "e"
     partida[jugador]['puntaje_partida'] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
     partida[jugador]['puntaje_global'] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
+
 def imprimir_resultados_parciales(partida,jugadores):
     numero = 1
     for jugador in jugadores:
@@ -310,4 +311,7 @@ def imprimir_resultados_parciales(partida,jugadores):
 
 #     impresion_final(puntaje, resumen_partida)
 #     return puntaje
-print(doctest.testmod())
+
+
+
+#print(doctest.testmod())
