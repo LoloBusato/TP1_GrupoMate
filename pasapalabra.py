@@ -31,12 +31,11 @@ def pasapalabra(jugadores,partida):
         while (indice_partida<len(letras_partida) and not error):
             #Mientras no se recorra todo el rosco o se equivoque
             resultados,abecedario_imprimir = iniciar_resultados_abecedario(letras_partida,resultados_partida)
-            aciertos,errores = contador_aciertos(resultados_partida)
             
             palabra_actual = diccionario_partida[indice_partida][0]
             definicion_actual = diccionario_partida[indice_partida][1]
             
-            imprimir_resultados(abecedario_imprimir,resultados,aciertos,errores,palabra_actual,definicion_actual,partida,jugadores,jugador)
+            imprimir_resultados(abecedario_imprimir,resultados,palabra_actual,definicion_actual,partida,jugadores,jugador)
             
             palabra_usuario = pedir_palabra(len(palabra_actual))
             respuesta = valida_respuesta(palabra_usuario,palabra_actual)

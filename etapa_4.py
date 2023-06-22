@@ -114,29 +114,34 @@ def iniciar_resultados_abecedario(letras,resultados):
         if not resultados[indice]:
             resultados[indice]= " "
     return resultados, abecedario_imprimir
-def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabra, definicion,partida,jugadores,jugador):
+def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,partida,jugadores,jugador):
     # Hecha por Busato Lorenzo
     """
     * Función que se encarga de la impresión de cada turno del juego y se acciona luego de cada intento 
     *
-    * Pre: Recibe las letras participantes ordenadas, los resultados parciales, la cantidad de aciertos y errores, la palabra del turno y su definición
+    * Pre: Recibe las letras participantes ordenadas, los resultados parciales, la palabra del turno, su definición, el contador de partida del jugador, el listado de jugadores y el jugador de turno
     *
     * Post: Imprime el tablero de letras, los resultados parciales, la palabra de turno y su definición
-    #REHACER DOCTEST
     >>> abecedario_imprimir = "[A][B][C][D]"
     >>> resultados=["a","e"," "," "]
-    >>> aciertos = 1
-    >>> errores = 1
     >>> palabra = "circuito"
-    >>> definicion = "1.  m. Terreno comprendido dentro de un perímetro cualquiera"
-    >>> imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabra, definicion)
+    >>> definicion = "def de circuito"
+    >>> partida = {'martin':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3},'lorenzo':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3}}
+    >>> jugadores = ['martin','lorenzo']
+    >>> jugador = 'martin'
+    >>> imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,partida, jugadores,jugador)
     [A][B][C][D]
     [a][e][ ][ ]
     <BLANKLINE>
     <BLANKLINE>
-    Aciertos: 1
-    Errores: 1
-    Turno letra C - Palabra de 8 letras
+    Jugadores:
+    1. martin - Aciertos: 1 - Errores : 1
+    2. lorenzo - Aciertos: 1 - Errores : 1
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    Turno jugador martin letra C - Palabra de 8 letras
+    3. Definición: def de circuito
     Definición: 1.  m. Terreno comprendido dentro de un perímetro cualquiera
     """
     print(abecedario_imprimir)
@@ -150,7 +155,7 @@ def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, pala
     print(f"Turno  jugador {jugador} letra {palabra[0].upper()} - Palabra de {len(palabra)} letras")
 
     print(f"{partida[jugador][TURNO]+1}. Definición: {definicion}")
-
+print(doctest.testmod())
 def pedir_palabra(longitud):
     # Hecha por Busato Lorenzo
     '''
