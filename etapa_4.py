@@ -32,8 +32,8 @@ def formateo_resultados(resultados):
     '[a][e]'
     >>> formateo_resultados(['e','e','a','a',' ',' '])
     '[e][e][a][a][ ][ ]'
-    >>> formateo_resultados(['a','e','a'])
-    '[a][e][a]'
+    >>> formateo_resultados([' ',' ',' '])
+    '[ ][ ][ ]'
     '''
     resultados_a_imprimir = ""
     for letra in resultados:
