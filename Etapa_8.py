@@ -68,6 +68,19 @@ def leer_archivo_diccionario(diccionario_txt):
 
 
 def leer_diccionario(diccionario_csv):
+    # Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada procesar el archivo diccionario_csv creado
+    *
+    * Pre: Recibe 1 archivo abierto en formato .csv
+    *
+    * Post: devuelve una lista con las palabras definiciones en formato
+    *   [
+    *       [palabra, definicion],
+    *       ... 
+    *   ]
+    *
+    """
     diccionario_lista = []
     palabra_definicion = leer_archivo_diccionario(diccionario_csv)
     while palabra_definicion != ('', ''):
