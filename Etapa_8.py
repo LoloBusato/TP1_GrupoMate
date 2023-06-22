@@ -1,21 +1,25 @@
 import random
 from etapa_10 import obtener_constantes
 
-#----------------------------------------------------------------------------------------------------------------
-#GENERO VARIABLES Y CONSTANTES QUE VOY A USAR
-PALABRA=0
+#CONSTANTES=================================================================================================
 CONFIGURACION = obtener_constantes()
-ENCODING='utf-8'
 
-#-------------------------------------------------------------------------------------------------------------------
-
-#LEE LOS ARCHIVOS.TXT LINEA POR LINEA
+#FUNCIONES========================================================================================
 def leer_archivos(palabras,definiciones):
-    linea_def=definiciones.readline().rstrip()
-    linea_pal=palabras.readline().rstrip()
+    # Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada de leer cada linea de los archivos
+    *
+    * Pre: Recibe 2 archivos abiertos de formato txt que contienen todas las palabras definicion
+    *
+    * Post: devuelve la siguiente linea de los archivos que contienen las palabras y definiciones
+    *       
+    *
+    """
+    linea_def = definiciones.readline().rstrip()
+    linea_pal = palabras.readline().rstrip()
     return linea_pal,linea_def
 
-#CREACION DE NUESTRO DICC ORDENADO ALF.   TYPE: LIST
 def crear_diccionario(palabras,definiciones):
     dicc={}
     palabra,definicion=leer_archivos(palabras,definiciones)
