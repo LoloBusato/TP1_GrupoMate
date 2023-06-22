@@ -7,70 +7,80 @@ import random
 
 #CONSTANTES========================================================================================================
 CONFIGURACION = obtener_constantes()
-PUNTAJE_PARTIDA = 'puntaje_partida'
-RESUMEN_PARTIDA = 'resumen_partida'
-PUNTAJE_GLOBAL = 'puntaje_global'
-TURNO = 'turno'
 
 #FUNCIONES=======================================================================================================
 def obtener_definiciones(dicc,letras):
     # Hecha por Nuñez Juan Bautista
     """
-    * funcion obtener_definiciones - lee el archivo configuracion.csv y crea un diccionario de constantes
+    * funcion obtener_definiciones - acepta una lista con [palabra,definicion] y una lista de letras
+    *   devuelve unicamente una lista con una palabra, definicion por letra
     *
-    * pre: configuracion.csv es un archivo con formato NOMBRE, VALOR por linea
+    * pre: dicc es una lista con formato [palabra, definicion] y letras es una lista de letras
     *
-    * post: devuelve el diccionario en formato
-    *       {
-    *           NOMBRE: VALOR,
+    * post: devuelve la variable definciones con formato
+    *       [
+    *           (palabra, definicion),
+    *           (palabra, definicion),
     *           ...
-    *       }
+    *       ]
     """
     definiciones=[]
-    palabras_candidatas=[]
     for letra in letras:
+        palabras_candidatas=[]
         for palabra,definicion in dicc:
-            if palabra[INICIAL].upper() == letra.upper():
+            if palabra[int(CONFIGURACION['INICIAL'])].upper() == letra.upper():
                 palabras_candidatas.append((palabra,definicion))
         random.shuffle(palabras_candidatas)
         definiciones.append(palabras_candidatas[0])
-        palabras_candidatas=[]
     return definiciones
 
 def obtener_resultados(letras):
-    #Hecha por Nuñez Juan Bautista
-    '''
-    *Funcion encargada de inicializar los resultados
-    *Pre: Recibe el listado de letras
-    *Post: Retorna la lista de resultados inicializada
-    
+    # Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada de inicializar los resultados
+    *
+    * Pre: Recibe un listado de letras
+    *
+    * Post: Retorna la lista de resultados inicializada
+    *
     >>> obtener_resultados(['a','b','c','d'])
     ['', '', '', '']
-    '''
+    """
     count=0
-    resultados=[]
-    while count<len(letras):
+    resultados = []
+    for letra in letras:
         resultados.append('')
-        count +=1
     return resultados
 
 def creacion_diccionarios(jugadores):
-    #Hecha por Nuñez Juan Bautista
+    # Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada de crear un diccionario por cada jugador de la partida
+    *
+    * Pre: Recibe una lista con los nombres de los jugadores 
+    *
+    * Post: Retorna un diccionario con formato
+    *   {
+    *       NOMBRE_JUGADOR1: [[PALABRA1, DEFINICION1], [PALABRA2, DEFINICION2], ...],
+    *       ...
+    *   }
+    *
+    """
     partida = {}
-    dicc_global=obtener_lista_definiciones()
+    diccionario_lista = obtener_lista_definiciones()
     for jugador in jugadores:
         if jugador not in partida.keys():
-            letras=letras_participantes()
-            dicc_definiciones=obtener_definiciones(dicc_global,letras)
-            resultados=obtener_resultados(letras)
+            letras = letras_participantes()
+            dicc_definiciones = obtener_definiciones(diccionario_lista,letras)
+            resultados = obtener_resultados(letras)
             partida[jugador] = {
                 DICCIONARIO: dicc_definiciones,
                 LETRAS: letras,
                 RESULTADOS: resultados,
                 TURNO: 0,
-                PUNTAJE_PARTIDA: 0,
-                RESUMEN_PARTIDA:'',
-                PUNTAJE_GLOBAL: 0,
+                CONFIGURACION['PUNTAJE_PARTIDA']: 0,
+                CONFIGURACION['RESUMEN_PARTIDA']:'',
+                CONFIGURACION['PUNTAJE_GLOBAL']: 0,
                 
             }
         #El caso contrario no deberia ocurrir nunca
