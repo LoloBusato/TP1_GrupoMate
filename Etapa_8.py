@@ -105,15 +105,15 @@ def obtener_lista_definiciones():
     *
     """
     #ABRIMOS LOS ARCHIVOS.TXT--------------------------------------------------------------------------------------------
-    palabras_txt = open('palabras.txt', 'r', encoding=ENCODING)
-    definiciones_txt = open('definiciones.txt', 'r', encoding=ENCODING)
-    diccionario_csv = open('diccionario.csv','w',encoding=ENCODING)
+    palabras_txt = open('palabras.txt', 'r', encoding=CONFIGURACION['ENCODING'])
+    definiciones_txt = open('definiciones.txt', 'r', encoding=CONFIGURACION['ENCODING'])
+    diccionario_csv = open('diccionario.csv','w',encoding=CONFIGURACION['ENCODING'])
     #PROCESADO DE DATOS------------------------------------------------------------------------------
     crear_diccionario_csv(palabras_txt,definiciones_txt,diccionario_csv)
     #CIERRO LOS ARCHIVOS TXT--------------------------------------------------------------------------------------------
     palabras_txt.close()
     definiciones_txt.close()
-    diccionario_csv = open('diccionario.csv', 'r', encoding=ENCODING)
+    diccionario_csv = open('diccionario.csv', 'r', encoding=CONFIGURACION['ENCODING'])
     diccionario_lista = leer_diccionario(diccionario_csv)
     diccionario_csv.close()
     random.shuffle(diccionario_lista)
