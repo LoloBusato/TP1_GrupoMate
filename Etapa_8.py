@@ -36,7 +36,7 @@ def crear_diccionario(palabras,definiciones):
             if palabra.isalpha() and len(palabra) > int(CONFIGURACION['LONGITUD_PALABRA_MINIMA']):
                 dicc[palabra] = definicion
             palabra,definicion=leer_archivos(palabras,definiciones)
-    dicc = sorted(dicc.items(),key=lambda x:x[int(CONFIGURACION['LONGITUD_PALABRA_MINIMA'])])
+    dicc = sorted(dicc.items(),key=lambda x:x[int(CONFIGURACION['PALABRA'])])
     return dicc
 
 
