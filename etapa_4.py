@@ -197,9 +197,23 @@ def letras_participantes():
     return sorted(LETRAS_ROSCO[:int(CONFIGURACION['CANTIDAD_LETRAS_ROSCO'])])
 
 def selecciona_jugador(indice,jugadores):
+    #Hecha por Orlando Martin
+    '''
+    * Función que selecciona un jugador de un listado dependiendo de su índice
+    * Pre: Recibe un número, indice, y un listado con todos los jugadores participantes de la partida
+    * Post: Retorna el nombre del jugador correspondiente. Si no coresponde seleccionar un jugador, retorna un string vacio
+    >>> indice = 3
+    >>> jugadores = ['martin','lorenzo','luciano','juan']
+    >>> selecciona_jugador(indice,jugadores)
+    'juan'
+    >>> indice_2 = -1
+    >>> selecciona_jugador(indice_2,jugadores)
+    ''
+    '''
     if (indice == -1):
         jugador = ''
-    jugador = jugadores[indice]
+    else: 
+        jugador = jugadores[indice]
     return jugador
 
 def incrementa_jugador(cantidad_jugadores,indice=-1):

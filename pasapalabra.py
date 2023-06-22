@@ -23,30 +23,31 @@ def pasapalabra(jugadores,partida):
         #Ciclo actuante si el jugador actual tiene turno libre o hay alguno que aun tenga turnos libres
         error = False
         jugador = selecciona_jugador(indice_jugador,jugadores)
-        turno = partida[jugador]
-        diccionario_partida = turno[DICCIONARIO]
-        letras_partida = turno[LETRAS]
-        resultados_partida = turno[RESULTADOS]
-        indice_partida =turno[TURNO]
-        while (indice_partida<len(letras_partida) and not error):
-            #Mientras no se recorra todo el rosco o se equivoque
-            resultados,abecedario_imprimir = iniciar_resultados_abecedario(letras_partida,resultados_partida)
-            
-            palabra_actual = diccionario_partida[indice_partida][0]
-            definicion_actual = diccionario_partida[indice_partida][1]
-            
-            imprimir_resultados(abecedario_imprimir,resultados,palabra_actual,definicion_actual,partida,jugadores,jugador)
-            
-            palabra_usuario = pedir_palabra(len(palabra_actual))
-            respuesta = valida_respuesta(palabra_usuario,palabra_actual)
-            if respuesta:
-                #partida,jugador,indice,palabra_actual,palabra_usuario
-                respuesta_correcta(partida,jugador,indice_partida,palabra_actual,palabra_usuario)
-            else:
-                respuesta_incorrecta(partida,jugador,indice_partida,palabra_actual,palabra_usuario)
-                error = True
-            indice_partida+=1
-            partida[jugador][TURNO]+=1
+        if(jugador):
+            turno = partida[jugador]
+            diccionario_partida = turno[DICCIONARIO]
+            letras_partida = turno[LETRAS]
+            resultados_partida = turno[RESULTADOS]
+            indice_partida =turno[TURNO]
+            while (indice_partida<len(letras_partida) and not error):
+                #Mientras no se recorra todo el rosco o se equivoque
+                resultados,abecedario_imprimir = iniciar_resultados_abecedario(letras_partida,resultados_partida)
+                
+                palabra_actual = diccionario_partida[indice_partida][0]
+                definicion_actual = diccionario_partida[indice_partida][1]
+                
+                imprimir_resultados(abecedario_imprimir,resultados,palabra_actual,definicion_actual,partida,jugadores,jugador)
+                
+                palabra_usuario = pedir_palabra(len(palabra_actual))
+                respuesta = valida_respuesta(palabra_usuario,palabra_actual)
+                if respuesta:
+                    #partida,jugador,indice,palabra_actual,palabra_usuario
+                    respuesta_correcta(partida,jugador,indice_partida,palabra_actual,palabra_usuario)
+                else:
+                    respuesta_incorrecta(partida,jugador,indice_partida,palabra_actual,palabra_usuario)
+                    error = True
+                indice_partida+=1
+                partida[jugador][TURNO]+=1
         print(f"\nFin del turno de {jugador}\n")
         indice_jugador = busca_siguiente_turno_libre(partida,jugadores,indice_jugador)
     return partida
