@@ -2,21 +2,35 @@ from pasapalabra import pasapalabra;
 from etapa_4 import *
 from Etapa_8 import obtener_lista_definiciones
 from etapa_7 import *
+from etapa_10 import obtener_constantes
 import random
+
 #CONSTANTES========================================================================================================
+CONFIGURACION = obtener_constantes()
 PUNTAJE_PARTIDA = 'puntaje_partida'
 RESUMEN_PARTIDA = 'resumen_partida'
 PUNTAJE_GLOBAL = 'puntaje_global'
-TURNO= 'turno'
+TURNO = 'turno'
 
 #FUNCIONES=======================================================================================================
 def obtener_definiciones(dicc,letras):
-    #Hecha por Nuñez Juan Bautista
+    # Hecha por Nuñez Juan Bautista
+    """
+    * funcion obtener_definiciones - lee el archivo configuracion.csv y crea un diccionario de constantes
+    *
+    * pre: configuracion.csv es un archivo con formato NOMBRE, VALOR por linea
+    *
+    * post: devuelve el diccionario en formato
+    *       {
+    *           NOMBRE: VALOR,
+    *           ...
+    *       }
+    """
     definiciones=[]
     palabras_candidatas=[]
     for letra in letras:
         for palabra,definicion in dicc:
-            if palabra[0].upper() == letra.upper():
+            if palabra[INICIAL].upper() == letra.upper():
                 palabras_candidatas.append((palabra,definicion))
         random.shuffle(palabras_candidatas)
         definiciones.append(palabras_candidatas[0])
