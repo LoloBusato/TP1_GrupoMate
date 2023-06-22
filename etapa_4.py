@@ -235,6 +235,12 @@ def incrementa_jugador(cantidad_jugadores,indice=-1):
     return indice
 
 def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada de buscar el jugador más cercano con turnos libres para seguir jugando. En caso de no encontrarlo, retorna -1
+    * Pre: Recibe el diccionario de partida, un listado de jugadores participantes y el índice correspondiente al jugador participante. De ser el primer jugador participante, se inicializa en -1
+    * Post: Retorna el índice del jugador con turnos libres. En caso de no haber ninguno libre, retorna -1
+    '''
     ciclos = 0
     libre = False
     indice = incrementa_jugador(len(jugadores),indice)
@@ -251,6 +257,17 @@ def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
 
 
 def contador_aciertos(resultados):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada de contar los aciertos y errores de cada jugador
+    * Pre: Recibe un listado con letras 'a', si se registró un acierto, 'e' si se registró un error, y ' ' en caso de que no se haya respondido todavía
+    * Post: Retorna una tupla con la cantidad de aciertos y errores del usuario
+    >>> contador_aciertos(['a','a','e','a',' '])
+    (3, 1)
+    >>> contador_aciertos([' ',' ',' ',])
+    (0, 0)
+    
+    '''
     aciertos = 0
     errores = 0
     for respuesta in resultados:
