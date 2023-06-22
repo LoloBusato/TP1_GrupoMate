@@ -139,13 +139,20 @@ def fin_de_partida(jugadores,partida,cant_partida):
     return ()
 
 def pedir_continuacion():
-    #Hecha por Nuñez Juan Bautista
+    # Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada de obtener la informacion si el jugador quiere seguir jugando o no
+    *
+    * Post: devuelve un booleano indicando si el jugador quiere seguir jugando o no
+    *       
+    *
+    """
     seguir_jugando = True
-    continuar = input('¿Desea seguir jugando? Ingrese si o no:')
+    continuar = input('¿Desea seguir jugando? Ingrese si o no: ')
     while continuar.lower() != 'si' and continuar.lower() != "no":
-        continuar = input('Error, ¿desea seguir jugando? Ingrese si o no:')
+        continuar = input('Error, ¿desea seguir jugando? Ingrese si o no: ')
     if continuar.lower() == "no":
-        seguir_jugando=False
+        seguir_jugando = False
     return seguir_jugando
 
 #CUERPO FUNCION PRINCIPAL===============================================================================================================
