@@ -51,27 +51,3 @@ def pasapalabra(jugadores,partida):
         print(f"\nFin del turno de {jugador}\n")
         indice_jugador = busca_siguiente_turno_libre(partida,jugadores,indice_jugador)
     return partida
-
-jugadores = ['martin','juan']
-partida = {
-    'martin':{
-        'diccionario':[['anda','def_1'],['boca','def_2'],['casa','def_3'],['dedo','def_4']],
-        'letras':['a','b','c','d'],
-        'resultados':['a','','',''],
-        'turno':1,
-        'puntaje_partida':3,
-        'resumen_partida':'acierto',
-        'puntaje_global':0
-        
-    },
-    'juan':{
-        'diccionario':[['esto','def_1'],['funciona','def_2'],['gana','def_3'],['hola','def_4']],
-        'letras':['e','f','g','h'],
-        'resultados':['','','',''],
-        'turno':0,
-        'puntaje_partida':0,
-        'resumen_partida':'',
-        'puntaje_global':0
-
-    }
-}
