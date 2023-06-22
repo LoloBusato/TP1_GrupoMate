@@ -304,6 +304,12 @@ def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
     partida[jugador]['puntaje_global'] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
 
 def imprimir_resultados_parciales(partida,jugadores):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada de imprimir los resultados parciales
+    * Pre: Recibe el diccionario de partida y el listado de los jugadores participantes
+    
+    '''
     numero = 1
     for jugador in jugadores:
         resultados_jugador = partida[jugador]['resultados']
