@@ -92,10 +92,23 @@ def leer_diccionario(diccionario_csv):
     
 
 def obtener_lista_definiciones():
+    # Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada de abrir los archivos, cerrarlos y devolver las palabras, diccionario
+    *   en formato lista mezcladas
+    *
+    * Post: devuelve una lista con las palabras definiciones en formato
+    *   [
+    *       [palabra, definicion],
+    *       ... 
+    *   ]
+    *
+    """
     #ABRIMOS LOS ARCHIVOS.TXT--------------------------------------------------------------------------------------------
     palabras_txt = open('palabras.txt', 'r', encoding=ENCODING)
     definiciones_txt = open('definiciones.txt', 'r', encoding=ENCODING)
     diccionario_csv = open('diccionario.csv','w',encoding=ENCODING)
+    #PROCESADO DE DATOS------------------------------------------------------------------------------
     crear_diccionario_csv(palabras_txt,definiciones_txt,diccionario_csv)
     #CIERRO LOS ARCHIVOS TXT--------------------------------------------------------------------------------------------
     palabras_txt.close()
