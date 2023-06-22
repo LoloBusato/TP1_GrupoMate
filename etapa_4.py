@@ -217,6 +217,18 @@ def selecciona_jugador(indice,jugadores):
     return jugador
 
 def incrementa_jugador(cantidad_jugadores,indice=-1):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada de incrementar el indice de los jugadores reiniciando el ciclo una vez que se halla llegado al final del listado
+    * Pre: Recibe un numero indicador de la cantidad de jugadores participantes y el índice actual, siendo -1 el valor por defecto en caso de que no se ingrese como parametro
+    * Post: Devuelve un número índice incrementado en uno
+    >>> incrementa_jugador(3)
+    0
+    >>> incrementa_jugador(3,2)
+    0
+    >>> incrementa_jugador(3,1)
+    2
+    '''
     indice +=1
     if indice == cantidad_jugadores:
         indice = 0
