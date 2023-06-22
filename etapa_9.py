@@ -19,6 +19,7 @@ def obtener_definiciones(dicc,letras):
                 palabras_candidatas.append((palabra,definicion))
         random.shuffle(palabras_candidatas)
         definiciones.append(palabras_candidatas[0])
+        palabras_candidatas=[]
     return definiciones
 
 def obtener_resultados(letras):
@@ -99,4 +100,4 @@ def main ():
         
     return fin_de_partida(jugadores,partida,cant_partidas)
 
-print(pedir_continuacion())
+main()
