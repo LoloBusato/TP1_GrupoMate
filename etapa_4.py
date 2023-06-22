@@ -92,23 +92,20 @@ def valida_respuesta(palabra_usuario, palabra_actual):
     return respuesta
 
 
-def iniciar_resultados_abecedario(letras,resultados = []):
+def iniciar_resultados_abecedario(letras,resultados):
     #Hecha por Orlando Martín
     '''
     * Función que se encarga de iniciar las variables resultados y abecedario_imprimir
     *
-    * Pre: recibe "letras" que es una lista ordenada con las letras participantes y "resultados" que es una lista ordenada con los aciertos o errores de cada letra o los inicia
+    * Pre: recibe "letras" que es una lista ordenada con las letras participantes y "resultados" que es una lista ordenada con los aciertos o errores de cada letra
     *
     * Post: devuelve resultados como una lista con cadenas de caracter vacias y
     *       devuelve abecedario_imprimir con las letras participantes para imprimir
     
-    #REHACER DOCTEST
-    >>> iniciar_resultados_abecedario(["a","b","c","d"])
+    >>> iniciar_resultados_abecedario(["a","b","c","d"],[' ',' ',' ',' '])
     ([' ', ' ', ' ', ' '], '[A][B][C][D]')
-    >>> iniciar_resultados_abecedario(["A","f","h","r"])
-    ([' ', ' ', ' ', ' '], '[A][F][H][R]')
-    >>> iniciar_resultados_abecedario(["R","t","w","z"])
-    ([' ', ' ', ' ', ' '], '[R][T][W][Z]')
+    >>> iniciar_resultados_abecedario(["A","f","h","r"],['a','e',' ',' '])
+    (['a', 'e', ' ', ' '], '[A][F][H][R]')
     '''
     abecedario_imprimir = ""
     indice = 0
@@ -117,7 +114,6 @@ def iniciar_resultados_abecedario(letras,resultados = []):
         if not resultados[indice]:
             resultados[indice]= " "
     return resultados, abecedario_imprimir
-
 def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabra, definicion,partida,jugadores,jugador):
     # Hecha por Busato Lorenzo
     """
