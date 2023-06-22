@@ -61,8 +61,9 @@ def resultados_parciales(jugadores,partida):
 
 def fin_de_partida(jugadores,partida,cant_partida):
     print('Reporte Final: \n')
-    print(f'Partidas jugadas: {cant_partida} \\n')
+    print(f'Partidas jugadas: {cant_partida} \n')
     print('Puntaje final: \n')
+    count = 0
     for jugador in jugadores:
         count +=1
         print(f'{count}. {jugador} - {partida[jugador][PUNTAJE_GLOBAL]}') 
@@ -97,7 +98,6 @@ def main ():
         resultados_parciales(jugadores,partida)
         #pide continuacion del juego
         seguir_jugando = pedir_continuacion()
-        
-    return fin_de_partida(jugadores,partida,cant_partidas)
+    fin_de_partida(jugadores,partida,cant_partidas)
 
 main()
