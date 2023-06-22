@@ -1,7 +1,12 @@
 import csv
 
+#-----------------------------------------------------------------
+# Constantes
 NOMBRE = 0
 VALOR = 1
+
+#-----------------------------------------------------------------
+# Funcion
 def obtener_constantes():
     # Hecha por Busato Lorenzo
     """
