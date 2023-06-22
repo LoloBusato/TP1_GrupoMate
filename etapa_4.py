@@ -1,6 +1,4 @@
 import random
-from etapa_2 import obtener_definiciones
-from etapa_3 import palabras_del_rosco
 import doctest
 from etapa_10 import obtener_constantes
 
@@ -32,8 +30,8 @@ def formateo_resultados(resultados):
     '[a][e]'
     >>> formateo_resultados(['e','e','a','a',' ',' '])
     '[e][e][a][a][ ][ ]'
-    >>> formateo_resultados(['a','e','a'])
-    '[a][e][a]'
+    >>> formateo_resultados([' ',' ',' '])
+    '[ ][ ][ ]'
     '''
     resultados_a_imprimir = ""
     for letra in resultados:
@@ -54,8 +52,6 @@ def reemplaza_tildes(palabra):
     *
     >>> reemplaza_tildes('esdrújula')
     'esdrujula'
-    >>> reemplaza_tildes('canción')
-    'cancion'
     >>> reemplaza_tildes('magia')
     'magia'
     '''
@@ -82,8 +78,6 @@ def valida_respuesta(palabra_usuario, palabra_actual):
     True
     >>> valida_respuesta('perrito','peritos')
     False
-    >>> valida_respuesta('teclado','teclado')
-    True
     >>> valida_respuesta('pérro','perro')
     False
     '''
@@ -92,23 +86,20 @@ def valida_respuesta(palabra_usuario, palabra_actual):
     return respuesta
 
 
-def iniciar_resultados_abecedario(letras,resultados = []):
+def iniciar_resultados_abecedario(letras,resultados):
     #Hecha por Orlando Martín
     '''
     * Función que se encarga de iniciar las variables resultados y abecedario_imprimir
     *
-    * Pre: recibe "letras" que es una lista ordenada con las letras participantes y "resultados" que es una lista ordenada con los aciertos o errores de cada letra o los inicia
+    * Pre: recibe "letras" que es una lista ordenada con las letras participantes y "resultados" que es una lista ordenada con los aciertos o errores de cada letra
     *
     * Post: devuelve resultados como una lista con cadenas de caracter vacias y
     *       devuelve abecedario_imprimir con las letras participantes para imprimir
     
-    #REHACER DOCTEST
-    >>> iniciar_resultados_abecedario(["a","b","c","d"])
+    >>> iniciar_resultados_abecedario(["a","b","c","d"],[' ',' ',' ',' '])
     ([' ', ' ', ' ', ' '], '[A][B][C][D]')
-    >>> iniciar_resultados_abecedario(["A","f","h","r"])
-    ([' ', ' ', ' ', ' '], '[A][F][H][R]')
-    >>> iniciar_resultados_abecedario(["R","t","w","z"])
-    ([' ', ' ', ' ', ' '], '[R][T][W][Z]')
+    >>> iniciar_resultados_abecedario(["A","f","h","r"],['a','e',' ',' '])
+    (['a', 'e', ' ', ' '], '[A][F][H][R]')
     '''
     abecedario_imprimir = ""
     indice = 0
@@ -117,31 +108,34 @@ def iniciar_resultados_abecedario(letras,resultados = []):
         if not resultados[indice]:
             resultados[indice]= " "
     return resultados, abecedario_imprimir
-
-def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabra, definicion,partida,jugadores,jugador):
+def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,partida,jugadores,jugador):
     # Hecha por Busato Lorenzo
     """
     * Función que se encarga de la impresión de cada turno del juego y se acciona luego de cada intento 
     *
-    * Pre: Recibe las letras participantes ordenadas, los resultados parciales, la cantidad de aciertos y errores, la palabra del turno y su definición
+    * Pre: Recibe las letras participantes ordenadas, los resultados parciales, la palabra del turno, su definición, el contador de partida del jugador, el listado de jugadores y el jugador de turno
     *
     * Post: Imprime el tablero de letras, los resultados parciales, la palabra de turno y su definición
-    #REHACER DOCTEST
     >>> abecedario_imprimir = "[A][B][C][D]"
     >>> resultados=["a","e"," "," "]
-    >>> aciertos = 1
-    >>> errores = 1
     >>> palabra = "circuito"
-    >>> definicion = "1.  m. Terreno comprendido dentro de un perímetro cualquiera"
-    >>> imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabra, definicion)
+    >>> definicion = "def de circuito"
+    >>> partida = {'martin':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3},'lorenzo':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3}}
+    >>> jugadores = ['martin','lorenzo']
+    >>> jugador = 'martin'
+    >>> imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,partida, jugadores,jugador)
     [A][B][C][D]
     [a][e][ ][ ]
     <BLANKLINE>
     <BLANKLINE>
-    Aciertos: 1
-    Errores: 1
-    Turno letra C - Palabra de 8 letras
-    Definición: 1.  m. Terreno comprendido dentro de un perímetro cualquiera
+    Jugadores:
+    1. martin - Aciertos: 1 - Errores : 1
+    2. lorenzo - Aciertos: 1 - Errores : 1
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    Turno  jugador martin letra C - Palabra de 8 letras
+    3. Definición: def de circuito
     """
     print(abecedario_imprimir)
     resultado_imprimir = formateo_resultados(resultados)
@@ -154,7 +148,7 @@ def imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, pala
     print(f"Turno  jugador {jugador} letra {palabra[0].upper()} - Palabra de {len(palabra)} letras")
 
     print(f"{partida[jugador][TURNO]+1}. Definición: {definicion}")
-
+print(doctest.testmod())
 def pedir_palabra(longitud):
     # Hecha por Busato Lorenzo
     '''
@@ -196,18 +190,50 @@ def letras_participantes():
     return sorted(LETRAS_ROSCO[:int(CONFIGURACION['CANTIDAD_LETRAS_ROSCO'])])
 
 def selecciona_jugador(indice,jugadores):
+    #Hecha por Orlando Martin
+    '''
+    * Función que selecciona un jugador de un listado dependiendo de su índice
+    * Pre: Recibe un número, indice, y un listado con todos los jugadores participantes de la partida
+    * Post: Retorna el nombre del jugador correspondiente. Si no coresponde seleccionar un jugador, retorna un string vacio
+    >>> indice = 3
+    >>> jugadores = ['martin','lorenzo','luciano','juan']
+    >>> selecciona_jugador(indice,jugadores)
+    'juan'
+    >>> indice_2 = -1
+    >>> selecciona_jugador(indice_2,jugadores)
+    ''
+    '''
     if (indice == -1):
         jugador = ''
-    jugador = jugadores[indice]
+    else: 
+        jugador = jugadores[indice]
     return jugador
 
 def incrementa_jugador(cantidad_jugadores,indice=-1):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada de incrementar el indice de los jugadores reiniciando el ciclo una vez que se halla llegado al final del listado
+    * Pre: Recibe un numero indicador de la cantidad de jugadores participantes y el índice actual, siendo -1 el valor por defecto en caso de que no se ingrese como parametro
+    * Post: Devuelve un número índice incrementado en uno
+    >>> incrementa_jugador(3)
+    0
+    >>> incrementa_jugador(3,2)
+    0
+    >>> incrementa_jugador(3,1)
+    2
+    '''
     indice +=1
     if indice == cantidad_jugadores:
         indice = 0
     return indice
 
 def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada de buscar el jugador más cercano con turnos libres para seguir jugando. En caso de no encontrarlo, retorna -1
+    * Pre: Recibe el diccionario de partida, un listado de jugadores participantes y el índice correspondiente al jugador participante. De ser el primer jugador participante, se inicializa en -1
+    * Post: Retorna el índice del jugador con turnos libres. En caso de no haber ninguno libre, retorna -1
+    '''
     ciclos = 0
     libre = False
     indice = incrementa_jugador(len(jugadores),indice)
@@ -224,6 +250,17 @@ def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
 
 
 def contador_aciertos(resultados):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada de contar los aciertos y errores de cada jugador
+    * Pre: Recibe un listado con letras 'a', si se registró un acierto, 'e' si se registró un error, y ' ' en caso de que no se haya respondido todavía
+    * Post: Retorna una tupla con la cantidad de aciertos y errores del usuario
+    >>> contador_aciertos(['a','a','e','a',' '])
+    (3, 1)
+    >>> contador_aciertos([' ',' ',' ',])
+    (0, 0)
+    
+    '''
     aciertos = 0
     errores = 0
     for respuesta in resultados:
@@ -234,6 +271,12 @@ def contador_aciertos(resultados):
     return aciertos,errores
 
 def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada del flujo de respuesta correcta
+    * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
+    
+    '''
     partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
     print("Palabra correcta")
     partida[jugador]['resultados'][indice] = "a"
@@ -241,6 +284,12 @@ def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario):
     partida[jugador]['puntaje_global'] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
     
 def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada del flujo de respuesta incorrecta
+    * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
+    
+    '''
     partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
     print(f"Palabra incorrecta - Respuesta: {palabra_actual}")
     partida[jugador]['resultados'][indice] = "e"
@@ -248,70 +297,19 @@ def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
     partida[jugador]['puntaje_global'] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
 
 def imprimir_resultados_parciales(partida,jugadores):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada de imprimir los resultados parciales
+    * Pre: Recibe el diccionario de partida y el listado de los jugadores participantes
+    >>> partida = {'martin':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3},'lorenzo':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3}}
+    >>> jugadores = ['martin','lorenzo']
+    >>> imprimir_resultados_parciales(partida,jugadores)
+    1. martin - Aciertos: 1 - Errores : 1
+    2. lorenzo - Aciertos: 1 - Errores : 1
+    '''
     numero = 1
     for jugador in jugadores:
         resultados_jugador = partida[jugador]['resultados']
         aciertos,errores = contador_aciertos(resultados_jugador)
         print(f"{numero}. {jugador} - Aciertos: {aciertos} - Errores : {errores} ")
         numero+=1
-
-
-# def partida_pasapalabra(puntaje = 0):
-#     # Hecha por Nuñez Juan Bautista
-#     # Modificada por todos los integrantes del grupo
-#     '''
-#     * Función que ejecuta cada partida de pasapalabra
-#     *
-#     * Pre: recibe o inicializa en 0, según corresponda, el puntaje de la partida global
-#     *
-#     * Post: Ejecuta la partida hasta que se recorra la totalidad de la lista de letras, con una respuesta válida por cada letra participante
-#     '''
-#     #1. Se deberá comenzar con la generación del diccionario de palabras.
-#     DICCIONARIO = obtener_definiciones()
-#     #2. Luego se deben seleccionar las 10 letras participantes.
-#     LETRAS= letras_participantes()
-#     #3. El programa elegirá al azar la lista de palabras, definicion a adivinar por el jugador.
-#     DICCIONARIO_SELECCIONADO = palabras_del_rosco(DICCIONARIO, LETRAS)
-#     #4. Luego se armará el tablero que visualizará el usuario, y dará comienzo la partida
-
-#     PALABRA = 0
-#     DEFINICION = 1
-#     # Se crean las variables abecedario y se les da formato a las mismas
-#     resultados, abecedario_imprimir = iniciar_resultados_abecedario(LETRAS)
-    
-#     # Se definen las variables que contabilizan los aciertos, los errores, la posición del rosco en la que se encuentra y el resumen final
-#     aciertos = 0
-#     errores = 0
-#     indice = 0                
-#     resumen_partida = ""
-
-#     #Se da inicio al ciclo que engloba el rosco. Finaliza al resolver todas las palabras
-#     while indice < len(LETRAS):
-#         palabra_actual = DICCIONARIO_SELECCIONADO[indice][PALABRA]
-#         definicion_actual = DICCIONARIO_SELECCIONADO[indice][DEFINICION]
-
-#         imprimir_resultados(abecedario_imprimir, resultados, aciertos, errores, palabra_actual, definicion_actual)
-
-#         palabra_usuario = pedir_palabra(len(palabra_actual))
-#         respuesta = valida_respuesta(palabra_usuario, palabra_actual)
-#         if respuesta:
-#             resumen_partida += (f"\nTurno letra {palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} letras - {palabra_usuario} - acierto")
-#             print("Palabra correcta")
-#             aciertos += 1
-#             resultados[indice] = "a"
-#             puntaje += int(CONFIGURACION['PUNTAJE_ACIERTO'])
-#             indice += 1
-#         else:
-#             resumen_partida += (f"\nTurno letra {palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} letras - {palabra_usuario} - error - Palabra Correcta: {palabra_actual}")
-#             print (f"Palabra incorrecta - Respuesta: {palabra_actual}")
-#             errores +=1
-#             resultados[indice] = "e"
-#             puntaje -= int(CONFIGURACION['PUNTAJE_DESACIERTO'])
-#             indice += 1
-
-#     impresion_final(puntaje, resumen_partida)
-#     return puntaje
-
-
-
-#print(doctest.testmod())

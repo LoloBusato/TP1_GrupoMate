@@ -11,6 +11,7 @@ TURNO= 'turno'
 
 #FUNCIONES=======================================================================================================
 def obtener_definiciones(dicc,letras):
+    #Hecha por Nuñez Juan Bautista
     definiciones=[]
     palabras_candidatas=[]
     for letra in letras:
@@ -23,6 +24,15 @@ def obtener_definiciones(dicc,letras):
     return definiciones
 
 def obtener_resultados(letras):
+    #Hecha por Nuñez Juan Bautista
+    '''
+    *Funcion encargada de inicializar los resultados
+    *Pre: Recibe el listado de letras
+    *Post: Retorna la lista de resultados inicializada
+    
+    >>> obtener_resultados(['a','b','c','d'])
+    ['', '', '', '']
+    '''
     count=0
     resultados=[]
     while count<len(letras):
@@ -31,6 +41,7 @@ def obtener_resultados(letras):
     return resultados
 
 def creacion_diccionarios(jugadores):
+    #Hecha por Nuñez Juan Bautista
     partida = {}
     dicc_global=obtener_lista_definiciones()
     for jugador in jugadores:
@@ -52,6 +63,7 @@ def creacion_diccionarios(jugadores):
     return partida
 
 def resultados_parciales(jugadores,partida):
+    #Hecha por Nuñez Juan Bautista
     print('Puntaje de la partida:\n')
     count=0
     for jugador in jugadores:
@@ -60,6 +72,7 @@ def resultados_parciales(jugadores,partida):
     return ()
 
 def fin_de_partida(jugadores,partida,cant_partida):
+    #Hecha por Nuñez Juan Bautista
     print('Reporte Final: \n')
     print(f'Partidas jugadas: {cant_partida} \n')
     print('Puntaje final: \n')
@@ -70,6 +83,7 @@ def fin_de_partida(jugadores,partida,cant_partida):
     return ()
 
 def pedir_continuacion():
+    #Hecha por Nuñez Juan Bautista
     seguir_jugando = True
     continuar = input('¿Desea seguir jugando? Ingrese si o no:')
     while continuar.lower() != 'si' and continuar.lower() != "no":
@@ -80,6 +94,7 @@ def pedir_continuacion():
 
 #CUERPO FUNCION PRINCIPAL===============================================================================================================
 def main ():
+    #Hecha por Nuñez Juan Bautista y Orlando Martin
     '''
     * Función encargada de mantener la dinámica del juego y definir la continuidad del juego
     '''
