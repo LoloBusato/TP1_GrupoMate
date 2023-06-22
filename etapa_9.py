@@ -99,11 +99,8 @@ def resultados_parciales(jugadores,partida):
     *       ...
     *   }
     *
-    * Post: Retorna un diccionario con formato
-    *   {
-    *       NOMBRE_JUGADOR1: [[PALABRA1, DEFINICION1], [PALABRA2, DEFINICION2], ...],
-    *       ...
-    *   }
+    * Post: imprime informacion al usuario del estado parcial de la partida con formato
+    *   "X. JugadorX - Aciertos: X - Errores: X"
     *
     """
     print('Puntaje de la partida:\n')
@@ -115,13 +112,30 @@ def resultados_parciales(jugadores,partida):
 
 def fin_de_partida(jugadores,partida,cant_partida):
     #Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada de imprimir los resultados finales de los jugadores
+    *
+    * Pre: Recibe una lista con los nombres de los jugadores, el diccionario con la informacion
+    *   de la partida con formato
+    *   {
+    *       jugador1: {...},
+    *       jugador2: {...},
+    *       ...
+    *   }
+    *   y un numero con la cantidad de partidas jugadas en total
+    *
+    * Post: imprime los resultados finales de la partida con formatos
+    *   "X. JugadorX - PUNTAJE"
+    *       
+    *
+    """
     print('Reporte Final: \n')
     print(f'Partidas jugadas: {cant_partida} \n')
     print('Puntaje final: \n')
     count = 0
     for jugador in jugadores:
-        count +=1
-        print(f'{count}. {jugador} - {partida[jugador][PUNTAJE_GLOBAL]}') 
+        count += 1
+        print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_GLOBAL"]]}') 
     return ()
 
 def pedir_continuacion():
