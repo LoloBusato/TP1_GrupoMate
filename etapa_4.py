@@ -278,6 +278,12 @@ def contador_aciertos(resultados):
     return aciertos,errores
 
 def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada del flujo de respuesta correcta
+    * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
+    
+    '''
     partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
     print("Palabra correcta")
     partida[jugador]['resultados'][indice] = "a"
@@ -285,6 +291,12 @@ def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario):
     partida[jugador]['puntaje_global'] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
     
 def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
+    #Hecha por Orlando Martin
+    '''
+    * Función encargada del flujo de respuesta incorrecta
+    * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
+    
+    '''
     partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
     print(f"Palabra incorrecta - Respuesta: {palabra_actual}")
     partida[jugador]['resultados'][indice] = "e"
