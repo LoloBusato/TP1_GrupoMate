@@ -1,22 +1,26 @@
 from tkinter import *
 from tkinter import messagebox
 import csv
+from etapa_10 import obtener_constantes
 
 
-#CONSTANTES
-USUARIO= 0
-CONTRASEÑA= 1
-MIN_LONG_USUARIO= 4
-MAX_LONG_USUARIO= 20
-MIN_LONG_CONTRASEÑA= 6
-MAX_LONG_CONTRASEÑA= 12
-CONTEO_MINIMO= 1
+#CONSTANTES=================================================================================
+CONFIGURACION = obtener_constantes()
+
 CARACTERES_ESPECIALES= ['#','!']
 
-#Esta es la lista de usuarios que van a jugar
+# Lista de usuarios participantes
 jugadores= []
 
+#FUNCIONES=================================================================================
 def ventana_de_jugadores():
+    # Hecha por Vicini Luciano
+    """
+    * Funcion encargada de crear la interfaz grafica para el registro, inicio y almacenamiento de usuarios
+    *
+    * Post: devuelve una lista con los nombres de usuario de los jugadores ingresados
+    *       
+    """
     raiz= Tk()
     #esta funcion agrega a la lista de jugadores los nombres de los usuarios a participar
     def usuarios_participantes(usuario,contraseña):
