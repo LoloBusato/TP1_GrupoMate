@@ -83,16 +83,34 @@ def creacion_diccionarios(jugadores):
                 CONFIGURACION['PUNTAJE_GLOBAL']: 0,
                 
             }
-        #El caso contrario no deberia ocurrir nunca
+        # El caso contrario no deberia ocurrir nunca
     return partida
 
 def resultados_parciales(jugadores,partida):
-    #Hecha por Nuñez Juan Bautista
+    # Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada de imprimir los resultados parciales de los jugadores
+    *
+    * Pre: Recibe una lista con los nombres de los jugadores y el diccionario con la informacion
+    *   de la partida con formato
+    *   {
+    *       jugador1: {...},
+    *       jugador2: {...},
+    *       ...
+    *   }
+    *
+    * Post: Retorna un diccionario con formato
+    *   {
+    *       NOMBRE_JUGADOR1: [[PALABRA1, DEFINICION1], [PALABRA2, DEFINICION2], ...],
+    *       ...
+    *   }
+    *
+    """
     print('Puntaje de la partida:\n')
-    count=0
+    count = 0
     for jugador in jugadores:
-        count +=1
-        print(f'{count}. {jugador} - {partida[jugador][PUNTAJE_PARTIDA]}') 
+        count += 1
+        print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_PARTIDA"]]}') 
     return ()
 
 def fin_de_partida(jugadores,partida,cant_partida):
