@@ -4,7 +4,6 @@ from etapa_10 import obtener_constantes
 
 # Constantes =======================================================================================================================
 CONFIGURACION = obtener_constantes()
-INICIAL = 0
 LETRAS_TILDADAS = {
     'á':'a',
     'é':'e',
@@ -12,10 +11,6 @@ LETRAS_TILDADAS = {
     'ó':'o',
     'ú':'u'
 }
-DICCIONARIO='diccionario'
-LETRAS='letras'
-RESULTADOS='resultados'
-TURNO='turno'
 # Funciones =======================================================================================================================
 
 def formateo_resultados(resultados):
@@ -147,7 +142,7 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,par
         
     print(f"Turno  jugador {jugador} letra {palabra[0].upper()} - Palabra de {len(palabra)} letras")
 
-    print(f"{partida[jugador][TURNO]+1}. Definición: {definicion}")
+    print(f"{partida[jugador][CONFIGURACION['TURNO']]+1}. Definición: {definicion}")
 print(doctest.testmod())
 def pedir_palabra(longitud):
     # Hecha por Busato Lorenzo
@@ -239,8 +234,8 @@ def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
     indice = incrementa_jugador(len(jugadores),indice)
     while ciclos < len(jugadores) and libre == False:
         jugador = jugadores[indice]
-        letras=partida[jugador][LETRAS]
-        turno = partida[jugador][TURNO]
+        letras=partida[jugador][CONFIGURACION['LETRAS']]
+        turno = partida[jugador][CONFIGURACION['TURNO']]
         if turno < len(letras):
             libre = True
         else:
@@ -277,7 +272,7 @@ def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario):
     * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
     
     '''
-    partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
+    partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
     print("Palabra correcta")
     partida[jugador]['resultados'][indice] = "a"
     partida[jugador]['puntaje_partida'] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
@@ -290,7 +285,7 @@ def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
     * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
     
     '''
-    partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[INICIAL].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
+    partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
     print(f"Palabra incorrecta - Respuesta: {palabra_actual}")
     partida[jugador]['resultados'][indice] = "e"
     partida[jugador]['puntaje_partida'] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])

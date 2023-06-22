@@ -25,10 +25,10 @@ def pasapalabra(jugadores,partida):
         jugador = selecciona_jugador(indice_jugador,jugadores)
         if(jugador):
             turno = partida[jugador]
-            diccionario_partida = turno[DICCIONARIO]
-            letras_partida = turno[LETRAS]
-            resultados_partida = turno[RESULTADOS]
-            indice_partida =turno[TURNO]
+            diccionario_partida = turno[CONFIGURACION['DICCIONARIO']]
+            letras_partida = turno[CONFIGURACION['LETRAS']]
+            resultados_partida = turno[CONFIGURACION['RESULTADOS']]
+            indice_partida =turno[CONFIGURACION['TURNO']]
             while (indice_partida<len(letras_partida) and not error):
                 #Mientras no se recorra todo el rosco o se equivoque
                 resultados,abecedario_imprimir = iniciar_resultados_abecedario(letras_partida,resultados_partida)
@@ -47,7 +47,7 @@ def pasapalabra(jugadores,partida):
                     respuesta_incorrecta(partida,jugador,indice_partida,palabra_actual,palabra_usuario)
                     error = True
                 indice_partida+=1
-                partida[jugador][TURNO]+=1
+                partida[jugador][CONFIGURACION['TURNO']]+=1
         print(f"\nFin del turno de {jugador}\n")
         indice_jugador = busca_siguiente_turno_libre(partida,jugadores,indice_jugador)
     return partida

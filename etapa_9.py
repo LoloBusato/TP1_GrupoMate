@@ -74,10 +74,10 @@ def creacion_diccionarios(jugadores):
             dicc_definiciones = obtener_definiciones(diccionario_lista,letras)
             resultados = obtener_resultados(letras)
             partida[jugador] = {
-                DICCIONARIO: dicc_definiciones,
-                LETRAS: letras,
-                RESULTADOS: resultados,
-                TURNO: 0,
+                CONFIGURACION['DICCIONARIO']: dicc_definiciones,
+                CONFIGURACION['LETRAS']: letras,
+                CONFIGURACION['RESULTADOS']: resultados,
+                CONFIGURACION['TURNO']: 0,
                 CONFIGURACION['PUNTAJE_PARTIDA']: 0,
                 CONFIGURACION['RESUMEN_PARTIDA']:'',
                 CONFIGURACION['PUNTAJE_GLOBAL']: 0,
