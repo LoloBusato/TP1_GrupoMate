@@ -47,7 +47,7 @@ def ventana_de_jugadores():
                 indice += 1
             else:
                 validacion= False
-        return validacion and MIN_LONG_USUARIO <= len(usuario) and len(usuario) <= MAX_LONG_USUARIO
+        return validacion and int(CONFIGURACION['MIN_LONG_USUARIO']) <= len(usuario) and len(usuario) <= int(CONFIGURACION['MAX_LONG_USUARIO'])
 
     #esta funcion comprueba si la contraseña del usuario es valido cuando se registra el jugador
     def validar_contraseña(contraseña):
@@ -69,7 +69,7 @@ def ventana_de_jugadores():
             else:
                 validacion= False
             indice += 1
-        validacion= cont_mayus >= CONTEO_MINIMO and cont_minus >= CONTEO_MINIMO and cont_num >= CONTEO_MINIMO and cont_especiales >= CONTEO_MINIMO and MIN_LONG_CONTRASEÑA <= len(contraseña) and len(contraseña) <= MAX_LONG_CONTRASEÑA 
+        validacion= cont_mayus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_minus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_num >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_especiales >= int(CONFIGURACION['CONTEO_MINIMO']) and int(CONFIGURACION['MIN_LONG_CONTRASEÑA']) <= len(contraseña) and len(contraseña) <= int(CONFIGURACION['MAX_LONG_CONTRASEÑA']) 
         return validacion
 
     #esta funcion inicia sesion
@@ -78,8 +78,8 @@ def ventana_de_jugadores():
             lector = csv.reader(archivo)
             cont = 0
             for fila in lector:
-                if fila[USUARIO] == usuario:
-                    if fila[CONTRASEÑA] == contraseña:
+                if fila[int(CONFIGURACION['USUARIO'])] == usuario:
+                    if fila[int(CONFIGURACION['CONTRASEÑA'])] == contraseña:
                         cont = -1
                         resultado= usuarios_participantes(fila[0],fila[1])
                     else:
@@ -100,7 +100,7 @@ def ventana_de_jugadores():
                 lector = csv.reader(archivo)
                 cont= 0
                 for fila in lector:
-                    if fila [USUARIO] == usuario:
+                    if fila[int(CONFIGURACION['USUARIO'])] == usuario:
                         cont += 1
             if cont == 0:
                 if validar_usuario(usuario) and validar_contraseña(contraseña):
