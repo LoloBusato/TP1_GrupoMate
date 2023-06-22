@@ -156,16 +156,17 @@ def pedir_continuacion():
     return seguir_jugando
 
 #CUERPO FUNCION PRINCIPAL===============================================================================================================
-def main ():
+def main():
     #Hecha por Nuñez Juan Bautista y Orlando Martin
-    '''
+    """
     * Función encargada de mantener la dinámica del juego y definir la continuidad del juego
-    '''
-    cant_partidas=0
-    jugadores= ventana_de_jugadores()
+    """
+    cant_partidas = 0
+    jugadores = ventana_de_jugadores()
     seguir_jugando = True
     while seguir_jugando:
         cant_partidas +=1
+
         #Genera diccionarios para cada jugador
         partida = creacion_diccionarios(jugadores)
         
@@ -174,6 +175,7 @@ def main ():
         
         #resultados parciales
         resultados_parciales(jugadores,partida)
+
         #pide continuacion del juego
         seguir_jugando = pedir_continuacion()
     fin_de_partida(jugadores,partida,cant_partidas)
