@@ -7,7 +7,8 @@ import random
 
 #CONSTANTES========================================================================================================
 CONFIGURACION = obtener_constantes()
-
+LETRA = 0
+PALABRAS_DEFINICIONES=1
 #FUNCIONES=======================================================================================================
 def obtener_definiciones(dicc,letras):
     # Hecha por Nuñez Juan Bautista
@@ -24,15 +25,20 @@ def obtener_definiciones(dicc,letras):
     *           ...
     *       ]
     """
-    definiciones=[]
-    for letra in letras:
-        palabras_candidatas=[]
-        for palabra,definicion in dicc:
-            if palabra[int(CONFIGURACION['INICIAL'])].upper() == letra.upper():
-                palabras_candidatas.append((palabra,definicion))
-        random.shuffle(palabras_candidatas)
-        definiciones.append(palabras_candidatas[0])
-    return definiciones
+    count_letra=0
+    count_dicc=0
+    lista_candidatos=[]
+    palabras_definiciones=[]
+    while count_letra <len(letras):
+        if letras[count_letra] == dicc[count_dicc][LETRA]:
+            lista_candidatos = (dicc[count_dicc][PALABRAS_DEFINICIONES])
+            random.shuffle(lista_candidatos)
+            palabras_definiciones.append(lista_candidatos[0])
+            count_letra +=1
+            count_dicc= 0
+        count_dicc +=1
+    return palabras_definiciones
+        
 
 def obtener_resultados(letras):
     # Hecha por Nuñez Juan Bautista
@@ -81,7 +87,7 @@ def creacion_diccionarios(jugadores):
                 CONFIGURACION['PUNTAJE_PARTIDA']: 0,
                 CONFIGURACION['RESUMEN_PARTIDA']:'',
                 CONFIGURACION['PUNTAJE_GLOBAL']: 0,
-                
+        
             }
         # El caso contrario no deberia ocurrir nunca
     return partida

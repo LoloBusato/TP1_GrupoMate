@@ -3,7 +3,8 @@ from etapa_10 import obtener_constantes
 
 #CONSTANTES=================================================================================================
 CONFIGURACION = obtener_constantes()
-
+PALABRA=0
+INICIAL=0
 #FUNCIONES========================================================================================
 def leer_archivos(palabras,definiciones):
     # Hecha por Nuñez Juan Bautista
@@ -54,16 +55,16 @@ def crear_diccionario_csv(palabras,definiciones,diccionario):
         diccionario.write(palabra_definicion[int(CONFIGURACION['PALABRA'])] + ','  + palabra_definicion[int(CONFIGURACION['DEFINICION'])] + "\n")
     
 
-def leer_archivo_diccionario(diccionario_txt):
+def leer_archivo_diccionario(diccionario_csv):
     # Hecha por Nuñez Juan Bautista
     """
-    * Funcion encargada de leer cada linea del archivo diccionario.txt
+    * Funcion encargada de leer cada linea del archivo diccionario.csv
     *
     * Pre: Recibe 1 archivo abierto en formato .txt
     *
     * Post: devuelve como lista una linea del archivo     
     """
-    linea = diccionario_txt.readline().rstrip()
+    linea = diccionario_csv.readline().rstrip()
     return linea.split(',') if linea else ('','')
 
 
@@ -83,13 +84,21 @@ def leer_diccionario(diccionario_csv):
     """
     diccionario_lista = []
     palabra_definicion = leer_archivo_diccionario(diccionario_csv)
+    letra = ''
+    lista_letra = []
     while palabra_definicion != ('', ''):
         while len(palabra_definicion) > 2:
             palabra_definicion[-2:] = [palabra_definicion[-2] + "," + palabra_definicion[-1]]
-        diccionario_lista.append(palabra_definicion)
+        if palabra_definicion[PALABRA][INICIAL].lower() != letra:
+            if lista_letra:
+                diccionario_lista.append([letra, lista_letra])        
+                lista_letra = []
+            letra = palabra_definicion[PALABRA][INICIAL].lower()
+        lista_letra.append(palabra_definicion)
         palabra_definicion = leer_archivo_diccionario(diccionario_csv)
+    if lista_letra:
+        diccionario_lista.append([letra, lista_letra])
     return diccionario_lista
-    
 
 def obtener_lista_definiciones():
     # Hecha por Nuñez Juan Bautista
@@ -116,5 +125,5 @@ def obtener_lista_definiciones():
     diccionario_csv = open('diccionario.csv', 'r', encoding=CONFIGURACION['ENCODING'])
     diccionario_lista = leer_diccionario(diccionario_csv)
     diccionario_csv.close()
-    random.shuffle(diccionario_lista)
     return diccionario_lista
+
