@@ -82,20 +82,21 @@ def valida_respuesta(palabra_usuario, palabra_actual):
 
 
 def iniciar_resultados_abecedario(letras,resultados):
-    #Hecha por Orlando Martín
-    '''
+    # Hecha por Orlando Martín
+    """
     * Función que se encarga de iniciar las variables resultados y abecedario_imprimir
     *
-    * Pre: recibe "letras" que es una lista ordenada con las letras participantes y "resultados" que es una lista ordenada con los aciertos o errores de cada letra
+    * Pre: recibe "letras" que es una lista ordenada con las letras participantes y 
+    *   "resultados" que es una lista ordenada con los aciertos o errores de cada letra
     *
     * Post: devuelve resultados como una lista con cadenas de caracter vacias y
     *       devuelve abecedario_imprimir con las letras participantes para imprimir
-    
+    *
     >>> iniciar_resultados_abecedario(["a","b","c","d"],[' ',' ',' ',' '])
     ([' ', ' ', ' ', ' '], '[A][B][C][D]')
     >>> iniciar_resultados_abecedario(["A","f","h","r"],['a','e',' ',' '])
     (['a', 'e', ' ', ' '], '[A][F][H][R]')
-    '''
+    """
     abecedario_imprimir = ""
     indice = 0
     for letra in letras:
@@ -103,6 +104,7 @@ def iniciar_resultados_abecedario(letras,resultados):
         if not resultados[indice]:
             resultados[indice]= " "
     return resultados, abecedario_imprimir
+
 def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,partida,jugadores,jugador):
     # Hecha por Busato Lorenzo
     """
@@ -144,6 +146,7 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,par
 
     print(f"{partida[jugador][CONFIGURACION['TURNO']]+1}. Definición: {definicion}")
 print(doctest.testmod())
+
 def pedir_palabra(longitud):
     # Hecha por Busato Lorenzo
     '''
