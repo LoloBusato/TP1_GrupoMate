@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import csv
 from etapa_10 import obtener_constantes
+import random
 
 
 #CONSTANTES=================================================================================
@@ -64,7 +65,7 @@ def validar_usuario(usuario):
 def validar_contrasenia(contrasenia):
     # Hecha por Luciano Vicini
     """
-    * Esta funcion se encarga de revisar si lacontrasenia cumple con los requisitos
+    * Esta funcion se encarga de revisar si la contrasenia cumple con los requisitos
     *   establecidos
     *
     * Pre: recibe una cadena de caracteres correspondiente a la contrasenia
@@ -153,7 +154,7 @@ def registro(usuario,contrasenia, registro):
                 resultado = messagebox.showinfo(message= 'Has sido registrado exitosamente')
                 registro.destroy()
         else:
-            resultado = messagebox.showerror(message= '''Ingrese un nombre de usuario o contrasenia validos    (NOMBRE DE USUARIO entre 4 y 20 caracteres con -, letras, numeros)   (CONTRASEniA: longitud entre 6 y 12 caracteres, por lo menos 1 mayus,minus,numero y alguno de los siguientes elementos: #, !)''')     
+            resultado = messagebox.showerror(message= '''Ingrese un nombre de usuario o contrasenia validos    (NOMBRE DE USUARIO entre 4 y 20 caracteres con -, letras, numeros)   (CONTRASENIA: longitud entre 6 y 12 caracteres, por lo menos 1 mayus,minus,numero y alguno de los siguientes elementos: #, !)''')     
     else:
         resultado = messagebox.showerror(message= 'Este usuario ya se encuentra registrado') 
     return resultado
@@ -219,4 +220,5 @@ def ventana_de_jugadores():
     registrarse_boton.place(x=156, y=180)
 
     raiz.mainloop()
+    random.shuffle(jugadores)
     return jugadores

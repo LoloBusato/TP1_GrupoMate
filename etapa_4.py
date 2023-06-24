@@ -211,7 +211,7 @@ def selecciona_jugador(indice,jugadores):
     >>> selecciona_jugador(indice_2,jugadores)
     ''
     """
-    return '' if indice == 1 else jugadores[indice]
+    return '' if indice == -1 else jugadores[indice]
 
 def incrementa_jugador(cantidad_jugadores,indice=-1):
     # Hecha por Orlando Martin
