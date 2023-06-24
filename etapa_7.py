@@ -63,8 +63,18 @@ def validar_contrasenia(contrasenia):
     validacion= cont_mayus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_minus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_num >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_especiales >= int(CONFIGURACION['CONTEO_MINIMO']) and int(CONFIGURACION['MIN_LONG_CONTRASEniA']) <= len(contrasenia) and len(contrasenia) <= int(CONFIGURACION['MAX_LONG_CONTRASEniA']) 
     return validacion
     
-#esta funcion inicia sesion
 def iniciar_sesion(usuario, contrasenia):
+    # Hecha por Luciano Vicini
+    """
+    * Esta funcion se encarga de revisar si el usuario y contrasenia ingresados corresponden
+    *   a un usuario ya registrado
+    *
+    * Pre: recibe 2 cadenas de caracteres correspondientes al usuario y a la contrasenia
+    *
+    * Post: devuelve una variable resultado con mensajes de error en caso de no haber sido 
+    *   correctos los datos ingresados o con la modificacion en la lista de usuarios participantes
+    *   en caso de encontrarse registrado
+    """
     with open('usuarios.csv', 'r') as archivo:
         lector = csv.reader(archivo)
         cont = 0
@@ -72,13 +82,13 @@ def iniciar_sesion(usuario, contrasenia):
             if fila[int(CONFIGURACION['USUARIO'])] == usuario:
                 if fila[int(CONFIGURACION['CONTRASENIA'])] == contrasenia:
                     cont = -1
-                    resultado= usuarios_participantes(fila[0],fila[1])
+                    resultado = usuarios_participantes(fila)
                 else:
                     cont = 1
         if cont == 1:
-            resultado= messagebox.showerror(message='contrasenia incorrecta')
+            resultado = messagebox.showerror(message='contrasenia incorrecta')
         elif cont == 0:
-            resultado= messagebox.showerror(message='este usuario no esta registrado')
+            resultado = messagebox.showerror(message='este usuario no esta registrado')
     return resultado
 
 #con esta funcion te registras
