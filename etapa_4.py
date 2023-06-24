@@ -222,10 +222,7 @@ def incrementa_jugador(cantidad_jugadores,indice=-1):
     >>> incrementa_jugador(3,1)
     2
     """
-    indice +=1
-    if indice == cantidad_jugadores:
-        indice = 0
-    return indice
+    return 0 if indice == cantidad_jugadores else indice + 1
 
 def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
     #Hecha por Orlando Martin
