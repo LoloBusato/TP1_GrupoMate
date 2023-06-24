@@ -166,7 +166,7 @@ def main():
     cant_partidas = 0
     jugadores = ventana_de_jugadores()
     seguir_jugando = True
-    while seguir_jugando and cant_partidas <= int(CONFIGURACION['MAXIMO_PARTIDAS']):
+    while seguir_jugando and cant_partidas < int(CONFIGURACION['MAXIMO_PARTIDAS']):
         cant_partidas +=1
 
         #Genera diccionarios para cada jugador

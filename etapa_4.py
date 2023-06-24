@@ -230,7 +230,8 @@ def incrementa_jugador(cantidad_jugadores,indice=-1):
     >>> incrementa_jugador(3,1)
     2
     """
-    return 0 if indice == cantidad_jugadores else indice + 1
+    indice += 1
+    return 0 if indice == cantidad_jugadores else indice
 
 def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
     #Hecha por Orlando Martin
@@ -247,7 +248,7 @@ def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
     ciclos = 0
     libre = False
     indice = incrementa_jugador(len(jugadores),indice)
-    while ciclos < len(jugadores) and libre == False:
+    while ciclos < len(jugadores) and not libre:
         jugador = jugadores[indice]
         letras = partida[jugador][CONFIGURACION['LETRAS']]
         turno = partida[jugador][CONFIGURACION['TURNO']]
@@ -328,7 +329,7 @@ def imprimir_resultados_parciales(partida,jugadores):
     """
     numero = 1
     for jugador in jugadores:
-        resultados_jugador = partida[jugador][CONFIGURACION('RESULTADOS')]
+        resultados_jugador = partida[jugador][CONFIGURACION['RESULTADOS']]
         aciertos,errores = contador_aciertos(resultados_jugador)
         print(f"{numero}. {jugador} - Aciertos: {aciertos} - Errores : {errores} ")
         numero += 1

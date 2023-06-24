@@ -113,7 +113,7 @@ def iniciar_sesion(usuario, contrasenia, nombre_usuario_entry, contrasenia_entry
             if fila[int(CONFIGURACION['USUARIO'])] == usuario:
                 if fila[int(CONFIGURACION['CONTRASENIA'])] == contrasenia:
                     cont = -1
-                    resultado = usuarios_participantes(usuario, jugadores)
+                    resultado = usuarios_participantes(usuario)
                     
                     nombre_usuario_entry.delete(0,len(usuario))
                     contrasenia_entry.delete(0,len(contrasenia))
@@ -122,9 +122,9 @@ def iniciar_sesion(usuario, contrasenia, nombre_usuario_entry, contrasenia_entry
                 else:
                     cont = 1
         if cont == 1:
-            resultado = messagebox.showerror(message='contrasenia incorrecta')
+            resultado = messagebox.showerror(message='Contrasenia incorrecta')
         elif cont == 0:
-            resultado = messagebox.showerror(message='este usuario no esta registrado')
+            resultado = messagebox.showerror(message='Este usuario no esta registrado')
     return resultado
 
 def registro(usuario,contrasenia, registro):
@@ -206,14 +206,14 @@ def ventana_de_jugadores():
 
     nombre_usuario_label= Label(raiz, text= 'Nombre de Usuario:', bg='lightblue')
     nombre_usuario_label.place(x=70, y=40)
-    contrasenia_label= Label(raiz, text= 'contrasenia:', bg='lightblue')
+    contrasenia_label= Label(raiz, text= 'Contrasenia:', bg='lightblue')
     contrasenia_label.place(x=115, y= 80)
 
-    iniciar_partida_boton= Button(raiz,text='     Iniciar Partida     ',command= lambda: iniciar_partida())
-    iniciar_partida_boton.place(x=133, y= 220)
+    iniciar_partida_boton= Button(raiz,text='Iniciar Partida',command= lambda: iniciar_partida(raiz), padx=20)
+    iniciar_partida_boton.place(x=130, y= 220)
     iniciar_sesion_boton= Button(raiz,text='Iniciar Sesion',command= lambda: iniciar_sesion(nombre_usuario_entry.get(), contrasenia_entry.get(), nombre_usuario_entry, contrasenia_entry, raiz))
     iniciar_sesion_boton.place(x=150, y= 120)
-    registrarse_txt= Label(raiz, text= 'si no tenes cuenta presiona en el boton de abajo', bg='lightblue', fg= 'blue')
+    registrarse_txt= Label(raiz, text= 'Si no tenes cuenta presiona en el boton de abajo', bg='lightblue', fg= 'blue')
     registrarse_txt.place(x=60, y= 150)
     registrarse_boton= Button(raiz,text= 'Registrarse',command= lambda: registrarse())
     registrarse_boton.place(x=156, y=180)
