@@ -10,20 +10,17 @@ CONFIGURACION = obtener_constantes()
 CARACTERES_ESPECIALES= ['#','!']
 
 # Lista de usuarios participantes
-jugadores= []
+jugadores = []
 
 #FUNCIONES=================================================================================
 #esta funcion agrega a la lista de jugadores los nombres de los usuarios a participar
-def usuarios_participantes(raiz, nombre_usuario_entry, contrasenia_entry, usuario, contrasenia):
+def usuarios_participantes(usuario, jugadores):
     if usuario in jugadores:
-        messagebox.showerror(message='Este jugador ya esta participando')
+        resultado = messagebox.showerror(message='Este jugador ya esta participando')
     else:
         jugadores.append(usuario)
-        messagebox.showinfo(message=f'{usuario} participará del juego')
-    nombre_usuario_entry.delete(0,len(usuario))
-    contrasenia_entry.delete(0,len(contrasenia))
-    if len(jugadores) == 4:
-        raiz.destroy()
+        resultado = messagebox.showinfo(message=f'{usuario} participará del juego')
+    return resultado
 
 #esta funcion hace que se cierre el programa pero mantengas la lista de jugadores
 def iniciar_partida(raiz):
@@ -63,7 +60,7 @@ def validar_contrasenia(contrasenia):
     validacion= cont_mayus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_minus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_num >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_especiales >= int(CONFIGURACION['CONTEO_MINIMO']) and int(CONFIGURACION['MIN_LONG_CONTRASEniA']) <= len(contrasenia) and len(contrasenia) <= int(CONFIGURACION['MAX_LONG_CONTRASEniA']) 
     return validacion
     
-def iniciar_sesion(usuario, contrasenia):
+def iniciar_sesion(usuario, contrasenia, nombre_usuario_entry, contrasenia_entry, raiz):
     # Hecha por Luciano Vicini
     """
     * Esta funcion se encarga de revisar si el usuario y contrasenia ingresados corresponden
@@ -82,7 +79,12 @@ def iniciar_sesion(usuario, contrasenia):
             if fila[int(CONFIGURACION['USUARIO'])] == usuario:
                 if fila[int(CONFIGURACION['CONTRASENIA'])] == contrasenia:
                     cont = -1
-                    resultado = usuarios_participantes(fila)
+                    resultado = usuarios_participantes(usuario, jugadores)
+                    
+                    nombre_usuario_entry.delete(0,len(usuario))
+                    contrasenia_entry.delete(0,len(contrasenia))
+                    if len(jugadores) == 4:
+                        raiz.destroy()
                 else:
                     cont = 1
         if cont == 1:
@@ -162,7 +164,7 @@ def ventana_de_jugadores():
 
     iniciar_partida_boton= Button(raiz,text='     Iniciar Partida     ',command= lambda: iniciar_partida())
     iniciar_partida_boton.place(x=133, y= 220)
-    iniciar_sesion_boton= Button(raiz,text='Iniciar Sesion',command= lambda: iniciar_sesion(nombre_usuario_entry.get(), contrasenia_entry.get()))
+    iniciar_sesion_boton= Button(raiz,text='Iniciar Sesion',command= lambda: iniciar_sesion(nombre_usuario_entry.get(), contrasenia_entry.get(), nombre_usuario_entry, contrasenia_entry, raiz))
     iniciar_sesion_boton.place(x=150, y= 120)
     registrarse_txt= Label(raiz, text= 'si no tenes cuenta presiona en el boton de abajo', bg='lightblue', fg= 'blue')
     registrarse_txt.place(x=60, y= 150)
