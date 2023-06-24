@@ -185,11 +185,16 @@ def letras_participantes():
     return sorted(LETRAS_ROSCO[:int(CONFIGURACION['CANTIDAD_LETRAS_ROSCO'])])
 
 def selecciona_jugador(indice,jugadores):
-    #Hecha por Orlando Martin
-    '''
+    # Hecha por Orlando Martin
+    """
     * Función que selecciona un jugador de un listado dependiendo de su índice
-    * Pre: Recibe un número, indice, y un listado con todos los jugadores participantes de la partida
-    * Post: Retorna el nombre del jugador correspondiente. Si no coresponde seleccionar un jugador, retorna un string vacio
+    *
+    * Pre: Recibe un número indice y un listado con todos los jugadores participantes 
+    *   de la partida
+    * 
+    * Post: Retorna el nombre del jugador correspondiente. Si no coresponde seleccionar 
+    *   un jugador, retorna un string vacio
+    *
     >>> indice = 3
     >>> jugadores = ['martin','lorenzo','luciano','juan']
     >>> selecciona_jugador(indice,jugadores)
@@ -197,18 +202,18 @@ def selecciona_jugador(indice,jugadores):
     >>> indice_2 = -1
     >>> selecciona_jugador(indice_2,jugadores)
     ''
-    '''
-    if (indice == -1):
-        jugador = ''
-    else: 
-        jugador = jugadores[indice]
-    return jugador
+    """
+    return '' if indice == 1 else jugadores[indice]
 
 def incrementa_jugador(cantidad_jugadores,indice=-1):
-    #Hecha por Orlando Martin
-    '''
-    * Función encargada de incrementar el indice de los jugadores reiniciando el ciclo una vez que se halla llegado al final del listado
-    * Pre: Recibe un numero indicador de la cantidad de jugadores participantes y el índice actual, siendo -1 el valor por defecto en caso de que no se ingrese como parametro
+    # Hecha por Orlando Martin
+    """
+    * Función encargada de incrementar el indice de los jugadores reiniciando el valor una vez 
+    *   que se llegue al final del listado
+    * 
+    * Pre: Recibe un numero indicador de la cantidad de jugadores participantes y el índice 
+    *   actual, siendo -1 el valor por defecto en caso de que no se ingrese como parametro
+    * 
     * Post: Devuelve un número índice incrementado en uno
     >>> incrementa_jugador(3)
     0
@@ -216,7 +221,7 @@ def incrementa_jugador(cantidad_jugadores,indice=-1):
     0
     >>> incrementa_jugador(3,1)
     2
-    '''
+    """
     indice +=1
     if indice == cantidad_jugadores:
         indice = 0
@@ -224,23 +229,28 @@ def incrementa_jugador(cantidad_jugadores,indice=-1):
 
 def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
     #Hecha por Orlando Martin
-    '''
-    * Función encargada de buscar el jugador más cercano con turnos libres para seguir jugando. En caso de no encontrarlo, retorna -1
-    * Pre: Recibe el diccionario de partida, un listado de jugadores participantes y el índice correspondiente al jugador participante. De ser el primer jugador participante, se inicializa en -1
-    * Post: Retorna el índice del jugador con turnos libres. En caso de no haber ninguno libre, retorna -1
-    '''
+    """
+    * Función encargada de buscar el jugador más cercano con turnos libres para seguir jugando. 
+    *   En caso de no encontrarlo, retorna -1
+    *
+    * Pre: Recibe el diccionario de partida, un listado de jugadores participantes y el índice 
+    *   correspondiente al jugador participante.
+    * 
+    * Post: Retorna el índice del jugador con turnos libres. De ser el primer jugador participante 
+    *   o en caso de no haber ninguno libre, retorna -1
+    """
     ciclos = 0
     libre = False
     indice = incrementa_jugador(len(jugadores),indice)
     while ciclos < len(jugadores) and libre == False:
         jugador = jugadores[indice]
-        letras=partida[jugador][CONFIGURACION['LETRAS']]
+        letras = partida[jugador][CONFIGURACION['LETRAS']]
         turno = partida[jugador][CONFIGURACION['TURNO']]
         if turno < len(letras):
             libre = True
         else:
             indice = incrementa_jugador(len(jugadores),indice)
-            ciclos+=1
+            ciclos += 1
     return indice if libre else -1
 
 
