@@ -52,8 +52,8 @@ def pasapalabra(jugadores,partida):
                 else:
                     respuesta_incorrecta(partida,jugador,indice_partida,palabra_actual,palabra_usuario)
                     error = True
-                indice_partida+=1
-                partida[jugador][CONFIGURACION['TURNO']]+=1
+                indice_partida += 1
+                partida[jugador][CONFIGURACION['TURNO']] += 1
         print(f"\nFin del turno de {jugador}\n")
         indice_jugador = busca_siguiente_turno_libre(partida,jugadores,indice_jugador)
     return partida

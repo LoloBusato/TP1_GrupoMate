@@ -39,11 +39,11 @@ def formateo_resultados(resultados):
     return resultados_a_imprimir
 
 def reemplaza_tildes(palabra):
-    #Hecha por Orlando Martín
-    '''
+    # Hecha por Orlando Martín
+    """
     * Función que reemplaza los tildes de las palabras, de encontrar alguna
     *
-    * Pre: Recibe una cadena
+    * Pre: Recibe una cadena de caracteres
     *
     * Post: Devuelve la misma palabra sin tildes
     *
@@ -51,7 +51,7 @@ def reemplaza_tildes(palabra):
     'esdrujula'
     >>> reemplaza_tildes('magia')
     'magia'
-    '''
+    """
     palabra_en_lista = list(palabra)
     indice = 0
     tilde_encontrada = False
@@ -59,16 +59,16 @@ def reemplaza_tildes(palabra):
         if palabra_en_lista[indice] in LETRAS_TILDADAS.keys():
             palabra_en_lista[indice] = LETRAS_TILDADAS[palabra_en_lista[indice]]
             tilde_encontrada = True
-        indice +=1
+        indice += 1
     palabra_procesada = ''.join(palabra_en_lista)
     return palabra_procesada
 
 def valida_respuesta(palabra_usuario, palabra_actual):
-    #Hecha por Orlando Martín
-    '''
-    * Función que evalúa si la palabra otorgada es correcta o no
+    # Hecha por Orlando Martín
+    """
+    * Función que evalúa si la palabra del usuario es correcta o no
     
-    * Pre: Recibe la palabra ingresada por input por el usuario y la palabra a adivinar 
+    * Pre: Recibe la palabra ingresada por el usuario y la palabra a adivinar 
     
     * Post: Retorna True o False segun la respuesta sea correcta o no
     >>> valida_respuesta('cancion','canción')
@@ -77,10 +77,9 @@ def valida_respuesta(palabra_usuario, palabra_actual):
     False
     >>> valida_respuesta('pérro','perro')
     False
-    '''
+    """
     palabra_actual = reemplaza_tildes(palabra_actual)
-    respuesta = palabra_usuario.lower() == palabra_actual.lower()
-    return respuesta
+    return palabra_usuario.lower() == palabra_actual.lower()
 
 
 def iniciar_resultados_abecedario(letras,resultados):
@@ -155,14 +154,14 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, pa
 
 def pedir_palabra(longitud):
     # Hecha por Busato Lorenzo
-    '''
+    """
     * Función que se encarga de pedir al jugador una respuesta para 
     *       la palabra de turno y revisa si tiene el formato y tamanio pedido
     *
     * Pre: recibe "longitud" que es el tamanio de la palabra actual
     *
-    * Post: si es valida devuelve la respuesta del usuario
-    '''
+    * Post: si es valida devuelve la respuesta del usuario y sino vuelve a pedir una respuesta
+    """
     respuesta = input("Ingrese palabra: ")
     while not respuesta.isalpha() or len(respuesta) != longitud:
         print("Respuesta inválida, intente nuevamente")
@@ -286,30 +285,33 @@ def contador_aciertos(resultados):
     return aciertos,errores
 
 def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario):
-    #Hecha por Orlando Martin
-    '''
-    * Función encargada del flujo de respuesta correcta
-    * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
-    
-    '''
-    partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
+    # Hecha por Orlando Martin
+    """
+    * Función encargada de actualizar los valores del jugador si la respuesta fue correcta
+    *
+    * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra 
+    *   actual que se encuentra participando y la palabra ingresada por el usuario
+    * 
+    """
+    partida[jugador][CONFIGURACION['RESUMEN_PARTIDA']] = (f"\nTurno letra{palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
+    partida[jugador][CONFIGURACION['RESULTADOS']][indice] = "a"
+    partida[jugador][CONFIGURACION['PUNTAJE_PARTIDA']] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
+    partida[jugador][CONFIGURACION['PUNTAJE_GLOBAL']] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
     print("Palabra correcta")
-    partida[jugador]['resultados'][indice] = "a"
-    partida[jugador]['puntaje_partida'] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
-    partida[jugador]['puntaje_global'] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
     
 def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
-    #Hecha por Orlando Martin
-    '''
+    # Hecha por Orlando Martin
+    """
     * Función encargada del flujo de respuesta incorrecta
+    *
     * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
-    
-    '''
-    partida[jugador]['resumen_partida'] = (f"\nTurno letra{palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
+    *
+    """
+    partida[jugador][CONFIGURACION['RESUMEN_PARTIDA']] = (f"\nTurno letra{palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
+    partida[jugador][CONFIGURACION['RESULTADOS']][indice] = "e"
+    partida[jugador][CONFIGURACION['PUNTAJE_PARTIDA']] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
+    partida[jugador][CONFIGURACION['PUNTAJE_GLOBAL']] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
     print(f"Palabra incorrecta - Respuesta: {palabra_actual}")
-    partida[jugador]['resultados'][indice] = "e"
-    partida[jugador]['puntaje_partida'] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
-    partida[jugador]['puntaje_global'] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
 
 def imprimir_resultados_parciales(partida,jugadores):
     # Hecha por Orlando Martin
