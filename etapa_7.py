@@ -69,11 +69,12 @@ def iniciar_sesion(usuario, contrasenia):
         lector = csv.reader(archivo)
         cont = 0
         for fila in lector:
-            if fila[int(CONFIGURACION['USUARIO'])] == usuario and fila[int(CONFIGURACION['CONTRASENIA'])] == contrasenia:
-                cont = -1
-                resultado= usuarios_participantes(fila[0],fila[1])
-            else:
-                cont += 1
+            if fila[int(CONFIGURACION['USUARIO'])] == usuario:
+                if fila[int(CONFIGURACION['CONTRASENIA'])] == contrasenia:
+                    cont = -1
+                    resultado= usuarios_participantes(fila[0],fila[1])
+                else:
+                    cont = 1
         if cont == 1:
             resultado= messagebox.showerror(message='contrasenia incorrecta')
         elif cont == 0:
