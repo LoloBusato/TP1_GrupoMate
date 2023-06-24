@@ -163,14 +163,14 @@ def pedir_continuacion():
 
 #CUERPO FUNCION PRINCIPAL===============================================================================================================
 def main():
-    #Hecha por Nuñez Juan Bautista y Orlando Martin
+    # Hecha por Nuñez Juan Bautista y Orlando Martin
     """
-    * Función encargada de mantener la dinámica del juego y definir la continuidad del juego
+    * Función encargada de iniciar la dinámica del juego y definir la continuidad del mismo
     """
     cant_partidas = 0
     jugadores = ventana_de_jugadores()
     seguir_jugando = True
-    while seguir_jugando:
+    while seguir_jugando and cant_partidas <= int(CONFIGURACION['MAXIMO_PARTIDAS']):
         cant_partidas +=1
 
         #Genera diccionarios para cada jugador
