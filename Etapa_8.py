@@ -3,8 +3,6 @@ from etapa_10 import obtener_constantes
 
 #CONSTANTES=================================================================================================
 CONFIGURACION = obtener_constantes()
-PALABRA=0
-INICIAL=0
 #FUNCIONES========================================================================================
 def leer_archivos(palabras,definiciones):
     # Hecha por Nuñez Juan Bautista
@@ -36,7 +34,7 @@ def crear_diccionario(palabras,definiciones):
     while palabra:
             if palabra.isalpha() and len(palabra) > int(CONFIGURACION['LONGITUD_PALABRA_MINIMA']):
                 dicc[palabra] = definicion
-            palabra,definicion=leer_archivos(palabras,definiciones)
+            palabra,definicion = leer_archivos(palabras,definiciones)
     dicc = sorted(dicc.items(),key=lambda x:x[int(CONFIGURACION['PALABRA'])])
     return dicc
 
@@ -50,7 +48,7 @@ def crear_diccionario_csv(palabras,definiciones,diccionario):
     *   y 1 archivo abierto vacio en modo escritura
     *       
     """
-    palabras_definiciones=crear_diccionario(palabras,definiciones)
+    palabras_definiciones = crear_diccionario(palabras,definiciones)
     for palabra_definicion in palabras_definiciones:
         diccionario.write(palabra_definicion[int(CONFIGURACION['PALABRA'])] + ','  + palabra_definicion[int(CONFIGURACION['DEFINICION'])] + "\n")
     
@@ -89,11 +87,11 @@ def leer_diccionario(diccionario_csv):
     while palabra_definicion != ('', ''):
         while len(palabra_definicion) > 2:
             palabra_definicion[-2:] = [palabra_definicion[-2] + "," + palabra_definicion[-1]]
-        if palabra_definicion[PALABRA][INICIAL].lower() != letra:
+        if palabra_definicion[int(CONFIGURACION['PALABRA'])][int(CONFIGURACION['INICIAL'])].lower() != letra:
             if lista_letra:
                 diccionario_lista.append([letra, lista_letra])        
                 lista_letra = []
-            letra = palabra_definicion[PALABRA][INICIAL].lower()
+            letra = palabra_definicion[int(CONFIGURACION['PALABRA'])][int(CONFIGURACION['INICIAL'])].lower()
         lista_letra.append(palabra_definicion)
         palabra_definicion = leer_archivo_diccionario(diccionario_csv)
     if lista_letra:

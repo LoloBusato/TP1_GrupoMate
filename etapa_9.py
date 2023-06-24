@@ -7,8 +7,6 @@ import random
 
 #CONSTANTES========================================================================================================
 CONFIGURACION = obtener_constantes()
-LETRA = 0
-PALABRAS_DEFINICIONES=1
 #FUNCIONES=======================================================================================================
 def obtener_definiciones(dicc,letras):
     # Hecha por Nuñez Juan Bautista
@@ -25,18 +23,18 @@ def obtener_definiciones(dicc,letras):
     *           ...
     *       ]
     """
-    count_letra=0
-    count_dicc=0
-    lista_candidatos=[]
-    palabras_definiciones=[]
-    while count_letra <len(letras):
-        if letras[count_letra] == dicc[count_dicc][LETRA]:
-            lista_candidatos = (dicc[count_dicc][PALABRAS_DEFINICIONES])
+    cont_letra = 0
+    cont_dicc = 0
+    lista_candidatos = []
+    palabras_definiciones = []
+    while cont_letra < len(letras):
+        if letras[cont_letra] == dicc[cont_dicc][int(CONFIGURACION['INICIAL'])]:
+            lista_candidatos = dicc[cont_dicc][int(CONFIGURACION['DEFINICION'])]
             random.shuffle(lista_candidatos)
-            palabras_definiciones.append(lista_candidatos[0])
-            count_letra +=1
-            count_dicc= 0
-        count_dicc +=1
+            palabras_definiciones.append(lista_candidatos[int(CONFIGURACION['PRIMERA_PALABRA_DEFINICION'])])
+            cont_letra += 1
+            cont_dicc= 0
+        cont_dicc += 1
     return palabras_definiciones
         
 
@@ -52,7 +50,6 @@ def obtener_resultados(letras):
     >>> obtener_resultados(['a','b','c','d'])
     ['', '', '', '']
     """
-    count=0
     resultados = []
     for letra in letras:
         resultados.append('')
@@ -117,7 +114,7 @@ def resultados_parciales(jugadores,partida):
     return ()
 
 def fin_de_partida(jugadores,partida,cant_partida):
-    #Hecha por Nuñez Juan Bautista
+    # Hecha por Nuñez Juan Bautista
     """
     * Funcion encargada de imprimir los resultados finales de los jugadores
     *
@@ -142,7 +139,6 @@ def fin_de_partida(jugadores,partida,cant_partida):
     for jugador in jugadores:
         count += 1
         print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_GLOBAL"]]}') 
-    return ()
 
 def pedir_continuacion():
     # Hecha por Nuñez Juan Bautista

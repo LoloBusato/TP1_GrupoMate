@@ -188,7 +188,7 @@ def letras_participantes():
     *
     * Post: Devuelve una lista con 10 valores (CANTIDAD_LETRAS_ROSCO), cada uno una letra distinta
     '''
-    LETRAS_ROSCO= ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z']
+    LETRAS_ROSCO = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z']
     random.shuffle(LETRAS_ROSCO)
     return sorted(LETRAS_ROSCO[:int(CONFIGURACION['CANTIDAD_LETRAS_ROSCO'])])
 
