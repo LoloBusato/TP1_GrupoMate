@@ -13,8 +13,16 @@ CARACTERES_ESPECIALES= ['#','!']
 jugadores = []
 
 #FUNCIONES=================================================================================
-#esta funcion agrega a la lista de jugadores los nombres de los usuarios a participar
-def usuarios_participantes(usuario, jugadores):
+def usuarios_participantes(usuario):
+    # Hecha por Luciano Vicini
+    """
+    * Esta funcion se encarga de revisar si el usuario ingresado ya habia sido ingresado o no
+    *
+    * Pre: una cadena de caracteres con el nuevo usuario
+    *
+    * Post: revisa si el nuevo usuario ya se encuentra en la lista de jugadores, en caso
+    *   de ya encontrarse devuelve un error, sino lo agrega a la lista y devuelve una alerta
+    """
     if usuario in jugadores:
         resultado = messagebox.showerror(message='Este jugador ya esta participando')
     else:
@@ -22,30 +30,56 @@ def usuarios_participantes(usuario, jugadores):
         resultado = messagebox.showinfo(message=f'{usuario} participará del juego')
     return resultado
 
-#esta funcion hace que se cierre el programa pero mantengas la lista de jugadores
 def iniciar_partida(raiz):
+    # Hecha por Luciano Vicini
+    """
+    * Esta funcion se encarga de que se cierre el programa pero mantengas la lista de jugadores
+    *
+    * Pre: recibe la raiz de la interfaz grafica
+    *
+    """
     raiz.destroy()
 
-#esta funcion comprueba si el nombre de usuario es valido cuando se registra el jugador
 def validar_usuario(usuario):
+    # Hecha por Luciano Vicini
+    """
+    * Esta funcion se encarga de revisar si el nombre de usuario cumple con los requisitos
+    *   establecidos
+    *
+    * Pre: recibe una cadena de caracteres correspondiente al usuario
+    *
+    * Post: devuelve un valor booleano dependiendo si el nombre de usuario cumple o no con
+    *   las restricciones
+    *
+    """
     indice = 0
-    validacion= True
-    while indice < len(usuario) and validacion==True:
-        if usuario[indice].isalnum() or usuario[indice]== '-':
+    validacion = True
+    while indice < len(usuario) and validacion:
+        if usuario[indice].isalnum() or usuario[indice] == '-':
             indice += 1
         else:
             validacion= False
     return validacion and int(CONFIGURACION['MIN_LONG_USUARIO']) <= len(usuario) and len(usuario) <= int(CONFIGURACION['MAX_LONG_USUARIO'])
 
-#esta funcion comprueba si la contrasenia del usuario es valido cuando se registra el jugador
 def validar_contrasenia(contrasenia):
+    # Hecha por Luciano Vicini
+    """
+    * Esta funcion se encarga de revisar si lacontrasenia cumple con los requisitos
+    *   establecidos
+    *
+    * Pre: recibe una cadena de caracteres correspondiente a la contrasenia
+    *
+    * Post: devuelve un valor booleano dependiendo si la contrasenia cumple o no con
+    *   las restricciones
+    *
+    """
     cont_especiales= 0
     cont_num = 0
     cont_minus = 0
     cont_mayus = 0
     indice = 0
-    validacion= True
-    while indice < len(contrasenia) and validacion==True:
+    validacion = True
+    while indice < len(contrasenia) and validacion:
         if contrasenia[indice] in CARACTERES_ESPECIALES:
             cont_especiales += 1
         elif contrasenia[indice].isnumeric():
@@ -55,10 +89,9 @@ def validar_contrasenia(contrasenia):
         elif contrasenia[indice].isupper():
             cont_mayus += 1
         else:
-            validacion= False
+            validacion = False
         indice += 1
-    validacion= cont_mayus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_minus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_num >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_especiales >= int(CONFIGURACION['CONTEO_MINIMO']) and int(CONFIGURACION['MIN_LONG_CONTRASEniA']) <= len(contrasenia) and len(contrasenia) <= int(CONFIGURACION['MAX_LONG_CONTRASEniA']) 
-    return validacion
+    return validacion and cont_mayus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_minus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_num >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_especiales >= int(CONFIGURACION['CONTEO_MINIMO']) and int(CONFIGURACION['MIN_LONG_CONTRASENIA']) <= len(contrasenia) and len(contrasenia) <= int(CONFIGURACION['MAX_LONG_CONTRASENIA'])
     
 def iniciar_sesion(usuario, contrasenia, nombre_usuario_entry, contrasenia_entry, raiz):
     # Hecha por Luciano Vicini
@@ -66,11 +99,12 @@ def iniciar_sesion(usuario, contrasenia, nombre_usuario_entry, contrasenia_entry
     * Esta funcion se encarga de revisar si el usuario y contrasenia ingresados corresponden
     *   a un usuario ya registrado
     *
-    * Pre: recibe 2 cadenas de caracteres correspondientes al usuario y a la contrasenia
+    * Pre: recibe 2 cadenas de caracteres correspondientes al usuario y a la contrasenia.
+    *   los recuadros de input y la ventana de iniciar usuarios
     *
     * Post: devuelve una variable resultado con mensajes de error en caso de no haber sido 
     *   correctos los datos ingresados o con la modificacion en la lista de usuarios participantes
-    *   en caso de encontrarse registrado
+    *   en caso de encontrarse registrado el usuario
     """
     with open('usuarios.csv', 'r') as archivo:
         lector = csv.reader(archivo)
@@ -93,30 +127,43 @@ def iniciar_sesion(usuario, contrasenia, nombre_usuario_entry, contrasenia_entry
             resultado = messagebox.showerror(message='este usuario no esta registrado')
     return resultado
 
-#con esta funcion te registras
-def registrarse():
-    Registro= Tk()
-    
-    def registro(usuario,contrasenia):
-        #este with open es para comprobar si ya esta registrado ese usuario
-        with open('usuarios.csv', 'r') as archivo:
-            lector = csv.reader(archivo)
-            cont= 0
-            for fila in lector:
-                if fila[int(CONFIGURACION['USUARIO'])] == usuario:
-                    cont += 1
-        if cont == 0:
-            if validar_usuario(usuario) and validar_contrasenia(contrasenia):
-                with open('usuarios.csv','a',newline='\n') as archivo:
-                    escritor = csv.writer(archivo)
-                    escritor.writerow([usuario,contrasenia])
-                    messagebox.showinfo(message= 'has sido registrado exitosamente')
-                    Registro.destroy()
-            else:
-                messagebox.showerror(message= '''Ingrese un nombre de usuario o contrasenia validos    (NOMBRE DE USUARIO entre 4 y 20 caracteres con -, letras, numeros)   (CONTRASEniA: longitud entre 6 y 12 caracteres, por lo menos 1 mayus,minus,numero y alguno de los siguientes elementos: #, !)''')
-                
+def registro(usuario,contrasenia, registro):
+    # Hecha por Luciano Vicini
+    """
+    * Esta funcion se encarga de registrar un nuevo usuario
+    *
+    * Pre: recibe 2 cadenas de caracteres correspondientes al usuario y a la contrasenia y
+    *   la raiz de la ventana de registro
+    *
+    * Post: devuelve una variable resultado con mensajes de error en caso de que el usuario
+    *   ya haya sido creado o las credenciales no cumplan con los requisitos o un mensajes
+    *   de informacion en caso del usuario crearse correctamente
+    """    
+    cont = TRUE
+    with open('usuarios.csv', 'r') as archivo:
+        lector = csv.reader(archivo)
+        for fila in lector:
+            if fila[int(CONFIGURACION['USUARIO'])] == usuario:
+                cont = FALSE
+    if cont == TRUE:
+        if validar_usuario(usuario) and validar_contrasenia(contrasenia):
+            with open('usuarios.csv','a',newline='\n') as archivo:
+                escritor = csv.writer(archivo)
+                escritor.writerow([usuario,contrasenia])
+                resultado = messagebox.showinfo(message= 'Has sido registrado exitosamente')
+                registro.destroy()
         else:
-            messagebox.showerror(message= 'este usuario ya esta registrado') 
+            resultado = messagebox.showerror(message= '''Ingrese un nombre de usuario o contrasenia validos    (NOMBRE DE USUARIO entre 4 y 20 caracteres con -, letras, numeros)   (CONTRASEniA: longitud entre 6 y 12 caracteres, por lo menos 1 mayus,minus,numero y alguno de los siguientes elementos: #, !)''')     
+    else:
+        resultado = messagebox.showerror(message= 'Este usuario ya se encuentra registrado') 
+    return resultado
+
+def registrarse():
+    # Hecha por Luciano Vicini
+    """
+    * Esta funcion se encarga del registro de nuevos usuarios
+    """
+    Registro= Tk()
             
     Registro.config(background='lightyellow',width='400',height='180')
     Registro.title('Registro de Usuario')
@@ -129,10 +176,10 @@ def registrarse():
 
     R_nombre_usuario_label= Label(Registro, text= 'Nombre de Usuario:', bg='lightyellow')
     R_nombre_usuario_label.place(x=70, y=40)
-    R_contrasenia_label= Label(Registro, text= 'contrasenia:', bg='lightyellow')
+    R_contrasenia_label= Label(Registro, text= 'Contrasenia:', bg='lightyellow')
     R_contrasenia_label.place(x=115, y= 80)
     
-    R_registrarse_boton= Button(Registro,text= 'Registrarse',command= lambda:registro(R_nombre_usuario_entry.get(),R_contrasenia_entry.get()))
+    R_registrarse_boton= Button(Registro,text= 'Registrarse',command= lambda:registro(R_nombre_usuario_entry.get(),R_contrasenia_entry.get(), Registro))
     R_registrarse_boton.place(x=150, y= 120)
     
     Registro.mainloop()
