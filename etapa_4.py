@@ -16,12 +16,12 @@ LETRAS_TILDADAS = {
 def formateo_resultados(resultados):
     # Hecha por Orlando Martín
     """
-    * Función que da formato de impresión al listado de resultados
+    * Función que da formato de impresión a un listado
     *
-    * Pre: resultados es una lista con valores posibles 'a' en caso de acierto, 
-    *   'e' en caso de error y ' 'en caso de que no se haya evaluado aún esa respuesta
+    * Pre: resultados es una lista con valores
     *
-    * Post: Devuelve un formato de impresión con los mismos valores recibidos
+    * Post: Devuelve un formato de impresión con los mismos valores recibidos, en caso de contener un valor lo devuelve con
+    *   formato [valor], en caso de no contener nada devuelve [ ]
     *
     >>> formateo_resultados(['a','e'])
     '[a][e]'
@@ -29,6 +29,8 @@ def formateo_resultados(resultados):
     '[e][e][a][a][ ][ ]'
     >>> formateo_resultados([' ',' ',' '])
     '[ ][ ][ ]'
+    >>> formateo_resultados(['1','2','2','1',' ',' '])
+    '[1][2][2][1][ ][ ]'
     """
     resultados_a_imprimir = ""
     for letra in resultados:
@@ -93,10 +95,10 @@ def iniciar_resultados_abecedario(letras,resultados,jugadores):
     * Post: devuelve resultados como una lista con cadenas de caracter vacias y
     *       devuelve abecedario_imprimir con las letras participantes para imprimir
     *
-    >>> iniciar_resultados_abecedario(["a","b","c","d"],[' ',' ',' ',' '])
-    ([' ', ' ', ' ', ' '], '[A][B][C][D]')
-    >>> iniciar_resultados_abecedario(["A","f","h","r"],['a','e',' ',' '])
-    (['a', 'e', ' ', ' '], '[A][F][H][R]')
+    >>> iniciar_resultados_abecedario(["a","b","c","d"],[' ',' ',' ',' '],[' ',' ',' ',' '])
+    ([' ', ' ', ' ', ' '], '[A][B][C][D]', [' ', ' ', ' ', ' '])
+    >>> iniciar_resultados_abecedario(["A","f","h","r"],['a','e',' ',' '],['1','2','2','1'])
+    (['a', 'e', ' ', ' '], '[A][F][H][R]', ['1', '2', '2', '1'])
     """
     abecedario_imprimir = ""
     indice = 0
@@ -122,25 +124,28 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, pa
     *   y su definición
     * 
     >>> abecedario_imprimir = "[A][B][C][D]"
-    >>> resultados=["a","e"," "," "]
+    >>> resultados = ["a","a"," "," "]
+    >>> jugadores_imprimir = ["1","1"," "," "]
+    >>> indice_jugador = 1
     >>> palabra = "circuito"
     >>> definicion = "def de circuito"
-    >>> partida = {'martin':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3},'lorenzo':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3}}
+    >>> partida = {'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'jugador':[1,1,' ',' '],'resultados':['a','a',' ',' '],'resumen_partida':'asd','martin':{'puntaje_partida':3,'puntaje_global':3},'lorenzo':{'puntaje_partida':3,'puntaje_global':3}}
     >>> jugadores = ['martin','lorenzo']
     >>> jugador = 'martin'
-    >>> imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,partida, jugadores,jugador)
+    >>> imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, partida, jugadores, jugador, jugadores_imprimir, indice_jugador)
     [A][B][C][D]
-    [a][e][ ][ ]
+    [1][1][ ][ ]
+    [a][a][ ][ ]
     <BLANKLINE>
     <BLANKLINE>
     Jugadores:
-    1. martin - Aciertos: 1 - Errores : 1
-    2. lorenzo - Aciertos: 1 - Errores : 1
+    1. martin - Aciertos: 2 - Errores : 0
+    2. lorenzo - Aciertos: 0 - Errores : 0
     <BLANKLINE>
     <BLANKLINE>
     <BLANKLINE>
-    Turno  jugador martin letra C - Palabra de 8 letras
-    3. Definición: def de circuito
+    Turno Jugador 1 martin - letra C - Palabra de 8 letras
+    Definición: def de circuito
     """
     print(abecedario_imprimir)
     jugadores_imprimir = formateo_resultados(jugadores_imprimir)
@@ -152,7 +157,7 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, pa
     imprimir_resultados_parciales(partida,jugadores)
     print("\n\n")
         
-    print(f"Turno  Jugador {indice_jugador} {jugador} - letra {palabra[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra)} letras")
+    print(f"Turno Jugador {indice_jugador} {jugador} - letra {palabra[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra)} letras")
 
     print(f"Definición: {definicion}")
 
@@ -248,9 +253,11 @@ def contador_aciertos(resultados, numero, jugadores_turno):
     * 
     * Post: Retorna una tupla con la cantidad de aciertos y errores del usuario
     *
-    >>> contador_aciertos(['a','a','e','a',' '])
-    (3, 1)
-    >>> contador_aciertos([' ',' ',' '])
+    >>> contador_aciertos(['a','a','e','a',' '], 1, [1,1,1,2,' '])
+    (2, 1)
+    >>> contador_aciertos(['a','a','e','a',' '], 2, [1,1,1,2,' '])
+    (1, 0)
+    >>> contador_aciertos([' ',' ',' '], '2', [' ',' ',' '])
     (0, 0)
     
     """
@@ -304,11 +311,11 @@ def imprimir_resultados_parciales(partida,jugadores):
     *
     * Pre: Recibe el diccionario de partida y el listado de los jugadores participantes
     *
-    >>> partida = {'martin':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3},'lorenzo':{'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'resultados':['a','e',' ',' '],'turno':2,'puntaje_partida':3,'resumen_partida':'asd','puntaje_global':3}}
+    >>> partida = {'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'jugador':[1,1,' ',' '],'resultados':['a','a',' ',' '],'resumen_partida':'asd','martin':{'puntaje_partida':3,'puntaje_global':3},'lorenzo':{'puntaje_partida':3,'puntaje_global':3}}
     >>> jugadores = ['martin','lorenzo']
     >>> imprimir_resultados_parciales(partida,jugadores)
-    1. martin - Aciertos: 1 - Errores : 1
-    2. lorenzo - Aciertos: 1 - Errores : 1
+    1. martin - Aciertos: 2 - Errores : 0
+    2. lorenzo - Aciertos: 0 - Errores : 0
     """
     numero = 1
     jugadores_turno = partida[CONFIGURACION['JUGADOR']]
