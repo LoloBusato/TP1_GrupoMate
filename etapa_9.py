@@ -196,5 +196,3 @@ def main():
         seguir_jugando = pedir_continuacion()
     fin_de_partida(jugadores,partida,cant_partidas)
 
-
-main()

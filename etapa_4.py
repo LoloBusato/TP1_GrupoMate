@@ -75,14 +75,20 @@ def valida_respuesta(palabra_usuario, palabra_actual):
     * Post: Retorna True o False segun la respuesta sea correcta o no
     >>> valida_respuesta('cancion','canción')
     True
+    >>> valida_respuesta('canción','canción')
+    True
     >>> valida_respuesta('perrito','peritos')
     False
     >>> valida_respuesta('pérro','perro')
     False
     """
-    palabra_actual = reemplaza_tildes(palabra_actual)
-    return palabra_usuario.lower() == palabra_actual.lower()
-
+    valida = False
+    if (palabra_usuario != reemplaza_tildes(palabra_usuario)):
+        valida = palabra_usuario.lower() == palabra_actual.lower()
+    else:
+        palabra_actual = reemplaza_tildes(palabra_actual)
+        valida = palabra_usuario.lower()==palabra_actual.lower()
+    return valida
 
 def iniciar_resultados_abecedario(letras,resultados,jugadores):
     # Hecha por Orlando Martín
