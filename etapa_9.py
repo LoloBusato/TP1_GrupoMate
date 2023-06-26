@@ -33,7 +33,7 @@ def obtener_definiciones(dicc,letras):
             random.shuffle(lista_candidatos)
             palabras_definiciones.append(lista_candidatos[int(CONFIGURACION['PRIMERA_PALABRA_DEFINICION'])])
             cont_letra += 1
-            cont_dicc= 0
+            cont_dicc = 0
         cont_dicc += 1
     return palabras_definiciones
         
@@ -70,21 +70,22 @@ def creacion_diccionarios(jugadores, partida, cant_partidas):
     *
     """
     diccionario_lista = obtener_lista_definiciones()
+    letras = letras_participantes()
+    dicc_definiciones = obtener_definiciones(diccionario_lista,letras)
+    resultados = obtener_resultados(letras)
+    jugador_partida = obtener_resultados(letras)
+
+    partida[CONFIGURACION['DICCIONARIO']] = dicc_definiciones
+    partida[CONFIGURACION['LETRAS']] = letras
+    partida[CONFIGURACION['JUGADOR']] = jugador_partida
+    partida[CONFIGURACION['RESULTADOS']] = resultados
+    partida[CONFIGURACION['RESUMEN_PARTIDA']] = ''
+
     for jugador in jugadores:
-        letras = letras_participantes()
-        dicc_definiciones = obtener_definiciones(diccionario_lista,letras)
-        resultados = obtener_resultados(letras)
-        
         if cant_partidas == 1:
             partida[jugador] = {}
             partida[jugador][CONFIGURACION['PUNTAJE_GLOBAL']] = 0        
-        partida[jugador][CONFIGURACION['DICCIONARIO']] = dicc_definiciones
-        partida[jugador][CONFIGURACION['LETRAS']] = letras
-        partida[jugador][CONFIGURACION['RESULTADOS']] = resultados
-        partida[jugador][CONFIGURACION['TURNO']] = 0
         partida[jugador][CONFIGURACION['PUNTAJE_PARTIDA']] = 0
-        partida[jugador][CONFIGURACION['RESUMEN_PARTIDA']] = ''
-        # El caso contrario no deberia ocurrir nunca
     return partida
 
 def resultados_parciales(jugadores,partida):
@@ -104,11 +105,18 @@ def resultados_parciales(jugadores,partida):
     *   "X. JugadorX - Aciertos: X - Errores: X"
     *
     """
-    print('Puntaje de la partida:\n')
+    print(f'{partida[CONFIGURACION["RESUMEN_PARTIDA"]]}\n\n')
+    print('Puntaje de la partida:')
     count = 0
     for jugador in jugadores:
         count += 1
-        print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_PARTIDA"]]}') 
+        print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_PARTIDA"]]} puntos') 
+    print('\n\n')
+    print('Puntaje parcial:')
+    count = 0
+    for jugador in jugadores:
+        count += 1
+        print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_GLOBAL"]]} puntos') 
     return ()
 
 def fin_de_partida(jugadores,partida,cant_partida):
@@ -130,13 +138,13 @@ def fin_de_partida(jugadores,partida,cant_partida):
     *       
     *
     """
-    print('Reporte Final: \n')
-    print(f'Partidas jugadas: {cant_partida} \n')
-    print('Puntaje final: \n')
+    print('Reporte Final:')
+    print(f'Partidas jugadas: {cant_partida} \n\n')
+    print('Puntaje final:')
     count = 0
     for jugador in jugadores:
         count += 1
-        print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_GLOBAL"]]}') 
+        print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_GLOBAL"]]} puntos') 
 
 def pedir_continuacion():
     # Hecha por Nuñez Juan Bautista

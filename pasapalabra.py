@@ -24,36 +24,41 @@ def pasapalabra(jugadores,partida):
     *   }
     * Post: devuelve el diccionario partida modificado con los datos despues del cierre de la partida
     """
-    indice_jugador = busca_siguiente_turno_libre(partida,jugadores)
+    indice_jugador = 0
+    numero_jugador = 1
+    indice_partida = 0
     while indice_jugador != -1:
         #Ciclo actuante si el jugador actual tiene turno libre o hay alguno que aun tenga turnos libres
         error = False
         jugador = selecciona_jugador(indice_jugador,jugadores)
         if(jugador):
-            turno = partida[jugador]
-            diccionario_partida = turno[CONFIGURACION['DICCIONARIO']]
-            letras_partida = turno[CONFIGURACION['LETRAS']]
-            resultados_partida = turno[CONFIGURACION['RESULTADOS']]
-            indice_partida = turno[CONFIGURACION['TURNO']]
+            jugador_actual = partida[jugador]
+            diccionario_partida = partida[CONFIGURACION['DICCIONARIO']]
+            letras_partida = partida[CONFIGURACION['LETRAS']]
+            jugadores_partida = partida[CONFIGURACION['JUGADOR']]
+            resultados_partida = partida[CONFIGURACION['RESULTADOS']]
             while (indice_partida < len(letras_partida) and not error):
                 # Mientras no se recorra todo el rosco o se equivoque
-                resultados,abecedario_imprimir = iniciar_resultados_abecedario(letras_partida,resultados_partida)
+                resultados,abecedario_imprimir,jugadores_imprimir = iniciar_resultados_abecedario(letras_partida,resultados_partida,jugadores_partida)
                 
                 palabra_actual = diccionario_partida[indice_partida][int(CONFIGURACION['PALABRA'])]
                 definicion_actual = diccionario_partida[indice_partida][int(CONFIGURACION['DEFINICION'])]
                 
-                imprimir_resultados(abecedario_imprimir,resultados,palabra_actual,definicion_actual,partida,jugadores,jugador)
+                imprimir_resultados(abecedario_imprimir,resultados,palabra_actual,definicion_actual,partida,jugadores,jugador,jugadores_imprimir, numero_jugador)
                 
                 palabra_usuario = pedir_palabra(len(palabra_actual))
                 respuesta = valida_respuesta(palabra_usuario,palabra_actual)
                 if respuesta:
                     #partida,jugador,indice,palabra_actual,palabra_usuario
-                    respuesta_correcta(partida,jugador,indice_partida,palabra_actual,palabra_usuario)
+                    respuesta_correcta(partida,jugador,indice_partida,palabra_actual,palabra_usuario,jugador_actual,numero_jugador)
                 else:
-                    respuesta_incorrecta(partida,jugador,indice_partida,palabra_actual,palabra_usuario)
+                    respuesta_incorrecta(partida,jugador,indice_partida,palabra_actual,palabra_usuario,jugador_actual,numero_jugador)
                     error = True
                 indice_partida += 1
-                partida[jugador][CONFIGURACION['TURNO']] += 1
         print(f"\nFin del turno de {jugador}\n")
-        indice_jugador = busca_siguiente_turno_libre(partida,jugadores,indice_jugador)
+        if (indice_partida < int(CONFIGURACION['CANTIDAD_LETRAS_ROSCO'])):
+            indice_jugador = incrementa_jugador(len(jugadores),indice_jugador)
+            numero_jugador = indice_jugador + 1
+        else:
+            indice_jugador = -1
     return partida

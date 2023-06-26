@@ -82,7 +82,7 @@ def valida_respuesta(palabra_usuario, palabra_actual):
     return palabra_usuario.lower() == palabra_actual.lower()
 
 
-def iniciar_resultados_abecedario(letras,resultados):
+def iniciar_resultados_abecedario(letras,resultados,jugadores):
     # Hecha por Orlando Martín
     """
     * Función que se encarga de iniciar las variables resultados y abecedario_imprimir
@@ -103,10 +103,12 @@ def iniciar_resultados_abecedario(letras,resultados):
     for letra in letras:
         abecedario_imprimir += f"[{letra.upper()}]"
         if not resultados[indice]:
-            resultados[indice]= " "
-    return resultados, abecedario_imprimir
+            resultados[indice] = " "
+        if not jugadores[indice]:
+            jugadores[indice] = " "
+    return resultados, abecedario_imprimir, jugadores
 
-def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, partida, jugadores, jugador):
+def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, partida, jugadores, jugador, jugadores_imprimir, indice_jugador):
     # Hecha por Busato Lorenzo
     """
     * Función que se encarga de la impresión de cada turno del juego y se acciona luego de 
@@ -141,16 +143,18 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, pa
     3. Definición: def de circuito
     """
     print(abecedario_imprimir)
+    jugadores_imprimir = formateo_resultados(jugadores_imprimir)
     resultado_imprimir = formateo_resultados(resultados)
+    print(jugadores_imprimir)
     print(resultado_imprimir + "\n\n")
     
     print('Jugadores:')
     imprimir_resultados_parciales(partida,jugadores)
     print("\n\n")
         
-    print(f"Turno  jugador {jugador} letra {palabra[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra)} letras")
+    print(f"Turno  Jugador {indice_jugador} {jugador} - letra {palabra[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra)} letras")
 
-    print(f"{partida[jugador][CONFIGURACION['TURNO']] + 1}. Definición: {definicion}")
+    print(f"Definición: {definicion}")
 
 def pedir_palabra(longitud):
     # Hecha por Busato Lorenzo
@@ -233,34 +237,8 @@ def incrementa_jugador(cantidad_jugadores,indice=-1):
     indice += 1
     return 0 if indice == cantidad_jugadores else indice
 
-def busca_siguiente_turno_libre(partida,jugadores,indice=-1):
-    #Hecha por Orlando Martin
-    """
-    * Función encargada de buscar el jugador más cercano con turnos libres para seguir jugando. 
-    *   En caso de no encontrarlo, retorna -1
-    *
-    * Pre: Recibe el diccionario de partida, un listado de jugadores participantes y el índice 
-    *   correspondiente al jugador participante.
-    * 
-    * Post: Retorna el índice del jugador con turnos libres. De ser el primer jugador participante 
-    *   o en caso de no haber ninguno libre, retorna -1
-    """
-    ciclos = 0
-    libre = False
-    indice = incrementa_jugador(len(jugadores),indice)
-    while ciclos < len(jugadores) and not libre:
-        jugador = jugadores[indice]
-        letras = partida[jugador][CONFIGURACION['LETRAS']]
-        turno = partida[jugador][CONFIGURACION['TURNO']]
-        if turno < len(letras):
-            libre = True
-        else:
-            indice = incrementa_jugador(len(jugadores),indice)
-            ciclos += 1
-    return indice if libre else -1
 
-
-def contador_aciertos(resultados):
+def contador_aciertos(resultados, numero, jugadores_turno):
     # Hecha por Orlando Martin
     """
     * Función encargada de contar los aciertos y errores de cada jugador
@@ -278,14 +256,17 @@ def contador_aciertos(resultados):
     """
     aciertos = 0
     errores = 0
+    indice = 0
     for respuesta in resultados:
-        if respuesta == 'a':
-            aciertos += 1
-        elif respuesta == 'e':
-            errores += 1
+        if(jugadores_turno[indice] == numero):
+            if respuesta == 'a':
+                aciertos += 1
+            elif respuesta == 'e':
+                errores += 1
+        indice += 1
     return aciertos,errores
 
-def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario):
+def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario,jugador_actual,indice_jugador):
     # Hecha por Orlando Martin
     """
     * Función encargada de actualizar los valores del jugador si la respuesta fue correcta
@@ -294,13 +275,14 @@ def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario):
     *   actual que se encuentra participando y la palabra ingresada por el usuario
     * 
     """
-    partida[jugador][CONFIGURACION['RESUMEN_PARTIDA']] = (f"\nTurno letra{palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
-    partida[jugador][CONFIGURACION['RESULTADOS']][indice] = "a"
-    partida[jugador][CONFIGURACION['PUNTAJE_PARTIDA']] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
-    partida[jugador][CONFIGURACION['PUNTAJE_GLOBAL']] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
+    partida[CONFIGURACION['RESUMEN_PARTIDA']] += (f"\nTurno letra {palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Jugador {indice_jugador} {jugador} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
+    partida[CONFIGURACION['JUGADOR']][indice] = indice_jugador
+    partida[CONFIGURACION['RESULTADOS']][indice] = "a"
+    jugador_actual[CONFIGURACION['PUNTAJE_PARTIDA']] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
+    jugador_actual[CONFIGURACION['PUNTAJE_GLOBAL']] += int(CONFIGURACION['PUNTAJE_ACIERTO'])
     print("Palabra correcta")
     
-def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
+def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario,jugador_actual,indice_jugador):
     # Hecha por Orlando Martin
     """
     * Función encargada del flujo de respuesta incorrecta
@@ -308,10 +290,11 @@ def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
     * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
     *
     """
-    partida[jugador][CONFIGURACION['RESUMEN_PARTIDA']] = (f"\nTurno letra{palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
-    partida[jugador][CONFIGURACION['RESULTADOS']][indice] = "e"
-    partida[jugador][CONFIGURACION['PUNTAJE_PARTIDA']] -= int(CONFIGURACION['PUNTAJE_DESACIERTO'])
-    partida[jugador][CONFIGURACION['PUNTAJE_GLOBAL']] -= int(CONFIGURACION['PUNTAJE_DESACIERTO'])
+    partida[CONFIGURACION['RESUMEN_PARTIDA']] += (f"\nTurno letra {palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Jugador {indice_jugador} {jugador} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
+    partida[CONFIGURACION['JUGADOR']][indice] = indice_jugador
+    partida[CONFIGURACION['RESULTADOS']][indice] = "e"
+    jugador_actual[CONFIGURACION['PUNTAJE_PARTIDA']] -= int(CONFIGURACION['PUNTAJE_DESACIERTO'])
+    jugador_actual[CONFIGURACION['PUNTAJE_GLOBAL']] -= int(CONFIGURACION['PUNTAJE_DESACIERTO'])
     print(f"Palabra incorrecta - Respuesta: {palabra_actual}")
 
 def imprimir_resultados_parciales(partida,jugadores):
@@ -328,9 +311,10 @@ def imprimir_resultados_parciales(partida,jugadores):
     2. lorenzo - Aciertos: 1 - Errores : 1
     """
     numero = 1
+    jugadores_turno = partida[CONFIGURACION['JUGADOR']]
+    resultados_jugador = partida[CONFIGURACION['RESULTADOS']]
     for jugador in jugadores:
-        resultados_jugador = partida[jugador][CONFIGURACION['RESULTADOS']]
-        aciertos,errores = contador_aciertos(resultados_jugador)
+        aciertos,errores = contador_aciertos(resultados_jugador, numero, jugadores_turno)
         print(f"{numero}. {jugador} - Aciertos: {aciertos} - Errores : {errores} ")
         numero += 1
 
