@@ -4,7 +4,6 @@ from Etapa_8 import obtener_lista_definiciones
 from etapa_7 import *
 from etapa_10 import obtener_constantes
 import random
-import doctest
 
 #CONSTANTES========================================================================================================
 CONFIGURACION = obtener_constantes()
@@ -136,9 +135,9 @@ def fin_de_partida(jugadores,partida,cant_partida):
     >>> jugadores = ['martin', 'lorenzo']
     >>> cantidad_partidas = 1
     >>> partida = {'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'jugador':[1,1,' ',' '],'resultados':['a','a',' ',' '],'resumen_partida':'asd','martin':{'puntaje_partida':10,'puntaje_global':30},'lorenzo':{'puntaje_partida':20,'puntaje_global':40}}
-    >>> fin_de_partida(jugadores, cantidad_partidas, partida)
+    >>> fin_de_partida(jugadores, partida,cantidad_partidas)
     Reporte Final:
-    Partidas jugadas: 1
+    Partidas jugadas: 1 
     <BLANKLINE>
     <BLANKLINE>
     Puntaje final:

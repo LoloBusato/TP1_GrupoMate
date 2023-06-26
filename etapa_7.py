@@ -3,7 +3,6 @@ from tkinter import messagebox
 import csv
 from etapa_10 import obtener_constantes
 import random
-import doctest
 
 #CONSTANTES=================================================================================
 CONFIGURACION = obtener_constantes()
@@ -268,4 +267,3 @@ def ventana_de_jugadores():
     random.shuffle(jugadores)
     return jugadores
 
-print(doctest.testmod())
