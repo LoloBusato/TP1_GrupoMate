@@ -3,18 +3,15 @@ from tkinter import messagebox
 import csv
 from etapa_10 import obtener_constantes
 import random
-
+import doctest
 
 #CONSTANTES=================================================================================
 CONFIGURACION = obtener_constantes()
 
 CARACTERES_ESPECIALES = ['#','!']
 
-# Lista de usuarios participantes
-jugadores = []
-
 #FUNCIONES=================================================================================
-def usuarios_participantes(usuario):
+def usuarios_participantes(usuario, jugadores):
     # Hecha por Luciano Vicini
     """
     * Esta funcion se encarga de revisar si el usuario ingresado ya habia sido ingresado o no
@@ -23,13 +20,21 @@ def usuarios_participantes(usuario):
     *
     * Post: revisa si el nuevo usuario ya se encuentra en la lista de jugadores, en caso
     *   de ya encontrarse devuelve un error, sino lo agrega a la lista y devuelve una alerta
+    >>> jugadores = ['lucho', 'juanBautista']
+    >>> usuario = 'lorenzo'
+    >>> usuarios_participantes(usuario, jugadores)
+    ['lucho', 'juanBautista', 'lorenzo']
+    >>> jugadores1 = ['lucho', 'juanBautista']
+    >>> usuario1 = 'lucho'
+    >>> usuarios_participantes(usuario1, jugadores1)
+    ['lucho', 'juanBautista']
     """
     if usuario in jugadores:
-        resultado = messagebox.showerror(message='Este jugador ya esta participando')
+        messagebox.showerror(message='Este jugador ya esta participando')
     else:
         jugadores.append(usuario)
-        resultado = messagebox.showinfo(message=f'{usuario} participará del juego')
-    return resultado
+        messagebox.showinfo(message=f'{usuario} participará del juego')
+    return jugadores
 
 def iniciar_partida(raiz):
     # Hecha por Luciano Vicini
@@ -52,6 +57,18 @@ def validar_usuario(usuario):
     * Post: devuelve un valor booleano dependiendo si el nombre de usuario cumple o no con
     *   las restricciones
     *
+    >>> usuario = 'Sup'
+    >>> validar_usuario(usuario)
+    False
+    >>> usuario = 'SuperLorenzo10'
+    >>> validar_usuario(usuario)
+    True
+    >>> usuario = 'AlgoritmosYProgramacion'
+    >>> validar_usuario(usuario)
+    False
+    >>> usuario = '12345'
+    >>> validar_usuario(usuario)
+    True
     """
     indice = 0
     validacion = True
@@ -73,6 +90,30 @@ def validar_contrasenia(contrasenia):
     * Post: devuelve un valor booleano dependiendo si la contrasenia cumple o no con
     *   las restricciones
     *
+    >>> contrasenia = 'Hola1'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'Hola1!'
+    >>> validar_contrasenia(contrasenia)
+    True
+    >>> contrasenia = 'Holas!'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'Holas12'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'holas1!'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'HOLAS1!'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'Doceletras1!'
+    >>> validar_contrasenia(contrasenia)
+    True
+    >>> contrasenia = 'Doceletras12!'
+    >>> validar_contrasenia(contrasenia)
+    False
     """
     cont_especiales= 0
     cont_num = 0
@@ -94,7 +135,7 @@ def validar_contrasenia(contrasenia):
         indice += 1
     return validacion and cont_mayus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_minus >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_num >= int(CONFIGURACION['CONTEO_MINIMO']) and cont_especiales >= int(CONFIGURACION['CONTEO_MINIMO']) and int(CONFIGURACION['MIN_LONG_CONTRASENIA']) <= len(contrasenia) and len(contrasenia) <= int(CONFIGURACION['MAX_LONG_CONTRASENIA'])
     
-def iniciar_sesion(usuario, contrasenia, nombre_usuario_entry, contrasenia_entry, raiz):
+def iniciar_sesion(usuario, contrasenia, nombre_usuario_entry, contrasenia_entry, raiz, jugadores):
     # Hecha por Luciano Vicini
     """
     * Esta funcion se encarga de revisar si el usuario y contrasenia ingresados corresponden
@@ -114,7 +155,7 @@ def iniciar_sesion(usuario, contrasenia, nombre_usuario_entry, contrasenia_entry
             if fila[int(CONFIGURACION['USUARIO'])] == usuario:
                 if fila[int(CONFIGURACION['CONTRASENIA'])] == contrasenia:
                     cont = -1
-                    resultado = usuarios_participantes(usuario)
+                    resultado = usuarios_participantes(usuario, jugadores)
                     
                     nombre_usuario_entry.delete(0,len(usuario))
                     contrasenia_entry.delete(0,len(contrasenia))
@@ -194,6 +235,8 @@ def ventana_de_jugadores():
     * Post: devuelve una lista con los nombres de usuario de los jugadores ingresados
     *       
     """
+    jugadores = []
+
     raiz = Tk()
     raiz.iconbitmap("Mate.ico")
 
@@ -214,7 +257,7 @@ def ventana_de_jugadores():
 
     iniciar_partida_boton = Button(raiz,text='Iniciar Partida',command= lambda: iniciar_partida(raiz), padx=20)
     iniciar_partida_boton.place(x=130, y= 220)
-    iniciar_sesion_boton = Button(raiz,text='Iniciar Sesion',command= lambda: iniciar_sesion(nombre_usuario_entry.get(), contrasenia_entry.get(), nombre_usuario_entry, contrasenia_entry, raiz))
+    iniciar_sesion_boton = Button(raiz,text='Iniciar Sesion',command= lambda: iniciar_sesion(nombre_usuario_entry.get(), contrasenia_entry.get(), nombre_usuario_entry, contrasenia_entry, raiz, jugadores))
     iniciar_sesion_boton.place(x=150, y= 120)
     registrarse_txt = Label(raiz, text= 'Si no tenes cuenta presiona en el boton de abajo', bg='lightblue', fg= 'blue')
     registrarse_txt.place(x=60, y= 150)
@@ -224,3 +267,5 @@ def ventana_de_jugadores():
     raiz.mainloop()
     random.shuffle(jugadores)
     return jugadores
+
+print(doctest.testmod())
