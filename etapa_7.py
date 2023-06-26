@@ -8,7 +8,7 @@ import random
 #CONSTANTES=================================================================================
 CONFIGURACION = obtener_constantes()
 
-CARACTERES_ESPECIALES= ['#','!']
+CARACTERES_ESPECIALES = ['#','!']
 
 # Lista de usuarios participantes
 jugadores = []
@@ -164,23 +164,24 @@ def registrarse():
     """
     * Esta funcion se encarga del registro de nuevos usuarios
     """
-    Registro= Tk()
+    Registro = Tk()
+    Registro.iconbitmap("Mate.ico")
             
     Registro.config(background='lightyellow',width='400',height='180')
     Registro.title('Registro de Usuario')
     
-    R_nombre_usuario_entry= Entry(Registro)
+    R_nombre_usuario_entry = Entry(Registro)
     R_nombre_usuario_entry.place(x= 200, y=40)
-    R_contrasenia_entry= Entry(Registro)
+    R_contrasenia_entry = Entry(Registro)
     R_contrasenia_entry.place(x=200, y= 80)
     R_contrasenia_entry.config(show= '*')
 
-    R_nombre_usuario_label= Label(Registro, text= 'Nombre de Usuario:', bg='lightyellow')
+    R_nombre_usuario_label = Label(Registro, text= 'Nombre de Usuario:', bg='lightyellow')
     R_nombre_usuario_label.place(x=70, y=40)
-    R_contrasenia_label= Label(Registro, text= 'Contrasenia:', bg='lightyellow')
+    R_contrasenia_label = Label(Registro, text= 'Contrasenia:', bg='lightyellow')
     R_contrasenia_label.place(x=115, y= 80)
     
-    R_registrarse_boton= Button(Registro,text= 'Registrarse',command= lambda:registro(R_nombre_usuario_entry.get(),R_contrasenia_entry.get(), Registro))
+    R_registrarse_boton = Button(Registro,text= 'Registrarse',command= lambda:registro(R_nombre_usuario_entry.get(),R_contrasenia_entry.get(), Registro))
     R_registrarse_boton.place(x=150, y= 120)
     
     Registro.mainloop()
@@ -193,30 +194,31 @@ def ventana_de_jugadores():
     * Post: devuelve una lista con los nombres de usuario de los jugadores ingresados
     *       
     """
-    raiz= Tk()
+    raiz = Tk()
+    raiz.iconbitmap("Mate.ico")
 
     raiz.config(background='lightblue',width='400',height='250')
     raiz.title('Ingreso de Usuarios')
     raiz.resizable(0,0)
 
-    nombre_usuario_entry= Entry(raiz)
+    nombre_usuario_entry = Entry(raiz)
     nombre_usuario_entry.place(x= 200, y=40)
-    contrasenia_entry= Entry(raiz)
+    contrasenia_entry = Entry(raiz)
     contrasenia_entry.place(x=200, y= 80)
     contrasenia_entry.config(show= '*')
 
-    nombre_usuario_label= Label(raiz, text= 'Nombre de Usuario:', bg='lightblue')
+    nombre_usuario_label = Label(raiz, text= 'Nombre de Usuario:', bg='lightblue')
     nombre_usuario_label.place(x=70, y=40)
-    contrasenia_label= Label(raiz, text= 'Contrasenia:', bg='lightblue')
+    contrasenia_label = Label(raiz, text= 'Contrasenia:', bg='lightblue')
     contrasenia_label.place(x=115, y= 80)
 
-    iniciar_partida_boton= Button(raiz,text='Iniciar Partida',command= lambda: iniciar_partida(raiz), padx=20)
+    iniciar_partida_boton = Button(raiz,text='Iniciar Partida',command= lambda: iniciar_partida(raiz), padx=20)
     iniciar_partida_boton.place(x=130, y= 220)
-    iniciar_sesion_boton= Button(raiz,text='Iniciar Sesion',command= lambda: iniciar_sesion(nombre_usuario_entry.get(), contrasenia_entry.get(), nombre_usuario_entry, contrasenia_entry, raiz))
+    iniciar_sesion_boton = Button(raiz,text='Iniciar Sesion',command= lambda: iniciar_sesion(nombre_usuario_entry.get(), contrasenia_entry.get(), nombre_usuario_entry, contrasenia_entry, raiz))
     iniciar_sesion_boton.place(x=150, y= 120)
-    registrarse_txt= Label(raiz, text= 'Si no tenes cuenta presiona en el boton de abajo', bg='lightblue', fg= 'blue')
+    registrarse_txt = Label(raiz, text= 'Si no tenes cuenta presiona en el boton de abajo', bg='lightblue', fg= 'blue')
     registrarse_txt.place(x=60, y= 150)
-    registrarse_boton= Button(raiz,text= 'Registrarse',command= lambda: registrarse())
+    registrarse_boton = Button(raiz,text= 'Registrarse',command= lambda: registrarse())
     registrarse_boton.place(x=156, y=180)
 
     raiz.mainloop()
