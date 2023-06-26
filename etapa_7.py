@@ -90,6 +90,30 @@ def validar_contrasenia(contrasenia):
     * Post: devuelve un valor booleano dependiendo si la contrasenia cumple o no con
     *   las restricciones
     *
+    >>> contrasenia = 'Hola1'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'Hola1!'
+    >>> validar_contrasenia(contrasenia)
+    True
+    >>> contrasenia = 'Holas!'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'Holas12'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'holas1!'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'HOLAS1!'
+    >>> validar_contrasenia(contrasenia)
+    False
+    >>> contrasenia = 'Doceletras1!'
+    >>> validar_contrasenia(contrasenia)
+    True
+    >>> contrasenia = 'Doceletras12!'
+    >>> validar_contrasenia(contrasenia)
+    False
     """
     cont_especiales= 0
     cont_num = 0
