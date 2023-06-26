@@ -1,6 +1,5 @@
 import random
 from etapa_10 import obtener_constantes
-import doctest
 
 # Constantes =======================================================================================================================
 CONFIGURACION = obtener_constantes()
