@@ -7,21 +7,21 @@ def pasapalabra(jugadores,partida):
     *
     * Pre: Recibe un listado de los jugadores de cada partida y un diccionario que contiene la información global
     *
-    *   partida={
-    *       jugador1: {
-    *           'dicionario': lista de definiciones en orden de rosco,
-    *           'letras': lista de letras en orden de rosco,
-    *           'resultados': lista de 'a' || 'e' segun acierto o error
-    *           'turno': numero de turno en funcion a la posicion en letras correspondiente,
-    *           'puntaje_partida': 0,
-    *           'resumen_partida': en string el resumen de la partida
-    *           'puntaje_global': 0,
-    *       },
-    *       jugador2: {
+    *   partida = {
+    *       dicionario: [[palabra_1,definicion_1],[palabra_2,definicion_2],...,],
+    *       letras:['a','b',...,],
+    *       jugador:['','',...,],
+    *       resultados:['','',...,],
+    *       resumen_partida:'',
+    *       nombre_jugador_1:{
+    *           puntaje_global: 0,
+    *           puntaje_partida: 0
+    *       }
+    *       nombre_jugador_2:{
     *           ...
-    *       }, 
-    *       ...
-    *   }
+    *      }
+    *  }
+    *   
     * Post: devuelve el diccionario partida modificado con los datos despues del cierre de la partida
     """
     indice_jugador = 0

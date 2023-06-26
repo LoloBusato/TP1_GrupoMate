@@ -1,4 +1,4 @@
-from pasapalabra import pasapalabra;
+from pasapalabra import pasapalabra
 from etapa_4 import *
 from Etapa_8 import obtener_lista_definiciones
 from etapa_7 import *
@@ -39,22 +39,7 @@ def obtener_definiciones(dicc,letras):
     return palabras_definiciones
         
 
-def obtener_resultados(letras):
-    # Hecha por Nuñez Juan Bautista
-    """
-    * Funcion encargada de inicializar los resultados
-    *
-    * Pre: Recibe un listado de letras
-    *
-    * Post: Retorna la lista de resultados inicializada
-    *
-    >>> obtener_resultados(['a','b','c','d'])
-    ['', '', '', '']
-    """
-    resultados = []
-    for letra in letras:
-        resultados.append('')
-    return resultados
+
 
 def creacion_diccionarios(jugadores, partida, cant_partidas):
     # Hecha por Nuñez Juan Bautista
@@ -64,17 +49,27 @@ def creacion_diccionarios(jugadores, partida, cant_partidas):
     * Pre: Recibe una lista con los nombres de los jugadores 
     *
     * Post: Retorna un diccionario con formato
-    *   {
-    *       NOMBRE_JUGADOR1: [[PALABRA1, DEFINICION1], [PALABRA2, DEFINICION2], ...],
-    *       ...
-    *   }
+        partida = {
+            diccionario: [[palabra_1,definicion_1],[palabra_2,definicion_2],...,],
+            letras:['a','b',...,],
+            jugador:['','',...,],
+            resultados:['','',...,],
+            resumen_partida:'',
+            nombre_jugador_1:{
+                puntaje_global: 0,
+                puntaje_partida: 0
+            }
+            nombre_jugador_2:{
+                ...
+            }
+        }
     *
     """
     diccionario_lista = obtener_lista_definiciones()
     letras = letras_participantes()
     dicc_definiciones = obtener_definiciones(diccionario_lista,letras)
-    resultados = obtener_resultados(letras)
-    jugador_partida = obtener_resultados(letras)
+    resultados = generar_resultados_y_respuestas(letras)
+    jugador_partida = generar_resultados_y_respuestas(letras)
 
     partida[CONFIGURACION['DICCIONARIO']] = dicc_definiciones
     partida[CONFIGURACION['LETRAS']] = letras
@@ -201,6 +196,5 @@ def main():
         seguir_jugando = pedir_continuacion()
     fin_de_partida(jugadores,partida,cant_partidas)
 
-main()
 
-print(doctest.testmod())
+main()

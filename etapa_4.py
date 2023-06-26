@@ -91,9 +91,8 @@ def iniciar_resultados_abecedario(letras,resultados,jugadores):
     *
     * Pre: recibe "letras" que es una lista ordenada con las letras participantes y 
     *   "resultados" que es una lista ordenada con los aciertos o errores de cada letra
-    *
-    * Post: devuelve resultados como una lista con cadenas de caracter vacias y
-    *       devuelve abecedario_imprimir con las letras participantes para imprimir
+    *   "jugadores" que es una lista ordenada con los intentos de cada jugador
+    * Post: devuelve "resultados" como una lista con cadenas de caracter vacias, "abecedario_imprimir" con las letras participantes para imprimir y "jugadores" con el listado de participaciones para imprimir
     *
     >>> iniciar_resultados_abecedario(["a","b","c","d"],[' ',' ',' ',' '],[' ',' ',' ',' '])
     ([' ', ' ', ' ', ' '], '[A][B][C][D]', [' ', ' ', ' ', ' '])
@@ -117,30 +116,29 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, pa
     *   cada intento 
     *
     * Pre: Recibe las letras participantes ordenadas, los resultados parciales, la palabra 
-    *   del turno, su definición, el contador de partida del jugador, el listado de jugadores 
-    *   y el jugador de turno
+    *   del turno, su definición, el diccionario de partida, el listado de jugadores, el nombre del jugador participante, el listado ordenado de participaciones del rosco y el indice del jugador *    actual
     *
     * Post: Imprime el tablero de letras, los resultados parciales, la palabra de turno 
     *   y su definición
     * 
-    >>> abecedario_imprimir = "[A][B][C][D]"
-    >>> resultados = ["a","a"," "," "]
-    >>> jugadores_imprimir = ["1","1"," "," "]
-    >>> indice_jugador = 1
+    >>> abecedario_imprimir = "[A][B][C][D][E][F][G]"
+    >>> resultados=["a","a","e","a","e","a",' ']
     >>> palabra = "circuito"
     >>> definicion = "def de circuito"
-    >>> partida = {'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'jugador':[1,1,' ',' '],'resultados':['a','a',' ',' '],'resumen_partida':'asd','martin':{'puntaje_partida':3,'puntaje_global':3},'lorenzo':{'puntaje_partida':3,'puntaje_global':3}}
+    >>> partida = {'jugador':[1,1,1,2,2,1,' '],'resultados':['a','a','e','a','e','a',' ']}
     >>> jugadores = ['martin','lorenzo']
+    >>> jugadores_imprimir=[1,1,1,2,2,1,' ']
     >>> jugador = 'martin'
-    >>> imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, partida, jugadores, jugador, jugadores_imprimir, indice_jugador)
-    [A][B][C][D]
-    [1][1][ ][ ]
-    [a][a][ ][ ]
+    >>> numero_jugador=1
+    >>> imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,partida, jugadores,jugador,jugadores_imprimir,numero_jugador)
+    [A][B][C][D][E][F][G]
+    [1][1][1][2][2][1][ ]
+    [a][a][e][a][e][a][ ]
     <BLANKLINE>
     <BLANKLINE>
     Jugadores:
-    1. martin - Aciertos: 2 - Errores : 0
-    2. lorenzo - Aciertos: 0 - Errores : 0
+    1. martin - Aciertos: 3 - Errores : 1
+    2. lorenzo - Aciertos: 1 - Errores : 1
     <BLANKLINE>
     <BLANKLINE>
     <BLANKLINE>
@@ -248,18 +246,17 @@ def contador_aciertos(resultados, numero, jugadores_turno):
     """
     * Función encargada de contar los aciertos y errores de cada jugador
     *
-    * Pre: Recibe un listado con letras 'a', si se registró un acierto, 'e' si se 
-    *   registró un error, o ' ' en caso de que no se haya respondido todavía
+    * Pre: Recibe el listado reusltados, con una lista de aciertos o errores, numero es un *numero de indicie del jugador y jugadores_turno un listado con las respuestas correspondientes de cada * usuario
     * 
     * Post: Retorna una tupla con la cantidad de aciertos y errores del usuario
     *
-    >>> contador_aciertos(['a','a','e','a',' '], 1, [1,1,1,2,' '])
+
+    >>> contador_aciertos(['a','a','e','a',' '],1,[1,1,1,2,' '])
     (2, 1)
-    >>> contador_aciertos(['a','a','e','a',' '], 2, [1,1,1,2,' '])
+    >>> contador_aciertos(['a','a','e','a'],2,[1,1,1,2,' '])
     (1, 0)
-    >>> contador_aciertos([' ',' ',' '], '2', [' ',' ',' '])
+    >>> contador_aciertos(['a','a','a'],2,[1,1,1])
     (0, 0)
-    
     """
     aciertos = 0
     errores = 0
@@ -322,7 +319,22 @@ def imprimir_resultados_parciales(partida,jugadores):
     resultados_jugador = partida[CONFIGURACION['RESULTADOS']]
     for jugador in jugadores:
         aciertos,errores = contador_aciertos(resultados_jugador, numero, jugadores_turno)
-        print(f"{numero}. {jugador} - Aciertos: {aciertos} - Errores : {errores} ")
+        print(f"{numero}. {jugador} - Aciertos: {aciertos} - Errores : {errores}")
         numero += 1
 
-print(doctest.testmod())
+def generar_resultados_y_respuestas(letras):
+    # Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada de inicializar los resultados
+    *
+    * Pre: Recibe un listado de letras
+    *
+    * Post: Retorna la lista de resultados inicializada
+    *
+    >>> generar_resultados_y_respuestas(['a','b','c','d'])
+    ['', '', '', '']
+    """
+    resultados = []
+    for letra in letras:
+        resultados.append('')
+    return resultados
