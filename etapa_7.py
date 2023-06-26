@@ -57,6 +57,18 @@ def validar_usuario(usuario):
     * Post: devuelve un valor booleano dependiendo si el nombre de usuario cumple o no con
     *   las restricciones
     *
+    >>> usuario = 'Sup'
+    >>> validar_usuario(usuario)
+    False
+    >>> usuario = 'SuperLorenzo10'
+    >>> validar_usuario(usuario)
+    True
+    >>> usuario = 'AlgoritmosYProgramacion'
+    >>> validar_usuario(usuario)
+    False
+    >>> usuario = '12345'
+    >>> validar_usuario(usuario)
+    True
     """
     indice = 0
     validacion = True
