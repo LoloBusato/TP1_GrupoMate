@@ -4,6 +4,7 @@ from Etapa_8 import obtener_lista_definiciones
 from etapa_7 import *
 from etapa_10 import obtener_constantes
 import random
+import doctest
 
 #CONSTANTES========================================================================================================
 CONFIGURACION = obtener_constantes()
@@ -132,6 +133,17 @@ def fin_de_partida(jugadores,partida,cant_partida):
     *   "X. JugadorX - PUNTAJE"
     *       
     *
+    >>> jugadores = ['martin', 'lorenzo']
+    >>> cantidad_partidas = 1
+    >>> partida = {'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'jugador':[1,1,' ',' '],'resultados':['a','a',' ',' '],'resumen_partida':'asd','martin':{'puntaje_partida':10,'puntaje_global':30},'lorenzo':{'puntaje_partida':20,'puntaje_global':40}}
+    >>> fin_de_partida(jugadores, cantidad_partidas, partida)
+    Reporte Final:
+    Partidas jugadas: 1
+    <BLANKLINE>
+    <BLANKLINE>
+    Puntaje final:
+    1. martin - 30 puntos
+    2. lorenzo - 40 puntos
     """
     print('Reporte Final:')
     print(f'Partidas jugadas: {cant_partida} \n\n')
@@ -168,7 +180,7 @@ def main():
     jugadores = ventana_de_jugadores()
     seguir_jugando = True
     partida = {}
-    while seguir_jugando and cant_partidas < int(CONFIGURACION['MAXIMO_PARTIDAS']):
+    while seguir_jugando and cant_partidas < int(CONFIGURACION['MAXIMO_PARTIDAS']) and len(jugadores) >= 1:
         cant_partidas += 1
 
         #Genera diccionarios para cada jugador
@@ -184,5 +196,5 @@ def main():
         seguir_jugando = pedir_continuacion()
     fin_de_partida(jugadores,partida,cant_partidas)
 
-# print(doctest.testmod())
+
 main()
