@@ -1,5 +1,4 @@
 import random
-import doctest
 from etapa_10 import obtener_constantes
 
 # Constantes =======================================================================================================================
@@ -324,5 +323,3 @@ def imprimir_resultados_parciales(partida,jugadores):
         aciertos,errores = contador_aciertos(resultados_jugador, numero, jugadores_turno)
         print(f"{numero}. {jugador} - Aciertos: {aciertos} - Errores : {errores} ")
         numero += 1
-
-print(doctest.testmod())
