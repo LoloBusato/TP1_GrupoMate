@@ -4,7 +4,6 @@ from Etapa_8 import obtener_lista_definiciones
 from etapa_7 import *
 from etapa_10 import obtener_constantes
 import random
-import doctest
 
 #CONSTANTES========================================================================================================
 CONFIGURACION = obtener_constantes()
