@@ -15,3 +15,5 @@ Modos de ejecución:
 
     Para observar las pruebas y los resultados de las mismas utilizar el siguiente comando:
         py -m doctest -v etapa_4.py
+        py -m doctest -v etapa_7.py
+        py -m doctest -v etapa_9.py
