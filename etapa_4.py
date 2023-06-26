@@ -310,8 +310,8 @@ def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario):
     """
     partida[jugador][CONFIGURACION['RESUMEN_PARTIDA']] = (f"\nTurno letra{palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
     partida[jugador][CONFIGURACION['RESULTADOS']][indice] = "e"
-    partida[jugador][CONFIGURACION['PUNTAJE_PARTIDA']] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
-    partida[jugador][CONFIGURACION['PUNTAJE_GLOBAL']] += int(CONFIGURACION['PUNTAJE_DESACIERTO'])
+    partida[jugador][CONFIGURACION['PUNTAJE_PARTIDA']] -= int(CONFIGURACION['PUNTAJE_DESACIERTO'])
+    partida[jugador][CONFIGURACION['PUNTAJE_GLOBAL']] -= int(CONFIGURACION['PUNTAJE_DESACIERTO'])
     print(f"Palabra incorrecta - Respuesta: {palabra_actual}")
 
 def imprimir_resultados_parciales(partida,jugadores):

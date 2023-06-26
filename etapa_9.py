@@ -55,7 +55,7 @@ def obtener_resultados(letras):
         resultados.append('')
     return resultados
 
-def creacion_diccionarios(jugadores):
+def creacion_diccionarios(jugadores, partida, cant_partidas):
     # Hecha por Nuñez Juan Bautista
     """
     * Funcion encargada de crear un diccionario por cada jugador de la partida
@@ -69,23 +69,21 @@ def creacion_diccionarios(jugadores):
     *   }
     *
     """
-    partida = {}
     diccionario_lista = obtener_lista_definiciones()
     for jugador in jugadores:
-        if jugador not in partida.keys():
-            letras = letras_participantes()
-            dicc_definiciones = obtener_definiciones(diccionario_lista,letras)
-            resultados = obtener_resultados(letras)
-            partida[jugador] = {
-                CONFIGURACION['DICCIONARIO']: dicc_definiciones,
-                CONFIGURACION['LETRAS']: letras,
-                CONFIGURACION['RESULTADOS']: resultados,
-                CONFIGURACION['TURNO']: 0,
-                CONFIGURACION['PUNTAJE_PARTIDA']: 0,
-                CONFIGURACION['RESUMEN_PARTIDA']:'',
-                CONFIGURACION['PUNTAJE_GLOBAL']: 0,
+        letras = letras_participantes()
+        dicc_definiciones = obtener_definiciones(diccionario_lista,letras)
+        resultados = obtener_resultados(letras)
         
-            }
+        if cant_partidas == 1:
+            partida[jugador] = {}
+            partida[jugador][CONFIGURACION['PUNTAJE_GLOBAL']] = 0        
+        partida[jugador][CONFIGURACION['DICCIONARIO']] = dicc_definiciones
+        partida[jugador][CONFIGURACION['LETRAS']] = letras
+        partida[jugador][CONFIGURACION['RESULTADOS']] = resultados
+        partida[jugador][CONFIGURACION['TURNO']] = 0
+        partida[jugador][CONFIGURACION['PUNTAJE_PARTIDA']] = 0
+        partida[jugador][CONFIGURACION['RESUMEN_PARTIDA']] = ''
         # El caso contrario no deberia ocurrir nunca
     return partida
 
@@ -166,11 +164,12 @@ def main():
     cant_partidas = 0
     jugadores = ventana_de_jugadores()
     seguir_jugando = True
+    partida = {}
     while seguir_jugando and cant_partidas < int(CONFIGURACION['MAXIMO_PARTIDAS']):
-        cant_partidas +=1
+        cant_partidas += 1
 
         #Genera diccionarios para cada jugador
-        partida = creacion_diccionarios(jugadores)
+        partida = creacion_diccionarios(jugadores,partida, cant_partidas)
         
         #inicia los ciclos de pasapalabra hasta el final de la partida
         partida = pasapalabra(jugadores,partida)
