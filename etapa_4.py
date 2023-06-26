@@ -319,4 +319,20 @@ def imprimir_resultados_parciales(partida,jugadores):
         print(f"{numero}. {jugador} - Aciertos: {aciertos} - Errores : {errores}")
         numero += 1
 
+def generar_resultados_y_respuestas(letras):
+    # Hecha por Nuñez Juan Bautista
+    """
+    * Funcion encargada de inicializar los resultados
+    *
+    * Pre: Recibe un listado de letras
+    *
+    * Post: Retorna la lista de resultados inicializada
+    *
+    >>> generar_resultados_y_respuestas(['a','b','c','d'])
+    ['', '', '', '']
+    """
+    resultados = []
+    for letra in letras:
+        resultados.append('')
+    return resultados
 print(doctest.testmod())

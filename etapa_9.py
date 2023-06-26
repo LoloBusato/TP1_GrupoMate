@@ -38,22 +38,7 @@ def obtener_definiciones(dicc,letras):
     return palabras_definiciones
         
 
-def generar_resultados_y_respuestas(letras):
-    # Hecha por Nuñez Juan Bautista
-    """
-    * Funcion encargada de inicializar los resultados
-    *
-    * Pre: Recibe un listado de letras
-    *
-    * Post: Retorna la lista de resultados inicializada
-    *
-    >>> obtener_resultados(['a','b','c','d'])
-    ['', '', '', '']
-    """
-    resultados = []
-    for letra in letras:
-        resultados.append('')
-    return resultados
+
 
 def creacion_diccionarios(jugadores, partida, cant_partidas):
     # Hecha por Nuñez Juan Bautista
@@ -199,4 +184,5 @@ def main():
         seguir_jugando = pedir_continuacion()
     fin_de_partida(jugadores,partida,cant_partidas)
 
+# print(doctest.testmod())
 main()
