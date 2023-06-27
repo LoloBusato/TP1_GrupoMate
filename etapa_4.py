@@ -156,7 +156,7 @@ def imprimir_resultados(abecedario_imprimir, palabra, definicion, partida, jugad
     
     print('Jugadores:')
     imprimir_resultados_parciales(partida,jugadores)
-    print("\n\n")
+    print("\n")
         
     print(f"Turno Jugador {indice_jugador} {jugador} - letra {palabra[int(CONFIGURACION['INICIAL'])].upper()} - Palabra de {len(palabra)} letras")
 
