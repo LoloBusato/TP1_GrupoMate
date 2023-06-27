@@ -12,26 +12,25 @@ CONFIGURACION = obtener_constantes()
 def obtener_definiciones(dicc,letras):
     # Hecha por Busato Lorenzo
     """
-    * funcion obtener_definiciones - acepta un diccinario de letras del abecedario que tienen como valor a una lista con [palabra,definicion], y una lista de letras
-    *   devuelve unicamente una lista con una palabra, definicion por letra
+    * funcion obtener_definiciones - acepta un diccionario con todas las palabras y definciones, las letras participantes del rosco y
+    *   selecciona para cada letra de la lista letras 1 [palabra,definicion] aleatoria para que participe del rosco
     *
-    * pre: dicc es una lista con formato [palabra, definicion] y letras es una lista de letras
-    *
+    * pre: dicc es  un diccinario que tiene como clave las letras del abecedario y como valor a una lista de listas con 
+    *   formato [[palabra,definicion],[],...], y tambien una lista de letras ya ordenadas de manera alfabetica
+    * 
     * post: devuelve la variable definciones con formato
     *       [
-    *           (palabra, definicion),
-    *           (palabra, definicion),
+    *           [palabra, definicion],
+    *           [palabra, definicion],
     *           ...
     *       ]
     """
-    count = 0
-    lista_candidatos = []
     palabras_definiciones = []
-    while count < len(letras):
-        lista_candidatos= dicc[letras[count]]
+    for letra in letras:
+        lista_candidatos = []
+        lista_candidatos = dicc[letra]
         random.shuffle(lista_candidatos)
         palabras_definiciones.append(lista_candidatos[int(CONFIGURACION['PRIMERA_PALABRA_DEFINICION'])])
-        count +=1
     return palabras_definiciones
 
 def creacion_partida(jugadores, partida, cant_partidas):
