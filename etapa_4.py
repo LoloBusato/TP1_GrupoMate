@@ -17,7 +17,7 @@ def formateo_resultados(resultados):
     """
     * Función que da formato de impresión a un listado
     *
-    * Pre: resultados es una lista con valores
+    * Pre: resultados es una lista con valores 'a', 'e' o ' ' segun corresponda
     *
     * Post: Devuelve un formato de impresión con los mismos valores recibidos, en caso de contener un valor lo devuelve con
     *   formato [valor], en caso de no contener nada devuelve [ ]
@@ -121,7 +121,7 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, pa
     *   cada intento 
     *
     * Pre: Recibe las letras participantes ordenadas, los resultados parciales, la palabra 
-    *   del turno, su definición, el diccionario de partida, el listado de jugadores, el nombre del jugador participante, el listado ordenado de participaciones del rosco y el indice del jugador *    actual
+    *   del turno, su definición, el diccionario de partida, el listado de jugadores, el nombre del jugador participante, el listado *   ordenado de participaciones del rosco y el indice del jugador actual
     *
     * Post: Imprime el tablero de letras, los resultados parciales, la palabra de turno 
     *   y su definición
@@ -267,7 +267,7 @@ def respuesta_correcta(partida,jugador,indice,palabra_actual,palabra_usuario,jug
     * Función encargada de actualizar los valores del jugador si la respuesta fue correcta
     *
     * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra 
-    *   actual que se encuentra participando y la palabra ingresada por el usuario
+    *   actual que se encuentra participando , la palabra ingresada por el usuario, el jugador actual y el indice del mismo
     * 
     """
     partida[CONFIGURACION['RESUMEN_PARTIDA']] += (f"\nTurno letra {palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Jugador {indice_jugador} {jugador} - Palabra de {len(palabra_actual)} - {palabra_usuario} - acierto")
@@ -282,7 +282,7 @@ def respuesta_incorrecta(partida,jugador,indice,palabra_actual,palabra_usuario,j
     """
     * Función encargada del flujo de respuesta incorrecta
     *
-    * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario
+    * Pre: Recibe el diccionario de partida, el jugador participante, su índice, la palabra actual que se encuentra participando y la palabra ingresada por el usuario, el jugador actual y su índice
     *
     """
     partida[CONFIGURACION['RESUMEN_PARTIDA']] += (f"\nTurno letra {palabra_actual[int(CONFIGURACION['INICIAL'])].upper()} - Jugador {indice_jugador} {jugador} - Palabra de {len(palabra_actual)} - {palabra_usuario} - error - Palabra correcta: {palabra_actual}")
