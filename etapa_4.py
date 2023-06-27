@@ -127,15 +127,13 @@ def imprimir_resultados(abecedario_imprimir, palabra, definicion, partida, jugad
     *   y su definición
     * 
     >>> abecedario_imprimir = "[A][B][C][D][E][F][G]"
-    >>> resultados=["a","a","e","a","e","a",' ']
     >>> palabra = "circuito"
     >>> definicion = "def de circuito"
     >>> partida = {'jugador':[1,1,1,2,2,1,' '],'resultados':['a','a','e','a','e','a',' ']}
     >>> jugadores = ['martin','lorenzo']
-    >>> jugadores_imprimir=[1,1,1,2,2,1,' ']
     >>> jugador = 'martin'
     >>> numero_jugador=1
-    >>> imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion,partida, jugadores,jugador,jugadores_imprimir,numero_jugador)
+    >>> imprimir_resultados(abecedario_imprimir, palabra, definicion,partida, jugadores,jugador,numero_jugador)
     [A][B][C][D][E][F][G]
     [1][1][1][2][2][1][ ]
     [a][a][e][a][e][a][ ]
