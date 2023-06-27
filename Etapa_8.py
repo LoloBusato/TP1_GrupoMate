@@ -1,8 +1,8 @@
-import random
 from etapa_10 import obtener_constantes
 
 #CONSTANTES=================================================================================================
 CONFIGURACION = obtener_constantes()
+
 #FUNCIONES========================================================================================
 def leer_archivos(palabras,definiciones):
     # Hecha por Nuñez Juan Bautista
@@ -52,7 +52,6 @@ def crear_diccionario_csv(palabras,definiciones,diccionario):
     for palabra_definicion in palabras_definiciones:
         diccionario.write(palabra_definicion[int(CONFIGURACION['PALABRA'])] + ','  + palabra_definicion[int(CONFIGURACION['DEFINICION'])] + "\n")
     
-
 def leer_archivo_diccionario(diccionario_csv):
     # Hecha por Nuñez Juan Bautista
     """
@@ -64,7 +63,6 @@ def leer_archivo_diccionario(diccionario_csv):
     """
     linea = diccionario_csv.readline().rstrip()
     return linea.split(',') if linea else ('','')
-
 
 
 def leer_diccionario(diccionario_csv):
@@ -127,6 +125,4 @@ def obtener_diccionario():
     diccionario = leer_diccionario(diccionario_csv)
     diccionario_csv.close()
     return diccionario
-
-    
 

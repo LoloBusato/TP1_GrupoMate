@@ -2,6 +2,8 @@ from pasapalabra import pasapalabra
 from etapa_4 import *
 from etapa_7 import *
 from etapa_9 import *
+
+#FUNCIONES=======================================================================================================
 def main():
     # Hecha por Nuñez Juan Bautista y Orlando Martin
     """
@@ -15,7 +17,7 @@ def main():
         cant_partidas += 1
 
         #Genera diccionarios para cada jugador
-        partida = creacion_diccionarios(jugadores,partida, cant_partidas)
+        partida = creacion_partida(jugadores,partida, cant_partidas)
         
         #inicia los ciclos de pasapalabra hasta el final de la partida
         partida = pasapalabra(jugadores,partida)
@@ -26,6 +28,5 @@ def main():
         #pide continuacion del juego
         seguir_jugando = pedir_continuacion()
     fin_de_partida(jugadores,partida,cant_partidas)
-
 
 main()

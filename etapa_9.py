@@ -1,16 +1,16 @@
 from pasapalabra import pasapalabra
 from etapa_4 import *
-from Etapa_8 import obtener_lista_definiciones
+from Etapa_8 import obtener_diccionario
 from etapa_7 import *
 from etapa_10 import obtener_constantes
 import random
-import doctest
 
 #CONSTANTES========================================================================================================
 CONFIGURACION = obtener_constantes()
+
 #FUNCIONES=======================================================================================================
 def obtener_definiciones(dicc,letras):
-    # Hecha por Nuñez Juan Bautista
+    # Hecha por Busato Lorenzo
     """
     * funcion obtener_definiciones - acepta un diccinario de letras del abecedario que tienen como valor a una lista con [palabra,definicion], y una lista de letras
     *   devuelve unicamente una lista con una palabra, definicion por letra
@@ -24,25 +24,18 @@ def obtener_definiciones(dicc,letras):
     *           ...
     *       ]
     """
-    cont_letra = 0
-    cont_dicc = 0
+    count = 0
     lista_candidatos = []
     palabras_definiciones = []
-    while cont_letra < len(letras):
-        if letras[cont_letra] == dicc[cont_dicc][int(CONFIGURACION['INICIAL'])]:
-            lista_candidatos = dicc[cont_dicc][int(CONFIGURACION['DEFINICION'])]
-            random.shuffle(lista_candidatos)
-            palabras_definiciones.append(lista_candidatos[int(CONFIGURACION['PRIMERA_PALABRA_DEFINICION'])])
-            cont_letra += 1
-            cont_dicc = 0
-        cont_dicc += 1
+    while count < len(letras):
+        lista_candidatos= dicc[letras[count]]
+        random.shuffle(lista_candidatos)
+        palabras_definiciones.append(lista_candidatos[int(CONFIGURACION['PRIMERA_PALABRA_DEFINICION'])])
+        count +=1
     return palabras_definiciones
-        
 
-
-
-def creacion_diccionarios(jugadores, partida, cant_partidas):
-    # Hecha por Nuñez Juan Bautista
+def creacion_partida(jugadores, partida, cant_partidas):
+    # Hecha por Busato Lorenzo
     """
     * Funcion encargada de crear un diccionario por cada jugador de la partida
     *
@@ -65,9 +58,9 @@ def creacion_diccionarios(jugadores, partida, cant_partidas):
         }
     *
     """
-    diccionario_lista = obtener_lista_definiciones()
+    diccionario = obtener_diccionario()
     letras = letras_participantes()
-    dicc_definiciones = obtener_definiciones(diccionario_lista,letras)
+    dicc_definiciones = obtener_definiciones(diccionario,letras)
     resultados = generar_resultados_y_respuestas(letras)
     jugador_partida = generar_resultados_y_respuestas(letras)
 
@@ -85,7 +78,7 @@ def creacion_diccionarios(jugadores, partida, cant_partidas):
     return partida
 
 def resultados_parciales(jugadores,partida):
-    # Hecha por Nuñez Juan Bautista
+    # Hecha por Busato Lorenzo
     """
     * Funcion encargada de imprimir los resultados parciales de los jugadores
     *
@@ -116,7 +109,7 @@ def resultados_parciales(jugadores,partida):
     return ()
 
 def fin_de_partida(jugadores,partida,cant_partida):
-    # Hecha por Nuñez Juan Bautista
+    # Hecha por Busato Lorenzo
     """
     * Funcion encargada de imprimir los resultados finales de los jugadores
     *
@@ -136,9 +129,9 @@ def fin_de_partida(jugadores,partida,cant_partida):
     >>> jugadores = ['martin', 'lorenzo']
     >>> cantidad_partidas = 1
     >>> partida = {'diccionario':['def-1','def-2','def de circuito','def-4'],'letras':['a','b','c','d'],'jugador':[1,1,' ',' '],'resultados':['a','a',' ',' '],'resumen_partida':'asd','martin':{'puntaje_partida':10,'puntaje_global':30},'lorenzo':{'puntaje_partida':20,'puntaje_global':40}}
-    >>> fin_de_partida(jugadores, cantidad_partidas, partida)
+    >>> fin_de_partida(jugadores, partida,cantidad_partidas)
     Reporte Final:
-    Partidas jugadas: 1
+    Partidas jugadas: 1 
     <BLANKLINE>
     <BLANKLINE>
     Puntaje final:
@@ -154,7 +147,7 @@ def fin_de_partida(jugadores,partida,cant_partida):
         print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_GLOBAL"]]} puntos') 
 
 def pedir_continuacion():
-    # Hecha por Nuñez Juan Bautista
+    # Hecha por Busato Lorenzo
     """
     * Funcion encargada de obtener la informacion si el jugador quiere seguir jugando o no
     *
@@ -169,30 +162,3 @@ def pedir_continuacion():
     if continuar.lower() == "no":
         seguir_jugando = False
     return seguir_jugando
-
-#CUERPO FUNCION PRINCIPAL===============================================================================================================
-def main():
-    # Hecha por Nuñez Juan Bautista y Orlando Martin
-    """
-    * Función encargada de iniciar la dinámica del juego y definir la continuidad del mismo
-    """
-    cant_partidas = 0
-    jugadores = ventana_de_jugadores()
-    seguir_jugando = True
-    partida = {}
-    while seguir_jugando and cant_partidas < int(CONFIGURACION['MAXIMO_PARTIDAS']) and len(jugadores) >= 1:
-        cant_partidas += 1
-
-        #Genera diccionarios para cada jugador
-        partida = creacion_diccionarios(jugadores,partida, cant_partidas)
-        
-        #inicia los ciclos de pasapalabra hasta el final de la partida
-        partida = pasapalabra(jugadores,partida)
-        
-        #resultados parciales
-        resultados_parciales(jugadores,partida)
-
-        #pide continuacion del juego
-        seguir_jugando = pedir_continuacion()
-    fin_de_partida(jugadores,partida,cant_partidas)
-
