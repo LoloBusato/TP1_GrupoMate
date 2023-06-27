@@ -36,25 +36,27 @@ def obtener_definiciones(dicc,letras):
 def creacion_partida(jugadores, partida, cant_partidas):
     # Hecha por Busato Lorenzo
     """
-    * Funcion encargada de crear un diccionario por cada jugador de la partida
+    * Funcion encargada de crear y actualizar el diccionario con valores de la partida
     *
-    * Pre: Recibe una lista con los nombres de los jugadores 
+    * Pre: Recibe una lista con los nombres de los jugadores, un diccionario partida que puede estar vacio o contener informacion
+    *   de las partidas previas y un numero cant_partidas que indica cuantar partidas ya se jugaron
     *
-    * Post: Retorna un diccionario con formato
-        partida = {
-            diccionario: [[palabra_1,definicion_1],[palabra_2,definicion_2],...,],
-            letras:['a','b',...,],
-            jugador:['','',...,],
-            resultados:['','',...,],
-            resumen_partida:'',
-            nombre_jugador_1:{
-                puntaje_global: 0,
-                puntaje_partida: 0
-            }
-            nombre_jugador_2:{
-                ...
-            }
-        }
+    * Post: Retorna un diccionario con formato en caso de que la cant_partidas sea igual a 1
+    *    partida = {
+    *        diccionario: [[palabra_1,definicion_1],[palabra_2,definicion_2],...,],
+    *        letras:['a','b',...,],
+    *        jugador:['','',...,],
+    *        resultados:['','',...,],
+    *        resumen_partida:'',
+    *        nombre_jugador_1:{
+    *            puntaje_global: 0,
+    *            puntaje_partida: 0
+    *        }
+    *        nombre_jugador_2:{
+    *            ...
+    *        }
+    *    }
+    *       en otros casos no modifica los valores puntaje_global de cada jugador
     *
     """
     diccionario = obtener_diccionario()
@@ -83,14 +85,30 @@ def resultados_parciales(jugadores,partida):
     *
     * Pre: Recibe una lista con los nombres de los jugadores y el diccionario con la informacion
     *   de la partida con formato
-    *   {
-    *       jugador1: {...},
-    *       jugador2: {...},
-    *       ...
-    *   }
+    *   partida = {
+    *        diccionario: [[palabra_1,definicion_1],[palabra_2,definicion_2],...,],
+    *        letras:['a','b',...,],
+    *        jugador:['','',...,],
+    *        resultados:['','',...,],
+    *        resumen_partida:'',
+    *        nombre_jugador_1:{
+    *            puntaje_global: 0,
+    *            puntaje_partida: 0
+    *        }
+    *        nombre_jugador_2:{
+    *            ...
+    *        }
+    *    }
     *
     * Post: imprime informacion al usuario del estado parcial de la partida con formato
-    *   "X. JugadorX - Aciertos: X - Errores: X"
+    *   "Turno letra X - Jugador 1 X - Palabra de X - X - acierto"
+    *   ...
+    *
+    *   "Puntaje de la partida:"
+    *   "X. Jugador_X - X puntos"
+    *
+    *   "Puntaje parcial:"
+    *   "X. Jugador_X - X puntos"
     *
     """
     print(f'{partida[CONFIGURACION["RESUMEN_PARTIDA"]]}\n\n')
@@ -99,13 +117,12 @@ def resultados_parciales(jugadores,partida):
     for jugador in jugadores:
         count += 1
         print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_PARTIDA"]]} puntos') 
-    print('\n\n')
+    print('\n')
     print('Puntaje parcial:')
     count = 0
     for jugador in jugadores:
         count += 1
         print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_GLOBAL"]]} puntos') 
-    return ()
 
 def fin_de_partida(jugadores,partida,cant_partida):
     # Hecha por Busato Lorenzo
