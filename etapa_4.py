@@ -68,10 +68,11 @@ def valida_respuesta(palabra_usuario, palabra_actual):
     # Hecha por Orlando Martín
     """
     * Función que evalúa si la palabra del usuario es correcta o no
-    
+    *
     * Pre: Recibe la palabra ingresada por el usuario y la palabra a adivinar 
-    
+    *
     * Post: Retorna True o False segun la respuesta sea correcta o no
+    *
     >>> valida_respuesta('cancion','canción')
     True
     >>> valida_respuesta('canción','canción')
@@ -92,7 +93,7 @@ def valida_respuesta(palabra_usuario, palabra_actual):
 def iniciar_resultados_abecedario(letras,resultados,jugadores):
     # Hecha por Orlando Martín
     """
-    * Función que se encarga de iniciar las variables resultados y abecedario_imprimir
+    * Función que se encarga de iniciar las variables resultados, abecedario_imprimir y jugadores
     *
     * Pre: recibe "letras" que es una lista ordenada con las letras participantes y 
     *   "resultados" que es una lista ordenada con los aciertos o errores de cada letra
@@ -114,11 +115,10 @@ def iniciar_resultados_abecedario(letras,resultados,jugadores):
             jugadores[indice] = " "
     return resultados, abecedario_imprimir, jugadores
 
-def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, partida, jugadores, jugador, jugadores_imprimir, indice_jugador):
+def imprimir_resultados(abecedario_imprimir, palabra, definicion, partida, jugadores, jugador, indice_jugador):
     # Hecha por Busato Lorenzo
     """
-    * Función que se encarga de la impresión de cada turno del juego y se acciona luego de 
-    *   cada intento 
+    * Función que se encarga de la impresión de cada turno del juego y se acciona luego de cada intento 
     *
     * Pre: Recibe las letras participantes ordenadas, los resultados parciales, la palabra 
     *   del turno, su definición, el diccionario de partida, el listado de jugadores, el nombre del jugador participante, el listado *   ordenado de participaciones del rosco y el indice del jugador actual
@@ -151,8 +151,8 @@ def imprimir_resultados(abecedario_imprimir, resultados, palabra, definicion, pa
     Definición: def de circuito
     """
     print(abecedario_imprimir)
-    jugadores_imprimir = formateo_resultados(jugadores_imprimir)
-    resultado_imprimir = formateo_resultados(resultados)
+    jugadores_imprimir = formateo_resultados(partida[CONFIGURACION['JUGADOR']])
+    resultado_imprimir = formateo_resultados(partida[CONFIGURACION['RESULTADOS']])
     print(jugadores_imprimir)
     print(resultado_imprimir + "\n\n")
     

@@ -44,7 +44,7 @@ def pasapalabra(jugadores,partida):
                 palabra_actual = diccionario_partida[indice_partida][int(CONFIGURACION['PALABRA'])]
                 definicion_actual = diccionario_partida[indice_partida][int(CONFIGURACION['DEFINICION'])]
                 
-                imprimir_resultados(abecedario_imprimir,resultados,palabra_actual,definicion_actual,partida,jugadores,jugador,jugadores_imprimir, numero_jugador)
+                imprimir_resultados(abecedario_imprimir,palabra_actual,definicion_actual,partida,jugadores,jugador, numero_jugador)
                 
                 palabra_usuario = pedir_palabra(len(palabra_actual))
                 respuesta = valida_respuesta(palabra_usuario,palabra_actual)
