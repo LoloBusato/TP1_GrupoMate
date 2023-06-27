@@ -66,6 +66,7 @@ def leer_archivo_diccionario(diccionario_csv):
     return linea.split(',') if linea else ('','')
 
 
+
 def leer_diccionario(diccionario_csv):
     # Hecha por Nuñez Juan Bautista
     """
@@ -73,14 +74,15 @@ def leer_diccionario(diccionario_csv):
     *
     * Pre: Recibe 1 archivo abierto en formato .csv
     *
-    * Post: devuelve una lista con las palabras definiciones en formato
-    *   [
+    * Post: devuelve un diccionario que tiene de clave las letras del abecedario y por valor una lista de listas 
+    con las palabras y definiciones correspondientes, con formato:
+    *   [p:
     *       [palabra, definicion],
     *       ... 
     *   ]
     *
     """
-    diccionario_lista = []
+    diccionario = {}
     palabra_definicion = leer_archivo_diccionario(diccionario_csv)
     letra = ''
     lista_letra = []
@@ -89,23 +91,24 @@ def leer_diccionario(diccionario_csv):
             palabra_definicion[-2:] = [palabra_definicion[-2] + "," + palabra_definicion[-1]]
         if palabra_definicion[int(CONFIGURACION['PALABRA'])][int(CONFIGURACION['INICIAL'])].lower() != letra:
             if lista_letra:
-                diccionario_lista.append([letra, lista_letra])        
+                diccionario[letra]= lista_letra        
                 lista_letra = []
             letra = palabra_definicion[int(CONFIGURACION['PALABRA'])][int(CONFIGURACION['INICIAL'])].lower()
         lista_letra.append(palabra_definicion)
         palabra_definicion = leer_archivo_diccionario(diccionario_csv)
     if lista_letra:
-        diccionario_lista.append([letra, lista_letra])
-    return diccionario_lista
+        diccionario[letra]= lista_letra
+    return diccionario
 
-def obtener_lista_definiciones():
+def obtener_diccionario():
     # Hecha por Nuñez Juan Bautista
     """
     * Funcion encargada de abrir los archivos, cerrarlos y devolver las palabras, diccionario
     *   en formato lista mezcladas
     *
-    * Post: devuelve una lista con las palabras definiciones en formato
-    *   [
+    * Post: devuelve un diccionario que tiene de clave las letras del abecedario y por valor una lista de listas 
+    con las palabras y definiciones correspondientes, con formato
+    *   [p:
     *       [palabra, definicion],
     *       ... 
     *   ]
@@ -121,7 +124,9 @@ def obtener_lista_definiciones():
     palabras_txt.close()
     definiciones_txt.close()
     diccionario_csv = open('diccionario.csv', 'r', encoding=CONFIGURACION['ENCODING'])
-    diccionario_lista = leer_diccionario(diccionario_csv)
+    diccionario = leer_diccionario(diccionario_csv)
     diccionario_csv.close()
-    return diccionario_lista
+    return diccionario
+
+    
 
