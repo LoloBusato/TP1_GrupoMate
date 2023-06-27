@@ -1,6 +1,6 @@
 from pasapalabra import pasapalabra
 from etapa_4 import *
-from Etapa_8 import obtener_lista_definiciones
+from Etapa_8 import obtener_diccionario
 from etapa_7 import *
 from etapa_10 import obtener_constantes
 import random
@@ -23,20 +23,16 @@ def obtener_definiciones(dicc,letras):
     *           ...
     *       ]
     """
-    cont_letra = 0
-    cont_dicc = 0
+    count = 0
     lista_candidatos = []
     palabras_definiciones = []
-    while cont_letra < len(letras):
-        if letras[cont_letra] == dicc[cont_dicc][int(CONFIGURACION['INICIAL'])]:
-            lista_candidatos = dicc[cont_dicc][int(CONFIGURACION['DEFINICION'])]
-            random.shuffle(lista_candidatos)
-            palabras_definiciones.append(lista_candidatos[int(CONFIGURACION['PRIMERA_PALABRA_DEFINICION'])])
-            cont_letra += 1
-            cont_dicc = 0
-        cont_dicc += 1
+    while count < len(letras):
+        lista_candidatos= dicc[letras[count]]
+        random.shuffle(lista_candidatos)
+        palabras_definiciones.append(lista_candidatos[int(CONFIGURACION['PRIMERA_PALABRA_DEFINICION'])])
+        count +=1
     return palabras_definiciones
-        
+
 
 
 
@@ -64,9 +60,9 @@ def creacion_diccionarios(jugadores, partida, cant_partidas):
         }
     *
     """
-    diccionario_lista = obtener_lista_definiciones()
+    diccionario = obtener_diccionario()
     letras = letras_participantes()
-    dicc_definiciones = obtener_definiciones(diccionario_lista,letras)
+    dicc_definiciones = obtener_definiciones(diccionario,letras)
     resultados = generar_resultados_y_respuestas(letras)
     jugador_partida = generar_resultados_y_respuestas(letras)
 
