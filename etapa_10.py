@@ -8,9 +8,9 @@ VALOR = 1
 def obtener_constantes():
     # Hecha por Busato Lorenzo
     """
-    * funcion obtener_constantes  - lee el archivo configuracion.csv y crea un diccionario de constantes
+    * funcion obtener_constantes - lee el archivo configuracion.csv y crea un diccionario de constantes
     *
-    * pre: configuracion.csv es un archivo con formato NOMBRE, VALOR por linea
+    * pre: configuracion.csv es un archivo con formato NOMBRE,VALOR por linea
     *
     * post: devuelve el diccionario en formato
     *       {

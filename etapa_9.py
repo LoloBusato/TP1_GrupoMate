@@ -131,16 +131,30 @@ def fin_de_partida(jugadores,partida,cant_partida):
     *
     * Pre: Recibe una lista con los nombres de los jugadores, el diccionario con la informacion
     *   de la partida con formato
-    *   {
-    *       jugador1: {...},
-    *       jugador2: {...},
-    *       ...
-    *   }
+    *   partida = {
+    *        diccionario: [[palabra_1,definicion_1],[palabra_2,definicion_2],...,],
+    *        letras:['a','b',...,],
+    *        jugador:['','',...,],
+    *        resultados:['','',...,],
+    *        resumen_partida:'',
+    *        nombre_jugador_1:{
+    *            puntaje_global: 0,
+    *            puntaje_partida: 0
+    *        }
+    *        nombre_jugador_2:{
+    *            ...
+    *        }
+    *    }
     *   y un numero con la cantidad de partidas jugadas en total
     *
     * Post: imprime los resultados finales de la partida con formatos
-    *   "X. JugadorX - PUNTAJE"
-    *       
+    *       "Reporte Final:"
+    *       "Partidas jugadas: X"
+    *       <BLANKLINE>
+    *       <BLANKLINE>
+    *       "Puntaje final:"
+    *       "X. X - X puntos"
+    *       "X. X - X puntos"
     *
     >>> jugadores = ['martin', 'lorenzo']
     >>> cantidad_partidas = 1
@@ -169,7 +183,6 @@ def pedir_continuacion():
     *
     * Post: devuelve un booleano indicando si el jugador quiere seguir jugando o no
     *       
-    *
     """
     seguir_jugando = True
     continuar = input('¿Desea seguir jugando? Ingrese si o no: ')
