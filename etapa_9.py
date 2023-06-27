@@ -7,9 +7,10 @@ import random
 
 #CONSTANTES========================================================================================================
 CONFIGURACION = obtener_constantes()
+
 #FUNCIONES=======================================================================================================
 def obtener_definiciones(dicc,letras):
-    # Hecha por Nuñez Juan Bautista
+    # Hecha por Busato Lorenzo
     """
     * funcion obtener_definiciones - acepta una lista con [palabra,definicion] y una lista de letras
     *   devuelve unicamente una lista con una palabra, definicion por letra
@@ -33,11 +34,8 @@ def obtener_definiciones(dicc,letras):
         count +=1
     return palabras_definiciones
 
-
-
-
-def creacion_diccionarios(jugadores, partida, cant_partidas):
-    # Hecha por Nuñez Juan Bautista
+def creacion_partida(jugadores, partida, cant_partidas):
+    # Hecha por Busato Lorenzo
     """
     * Funcion encargada de crear un diccionario por cada jugador de la partida
     *
@@ -80,7 +78,7 @@ def creacion_diccionarios(jugadores, partida, cant_partidas):
     return partida
 
 def resultados_parciales(jugadores,partida):
-    # Hecha por Nuñez Juan Bautista
+    # Hecha por Busato Lorenzo
     """
     * Funcion encargada de imprimir los resultados parciales de los jugadores
     *
@@ -111,7 +109,7 @@ def resultados_parciales(jugadores,partida):
     return ()
 
 def fin_de_partida(jugadores,partida,cant_partida):
-    # Hecha por Nuñez Juan Bautista
+    # Hecha por Busato Lorenzo
     """
     * Funcion encargada de imprimir los resultados finales de los jugadores
     *
@@ -149,7 +147,7 @@ def fin_de_partida(jugadores,partida,cant_partida):
         print(f'{count}. {jugador} - {partida[jugador][CONFIGURACION["PUNTAJE_GLOBAL"]]} puntos') 
 
 def pedir_continuacion():
-    # Hecha por Nuñez Juan Bautista
+    # Hecha por Busato Lorenzo
     """
     * Funcion encargada de obtener la informacion si el jugador quiere seguir jugando o no
     *
@@ -164,30 +162,3 @@ def pedir_continuacion():
     if continuar.lower() == "no":
         seguir_jugando = False
     return seguir_jugando
-
-#CUERPO FUNCION PRINCIPAL===============================================================================================================
-def main():
-    # Hecha por Nuñez Juan Bautista y Orlando Martin
-    """
-    * Función encargada de iniciar la dinámica del juego y definir la continuidad del mismo
-    """
-    cant_partidas = 0
-    jugadores = ventana_de_jugadores()
-    seguir_jugando = True
-    partida = {}
-    while seguir_jugando and cant_partidas < int(CONFIGURACION['MAXIMO_PARTIDAS']) and len(jugadores) >= 1:
-        cant_partidas += 1
-
-        #Genera diccionarios para cada jugador
-        partida = creacion_diccionarios(jugadores,partida, cant_partidas)
-        
-        #inicia los ciclos de pasapalabra hasta el final de la partida
-        partida = pasapalabra(jugadores,partida)
-        
-        #resultados parciales
-        resultados_parciales(jugadores,partida)
-
-        #pide continuacion del juego
-        seguir_jugando = pedir_continuacion()
-    fin_de_partida(jugadores,partida,cant_partidas)
-

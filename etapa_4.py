@@ -10,8 +10,8 @@ LETRAS_TILDADAS = {
     'ó':'o',
     'ú':'u'
 }
-# Funciones =======================================================================================================================
 
+# Funciones =======================================================================================================================
 def formateo_resultados(resultados):
     # Hecha por Orlando Martín
     """
@@ -180,19 +180,6 @@ def pedir_palabra(longitud):
         respuesta = input("Ingrese palabra: ")
     return respuesta
 
-def impresion_final(puntaje, resumen_partida):
-    # Hecha por Busato Lorenzo
-    '''
-    * Función que imprime el puntaje final de cada partida
-    *
-    * Pre: recibe los puntajes finales como un número entero y el resumen de partida, como una cadena formateada
-    *      con cada respuesta correcta, su definición y la respuesta otorgada por el usuario
-    *
-    * Post: imprime los resultados
-    '''
-    print(resumen_partida)
-    print(f"Puntaje final: {puntaje}")
-
 def letras_participantes():
     # Hecho por Nuñez Juan Bautista
     '''
@@ -244,7 +231,6 @@ def incrementa_jugador(cantidad_jugadores,indice=-1):
     """
     indice += 1
     return 0 if indice == cantidad_jugadores else indice
-
 
 def contador_aciertos(resultados, numero, jugadores_turno):
     # Hecha por Orlando Martin
