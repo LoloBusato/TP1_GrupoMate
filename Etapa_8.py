@@ -64,6 +64,7 @@ def leer_archivo_diccionario(diccionario_csv):
     linea = diccionario_csv.readline().rstrip()
     return linea.split(',') if linea else ('','')
 
+
 def leer_diccionario(diccionario_csv):
     # Hecha por Nuñez Juan Bautista
     """
@@ -71,8 +72,9 @@ def leer_diccionario(diccionario_csv):
     *
     * Pre: Recibe 1 archivo abierto en formato .csv
     *
-    * Post: devuelve una lista con las palabras definiciones en formato
-    *   [
+    * Post: devuelve un diccionario que tiene de clave las letras del abecedario y por valor una lista de listas 
+    con las palabras y definiciones correspondientes, con formato:
+    *   [p:
     *       [palabra, definicion],
     *       ... 
     *   ]
@@ -102,8 +104,9 @@ def obtener_diccionario():
     * Funcion encargada de abrir los archivos, cerrarlos y devolver las palabras, diccionario
     *   en formato lista mezcladas
     *
-    * Post: devuelve una lista con las palabras definiciones en formato
-    *   [
+    * Post: devuelve un diccionario que tiene de clave las letras del abecedario y por valor una lista de listas 
+    con las palabras y definiciones correspondientes, con formato
+    *   [p:
     *       [palabra, definicion],
     *       ... 
     *   ]
@@ -122,3 +125,4 @@ def obtener_diccionario():
     diccionario = leer_diccionario(diccionario_csv)
     diccionario_csv.close()
     return diccionario
+

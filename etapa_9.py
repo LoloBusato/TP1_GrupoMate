@@ -12,7 +12,7 @@ CONFIGURACION = obtener_constantes()
 def obtener_definiciones(dicc,letras):
     # Hecha por Busato Lorenzo
     """
-    * funcion obtener_definiciones - acepta una lista con [palabra,definicion] y una lista de letras
+    * funcion obtener_definiciones - acepta un diccinario de letras del abecedario que tienen como valor a una lista con [palabra,definicion], y una lista de letras
     *   devuelve unicamente una lista con una palabra, definicion por letra
     *
     * pre: dicc es una lista con formato [palabra, definicion] y letras es una lista de letras
