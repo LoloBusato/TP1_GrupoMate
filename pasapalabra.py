@@ -39,7 +39,7 @@ def pasapalabra(jugadores,partida):
             resultados_partida = partida[CONFIGURACION['RESULTADOS']]
             while (indice_partida < len(letras_partida) and not error):
                 # Mientras no se recorra todo el rosco o se equivoque
-                resultados,abecedario_imprimir,jugadores_imprimir = iniciar_resultados_abecedario(letras_partida,resultados_partida,jugadores_partida)
+                abecedario_imprimir = iniciar_resultados_abecedario(letras_partida,resultados_partida,jugadores_partida)
                 
                 palabra_actual = diccionario_partida[indice_partida][int(CONFIGURACION['PALABRA'])]
                 definicion_actual = diccionario_partida[indice_partida][int(CONFIGURACION['DEFINICION'])]

@@ -113,7 +113,7 @@ def iniciar_resultados_abecedario(letras,resultados,jugadores):
             resultados[indice] = " "
         if not jugadores[indice]:
             jugadores[indice] = " "
-    return resultados, abecedario_imprimir, jugadores
+    return abecedario_imprimir
 
 def imprimir_resultados(abecedario_imprimir, palabra, definicion, partida, jugadores, jugador, indice_jugador):
     # Hecha por Busato Lorenzo
